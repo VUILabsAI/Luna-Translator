@@ -1,6 +1,6 @@
 # Luna Translator 开源计划
 
-更新：2026-10-30 · 首版 v0.1.0 · [社区仓库](https://github.com/VUILabsHub/Luna-Translator)
+首版 v0.1.0 · [社区仓库](https://github.com/VUILabsAI/Luna-Translator)
 
 首版优先交付 Web 与对应 Go 后端，采用 Apache-2.0。社区开发者在安装 Docker / Compose 后，可下载源码并运行 `./start.sh`（Windows：`./start.ps1`）。无模型账号时使用明确标注的模拟模式；真实翻译需要部署者自行配置外部服务。
 
@@ -42,14 +42,24 @@
 1. 完善真实麦克风与音频输出设备矩阵，持续验证 Chrome/Safari/Edge、回声与长会话。
 2. 改进分段对齐、提供方扩展、无障碍和英文界面。
 3. 按社区需求增加多人会议与可选 RTC；补充账号隔离、存储配额和运维能力。
-4. 整理 Android/iOS 源码、独立构建与实机验收，单独发布移动端版本。
+4. 整理 iOS、Android 与配套社区后端，完成独立构建和实机验收后再发布移动端。macOS 不纳入这批。
+
+### 移动端发布准备
+
+| 交付 | 拟纳入范围 | 发布前验收 |
+|---|---|---|
+| Web + Go 后端 | 保留现有自托管 Web、启动脚本和公共模型 API 适配器 | 干净环境能够启动、完成模拟同传、保存并回放 |
+| iOS | 共享移动端界面、iOS 工程与必要的音频桥接；使用社区构建配置 | 不依赖官方签名能在模拟器构建；实机确认录音、字幕和译音回放 |
+| Android | 同一共享移动端界面、Android 工程与必要的音频桥接；使用独立构建配置 | 安装调试包，模拟器与实机确认输入、字幕和译音回放 |
+| 移动端社区接口 | 补齐客户端实际需要的工作区鉴权、流式同传、历史与回放；后端地址由部署者配置 | 两端都能连接同一套自托管后端，默认不访问官方生产服务；真实翻译使用部署者凭据 |
+
+只从明确允许公开的文件清单生成源码，不导入内部 Git 历史。正式签名、生产配置、内部服务、模型资产和用户数据不进入社区发行包。公开前检查源码、构建产物及素材的凭据和许可，分别记录构建、模拟器和实机结果。
 
 ## 现有官方产品入口
 
 | 入口 | 地址 |
 |---|---|
-| Welcome 产品介绍 | [了解 Luna 翻译](https://simultrans.lunalabs.cn/welcome/) |
-| 线上 Web 体验 | [官方网页版](https://simultrans.lunalabs.cn/) |
+| Welcome 产品介绍与网页版 | [各地区入口](../README.md#官方网页版与产品介绍) |
 | iOS 下载 | [App Store：Luna翻译](https://apps.apple.com/cn/app/id6806330215) |
 
-官方产品与自行部署的社区工作区使用各自的账号、数据与服务配置。欢迎通过 [Issues](https://github.com/VUILabsHub/Luna-Translator/issues) 提出需求。
+官方产品与自行部署的社区工作区使用各自的账号、数据与服务配置。欢迎通过 [Issues](https://github.com/VUILabsAI/Luna-Translator/issues) 提出需求。
