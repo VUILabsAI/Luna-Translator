@@ -5,20 +5,22 @@
 <h1 align="center">Luna Translator</h1>
 
 <p align="center">
-  实时语音翻译，让不同语言的人听见彼此。
+  VUI Labs 的实时语音到语音翻译应用，提供字幕、译音和可自托管的 Web 社区版。
 </p>
 
 <p align="center">
   中文 · <a href="README.en.md">English</a> ·
-  <a href="https://simultrans.lunalabs.cn/">在线体验</a> ·
-  <a href="https://simultrans.lunalabs.cn/welcome/">产品介绍</a> ·
-  <a href="https://github.com/VUILabsHub/Luna-Translator/releases">下载</a> ·
-  <a href="https://simultrans.lunalabs.cn/api-docs">API 文档</a>
+  <a href="#官方网页版与产品介绍">在线体验与官网</a> ·
+  <a href="#安装与快速开始">自托管指南</a> ·
+  <a href="https://github.com/VUILabsAI/Luna-Translator/releases">社区版发行包</a> ·
+  <a href="https://simultrans.lunalabs.cn/api-docs">社区版接入 API</a>
 </p>
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache_2.0-blue.svg" alt="License: Apache-2.0" /></a>
-  <a href="https://github.com/VUILabsHub/Luna-Translator/actions/workflows/ci.yml"><img src="https://github.com/VUILabsHub/Luna-Translator/actions/workflows/ci.yml/badge.svg?branch=main" alt="Community checks" /></a>
+  <a href="https://github.com/VUILabsAI/Luna-Translator/actions/workflows/ci.yml"><img src="https://github.com/VUILabsAI/Luna-Translator/actions/workflows/ci.yml/badge.svg?branch=main" alt="Community checks" /></a>
+  <a href="https://github.com/VUILabsAI/Luna-Translator/releases/latest"><img src="https://img.shields.io/github/v/release/VUILabsAI/Luna-Translator" alt="最新社区版发行版本" /></a>
+  <a href="#安装与快速开始"><img src="https://img.shields.io/badge/Docker%20Compose-self--hosted-2496ED?logo=docker" alt="通过 Docker Compose 自托管" /></a>
 </p>
 
 ## 边说，边译，边听
@@ -29,9 +31,15 @@
 
 > 当前社区版优先支持 Web：单人同传、中英双向对话、历史、回放与分享。默认启动的是有明确标识的模拟体验；实际识别和翻译需要配置自己的模型服务。
 
+### 社区版演示
+
+[![Web 社区版模拟会话记录：中英示例字幕与音频回放控件](docs/assets/community-web-demo.jpg)](docs/assets/community-web-demo.mp4)
+
+[观看 Web 社区版录屏（MP4）](docs/assets/community-web-demo.mp4)：用 WAV 输入启动模拟同传，查看字幕和保存的会话。示例字幕由模拟模式生成，不是对输入内容的实际翻译。
+
 ## 最新动态
 
-- **2026-10-30 · [v0.1.0](https://github.com/VUILabsHub/Luna-Translator/releases/tag/v0.1.0)**：发布首个 Web + Go 后端社区版，提供 Docker Compose 启动、Luna / 百炼适配、历史与音频归档、可撤销分享，以及独立的公开 CI。
+- **2026-10-30 · [v0.1.0](https://github.com/VUILabsAI/Luna-Translator/releases/tag/v0.1.0)**：发布首个 Web + Go 后端社区版，提供 Docker Compose 启动、Luna / 百炼适配、历史与音频归档、可撤销分享，以及独立的公开 CI。
 
 ## 从实时交流，到回听分享
 
@@ -58,18 +66,18 @@
 
 模型凭据保留在后端。浏览器负责采集和播放，后端负责服务编排与数据保存。完整接口和数据生命周期见 [架构说明](docs/architecture.md) 与 [服务协议](docs/providers.md)。
 
-## 快速开始
+## 安装与快速开始
 
 ### 1. 下载项目
 
 安装 [Docker Engine / Docker Desktop 与 Compose](https://docs.docker.com/compose/install/)，然后克隆仓库：
 
 ```sh
-git clone https://github.com/VUILabsHub/Luna-Translator.git
+git clone https://github.com/VUILabsAI/Luna-Translator.git
 cd Luna-Translator
 ```
 
-也可以从 [Releases](https://github.com/VUILabsHub/Luna-Translator/releases) 下载 ZIP 或 tar.gz 并解压；同页提供 SHA-256 校验文件。
+也可以从 [Releases](https://github.com/VUILabsAI/Luna-Translator/releases) 下载 ZIP 或 tar.gz 并解压；同页提供 SHA-256 校验文件。
 
 ### 2. 一条命令启动
 
@@ -172,20 +180,34 @@ v0.1.0 面向**单工作区部署**：使用同一部署密码的人共享历史
 
 后续优先完善 Web 的兼容性、可访问性、模型适配和对齐策略，再扩展多人会议 / RTC，整理 Android 与 iOS 源码。完整安排见 [开源计划](docs/open-source-plan.md)。
 
-## 官方产品与下载
+## 官方网页版与产品介绍
 
-| 入口 | 地址 |
-|---|---|
-| 产品介绍与 Welcome 页面 | [了解 Luna 翻译](https://simultrans.lunalabs.cn/welcome/) |
-| 在线 Web 体验 | [打开官方网页版](https://simultrans.lunalabs.cn/) |
-| iOS 应用 | [App Store：Luna翻译](https://apps.apple.com/cn/app/id6806330215) |
-| 社区源码与发行包 | [GitHub Releases](https://github.com/VUILabsHub/Luna-Translator/releases) |
+| 地区 | 产品介绍（Welcome） | 官方网页版 |
+|---|---|---|
+| 中国大陆 | [大陆产品页](https://simultrans.lunalabs.cn/welcome/) | [打开大陆网页版](https://simultrans.lunalabs.cn/) |
+| 国际通用入口 | [国际产品页（英文）](https://simultrans.vuilabs.ai/welcome/?lang=en) | [打开国际网页版](https://simultrans.vuilabs.ai/) |
+| 美国（北美） | [北美产品页（英文）](https://simultrans.vuilabs.ai/us/welcome/?lang=en) | [打开北美网页版](https://simultrans.vuilabs.ai/us/) |
 
-官方产品与独立部署的社区工作区使用各自的账号和数据。iOS 已有应用下载入口，移动端源码按后续路线推进。
+官方网页版与独立部署的社区工作区使用各自的账号和数据。国际和北美网页版需要先登录。官方 API 的能力和协议另见[国内同传 API 文档](https://doc.vuilabs.cn/api-reference/realtime-interpretation/)。
+
+### 官方移动端预览
+
+<p>
+  <img src="docs/assets/official-ios-preview.jpg" alt="官方 iOS App：快速同传入口（模拟器截图）" width="205" />
+  <img src="docs/assets/official-android-preview.jpg" alt="官方 Android App：快速同传入口（模拟器截图）" width="205" />
+</p>
+
+上图为官方 App 的 iOS 和 Android 模拟器截图，不代表移动端源码已发布。中国大陆 iOS 用户可前往 [App Store](https://apps.apple.com/cn/app/id6806330215)，社区版进展见[开源路线图](docs/open-source-plan.md#移动端发布准备)。
+
+## FAQ 与排障
+
+- **没有 API Key 能运行吗？** 可以。默认模拟模式无需模型凭据，可体验字幕、历史和分享流程；真实翻译见[模型接入](#接入模型服务)。
+- **启动失败或端口被占用？** 用 `docker compose logs` 查日志，必要时在 `.env` 中修改 `PORT`。更多问题见[部署排障](docs/deployment.md#常见问题)。
+- **无法使用麦克风？** 检查浏览器权限；远程访问需要 HTTPS。也可选择无压缩 PCM16 WAV 文件测试。
 
 ## 交流与贡献
 
-欢迎通过 [Issues](https://github.com/VUILabsHub/Luna-Translator/issues) 反馈问题、讨论场景和提出功能建议，也欢迎提交 Pull Request。当前适合参与的方向包括浏览器兼容、无障碍、模型适配、文档与对齐策略。
+欢迎通过 [Issues](https://github.com/VUILabsAI/Luna-Translator/issues) 反馈问题、讨论场景和提出功能建议，也欢迎提交 Pull Request。当前适合参与的方向包括浏览器兼容、无障碍、模型适配、文档与对齐策略。
 
 - [贡献指南](CONTRIBUTING.md)：开发检查与提交说明。
 - [安全报告](SECURITY.md)：私有凭据、录音及安全问题的报告方式。

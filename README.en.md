@@ -4,19 +4,21 @@
 
 <h1 align="center">Luna Translator</h1>
 
-<p align="center">Speak, translate, listen. Bring different languages into the same conversation.</p>
+<p align="center">Real-time speech-to-speech translation by VUI Labs, with live captions, translated audio, and a self-hosted Web community edition.</p>
 
 <p align="center">
   <a href="README.md">中文</a> · English ·
-  <a href="https://simultrans.lunalabs.cn/">Try the Web app</a> ·
-  <a href="https://simultrans.lunalabs.cn/welcome/">Product</a> ·
-  <a href="https://github.com/VUILabsHub/Luna-Translator/releases">Downloads</a> ·
-  <a href="https://simultrans.lunalabs.cn/api-docs">API docs</a>
+  <a href="#official-web-app-and-product-pages">Official Web app and product</a> ·
+  <a href="#installation-and-quick-start">Self-hosting guide</a> ·
+  <a href="https://github.com/VUILabsAI/Luna-Translator/releases">Community releases</a> ·
+  <a href="https://simultrans.lunalabs.cn/api-docs">Community provider API</a>
 </p>
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache_2.0-blue.svg" alt="License: Apache-2.0" /></a>
-  <a href="https://github.com/VUILabsHub/Luna-Translator/actions/workflows/ci.yml"><img src="https://github.com/VUILabsHub/Luna-Translator/actions/workflows/ci.yml/badge.svg?branch=main" alt="Community checks" /></a>
+  <a href="https://github.com/VUILabsAI/Luna-Translator/actions/workflows/ci.yml"><img src="https://github.com/VUILabsAI/Luna-Translator/actions/workflows/ci.yml/badge.svg?branch=main" alt="Community checks" /></a>
+  <a href="https://github.com/VUILabsAI/Luna-Translator/releases/latest"><img src="https://img.shields.io/github/v/release/VUILabsAI/Luna-Translator" alt="Latest community release" /></a>
+  <a href="#installation-and-quick-start"><img src="https://img.shields.io/badge/Docker%20Compose-self--hosted-2496ED?logo=docker" alt="Self-host with Docker Compose" /></a>
 </p>
 
 ## Speak, translate, listen
@@ -27,9 +29,15 @@ This repository contains a self-hosted **Web frontend and Go backend**. Run it o
 
 > The first community release focuses on Web: solo translation, Chinese–English turn-taking, history, replay and sharing. The default is a clearly labeled simulation. Actual recognition and translation require your own provider credentials.
 
+### Community edition demo
+
+[![Saved community Web session with simulated Chinese and English captions and audio replay controls](docs/assets/community-web-demo.jpg)](docs/assets/community-web-demo.mp4)
+
+[Watch the community Web recording (MP4)](docs/assets/community-web-demo.mp4): start a simulated session from a WAV file and see the captions and saved session. The sample captions are generated in simulation mode, not translated from the input.
+
 ## News
 
-- **2026-10-30 · [v0.1.0](https://github.com/VUILabsHub/Luna-Translator/releases/tag/v0.1.0)**: First Web + Go community release with Docker Compose startup, Luna / Model Studio adapters, persistent history and audio, revocable sharing, and public CI.
+- **2026-10-30 · [v0.1.0](https://github.com/VUILabsAI/Luna-Translator/releases/tag/v0.1.0)**: First Web + Go community release with Docker Compose startup, Luna / Model Studio adapters, persistent history and audio, revocable sharing, and public CI.
 
 ## From live conversation to replay
 
@@ -56,18 +64,18 @@ This repository contains a self-hosted **Web frontend and Go backend**. Run it o
 
 Provider credentials stay in the backend. The browser captures and plays audio; the backend coordinates services and persists data. See [architecture and data](docs/architecture.md) and [provider contracts](docs/providers.md) for details. The extended guides are currently in Chinese.
 
-## Quick start
+## Installation and quick start
 
 ### 1. Get the project
 
 Install [Docker Engine / Docker Desktop with Compose](https://docs.docker.com/compose/install/), then clone:
 
 ```sh
-git clone https://github.com/VUILabsHub/Luna-Translator.git
+git clone https://github.com/VUILabsAI/Luna-Translator.git
 cd Luna-Translator
 ```
 
-Alternatively, download and extract a ZIP or tar.gz from [Releases](https://github.com/VUILabsHub/Luna-Translator/releases). SHA-256 checksums are provided alongside the archives.
+Alternatively, download and extract a ZIP or tar.gz from [Releases](https://github.com/VUILabsAI/Luna-Translator/releases). SHA-256 checksums are provided alongside the archives.
 
 ### 2. Start with one command
 
@@ -170,20 +178,34 @@ Validation covers synthetic-speech Chinese–English translation in both directi
 
 Next priorities are Web compatibility, accessibility, provider adapters and alignment strategies, followed by multi-party meetings / RTC and Android / iOS source releases. See the [open-source roadmap](docs/open-source-plan.md).
 
-## Official product and downloads
+## Official Web app and product pages
 
-| Entry | Link |
-|---|---|
-| Product and Welcome page | [About Luna Translator](https://simultrans.lunalabs.cn/welcome/) |
-| Online Web experience | [Official Web app](https://simultrans.lunalabs.cn/) |
-| iOS app | [App Store: Luna翻译](https://apps.apple.com/cn/app/id6806330215) |
-| Community source archives | [GitHub Releases](https://github.com/VUILabsHub/Luna-Translator/releases) |
+| Region | Product page (Welcome) | Official Web app |
+|---|---|---|
+| International entry point | [International product page](https://simultrans.vuilabs.ai/welcome/?lang=en) | [Open the international Web app](https://simultrans.vuilabs.ai/) |
+| US (North America) | [North America product page](https://simultrans.vuilabs.ai/us/welcome/?lang=en) | [Open the North America Web app](https://simultrans.vuilabs.ai/us/) |
+| Mainland China | [Mainland China product page](https://simultrans.lunalabs.cn/welcome/) | [Open the Mainland China Web app](https://simultrans.lunalabs.cn/) |
 
-The official product and self-hosted workspaces use separate accounts and data. The iOS app is available for download; mobile source releases follow the roadmap.
+The official Web app and self-hosted workspaces use separate accounts and data. The international and North America Web apps require sign-in. For the official service's capabilities and protocol, see the [Mainland China interpretation API reference](https://doc.vuilabs.cn/api-reference/realtime-interpretation/) (in Chinese).
+
+### Official mobile app preview
+
+<p>
+  <img src="docs/assets/official-ios-preview.jpg" alt="Official iOS app: Quick interpreting screen (simulator screenshot)" width="205" />
+  <img src="docs/assets/official-android-preview.jpg" alt="Official Android app: Quick interpreting screen (emulator screenshot)" width="205" />
+</p>
+
+These are screenshots of the official iOS and Android apps, not part of this community source release. The iOS app is available from the [Mainland China App Store](https://apps.apple.com/cn/app/id6806330215). See the [open-source roadmap](docs/open-source-plan.md#移动端发布准备) for mobile release preparation.
+
+## FAQ and troubleshooting
+
+- **Can I run it without an API key?** Yes. Simulation mode needs no provider credentials and lets you try captions, history, and sharing. For actual translation, see [model setup](#connect-model-services).
+- **Startup fails or the port is in use?** Check `docker compose logs` and change `PORT` in `.env` if needed. See the [deployment troubleshooting guide](docs/deployment.md#常见问题) for more.
+- **Microphone not available?** Check browser permissions. Remote browser access requires HTTPS for microphone capture. You can also test with an uncompressed PCM16 WAV file.
 
 ## Community and contributions
 
-Use [Issues](https://github.com/VUILabsHub/Luna-Translator/issues) to report problems, discuss use cases and suggest features. Pull requests are welcome, especially for browser compatibility, accessibility, provider adapters, documentation and alignment strategies.
+Use [Issues](https://github.com/VUILabsAI/Luna-Translator/issues) to report problems, discuss use cases and suggest features. Pull requests are welcome, especially for browser compatibility, accessibility, provider adapters, documentation and alignment strategies.
 
 - [Contributing](CONTRIBUTING.md): Development checks and submission guidelines.
 - [Security](SECURITY.md): Private reporting for credentials, recordings and vulnerabilities.
