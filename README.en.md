@@ -7,11 +7,7 @@
 <p align="center">Real-time speech-to-speech translation by VUI Labs, with live captions, translated audio, and a self-hosted Web community edition.</p>
 
 <p align="center">
-  <a href="README.md">中文</a> · English ·
-  <a href="#official-web-app-and-product-pages">Official Web app and product</a> ·
-  <a href="#installation-and-quick-start">Self-hosting guide</a> ·
-  <a href="https://github.com/VUILabsAI/Luna-Translator/releases">Community releases</a> ·
-  <a href="https://simultrans.lunalabs.cn/api-docs">Community provider API</a>
+  <a href="README.md">中文</a> · English
 </p>
 
 <p align="center">
@@ -20,6 +16,11 @@
   <a href="https://github.com/VUILabsAI/Luna-Translator/releases/latest"><img src="https://img.shields.io/github/v/release/VUILabsAI/Luna-Translator" alt="Latest community release" /></a>
   <a href="#installation-and-quick-start"><img src="https://img.shields.io/badge/Docker%20Compose-self--hosted-2496ED?logo=docker" alt="Self-host with Docker Compose" /></a>
 </p>
+
+| Use Luna | Build with Luna |
+|---|---|
+| [Try the official Web app](#official-web-app-and-product-pages) · [Self-host the Web community edition](#installation-and-quick-start) | [Go API Quickstart](examples/quickstart/README.en.md) · [Interpretation v3 API reference](https://doc.vuilabs.cn/api-reference/realtime-interpretation/) (Chinese) |
+| Run the community edition locally in simulation mode without a model API key. | The Go example calls mainland China v3 with `X-API-Key`, separately from the [community Bearer provider adapter](docs/providers.md#luna-公共-api). |
 
 ## Speak, translate, listen
 

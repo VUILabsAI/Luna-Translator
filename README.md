@@ -9,11 +9,7 @@
 </p>
 
 <p align="center">
-  中文 · <a href="README.en.md">English</a> ·
-  <a href="#官方网页版与产品介绍">在线体验与官网</a> ·
-  <a href="#安装与快速开始">自托管指南</a> ·
-  <a href="https://github.com/VUILabsAI/Luna-Translator/releases">社区版发行包</a> ·
-  <a href="https://simultrans.lunalabs.cn/api-docs">社区版接入 API</a>
+  中文 · <a href="README.en.md">English</a>
 </p>
 
 <p align="center">
@@ -22,6 +18,11 @@
   <a href="https://github.com/VUILabsAI/Luna-Translator/releases/latest"><img src="https://img.shields.io/github/v/release/VUILabsAI/Luna-Translator" alt="最新社区版发行版本" /></a>
   <a href="#安装与快速开始"><img src="https://img.shields.io/badge/Docker%20Compose-self--hosted-2496ED?logo=docker" alt="通过 Docker Compose 自托管" /></a>
 </p>
+
+| 使用 Luna | 接入 Luna |
+|---|---|
+| [官方在线体验](#官方网页版与产品介绍) · [自托管 Web 社区版](#安装与快速开始) | [Go API 快速开始](examples/quickstart/README.md) · [同传 v3 API 文档](https://doc.vuilabs.cn/api-reference/realtime-interpretation/) |
+| 社区版可在本机运行模拟体验，不需要模型 API Key。 | Go 示例直接调用国内同传 v3，使用 `X-API-Key`，不同于[社区版 Bearer 模型适配器](docs/providers.md#luna-公共-api)。 |
 
 ## 边说，边译，边听
 
