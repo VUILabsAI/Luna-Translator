@@ -14,11 +14,14 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version: '1.26.10'
-          cache-dependency-path: backend/go.sum
+          cache-dependency-path: |
+            backend/go.sum
+            examples/quickstart/go.sum
       - run: npm ci
       - run: npm run build --workspace web
       - run: npm exec --workspace web -- vitest run src/lib/consumerHistory.test.ts src/lib/multilingualShowcase.test.ts src/lib/backfillAudio.test.ts src/lib/welcomeI18n.test.ts src/lib/welcomeRouting.test.ts
       - run: go -C backend test -race ./...
+      - run: go -C examples/quickstart test -race ./...
       - run: python3 scripts/check-public-content.py
       - run: docker compose config --quiet
       - run: docker compose up --build -d --wait
