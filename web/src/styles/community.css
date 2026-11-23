@@ -1,14 +1,201 @@
-.community-banner{padding:8px 16px;background:#edf4ef;color:#244d35;font:13px/1.6 system-ui;text-align:center;border-bottom:1px solid #d5e4d8}.community-login,.community-settings{max-width:620px;margin:64px auto;padding:24px;font-family:system-ui;line-height:1.7}.community-login form{display:grid;gap:16px}.community-login input,.community-login button,.community-settings button{min-height:44px;padding:10px 16px;border:1px solid #9aa99f;border-radius:10px;font:inherit}.community-login button,.community-settings button{background:#244d35;color:white;cursor:pointer}.community-login p{overflow-wrap:anywhere}.community-login code{font-size:12px}.community-login input:focus-visible{outline:3px solid #9ec4aa}button:disabled{opacity:.6}
+.community-app {
+  --community-page: #f8f9fa;
+  --community-group: #f6f8f8;
+  --community-fill: #f1f3f3;
+  --community-accent: #339370;
+  --community-ink: #0a0f0a;
+  --community-shadow: 0 1px 8px rgb(11 129 227 / 6%);
+  --community-serif: 'Songti SC', 'Noto Serif SC Variable', serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  background: var(--community-group);
+  color: var(--community-ink);
+}
+.community-banner {
+  padding: 8px 16px;
+  background: var(--community-fill);
+  color: #354644;
+  font: 12px/1.5 system-ui, sans-serif;
+  text-align: center;
+}
+.community-app > .global-shell.is-showcase,
+.community-app > .global-shell.is-showcase > .global-main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+}
+.community-app .realtime-showcase-page {
+  flex: 1;
+  min-height: 0;
+  padding-block: 12px;
+  background: transparent;
+}
+.community-app .realtime-showcase-device.showcase-multilingual-device.canary-workspace {
+  height: auto;
+  min-height: min(800px, max(460px, calc(100dvh - 118px)));
+  background: var(--community-page) !important;
+}
+.community-app .canary-home-profile .canary-profile-avatar {
+  background: white;
+  color: var(--community-accent);
+}
+.community-app .canary-home-empty {
+  top: calc(114px + env(safe-area-inset-top));
+  bottom: calc(164px + env(safe-area-inset-bottom));
+  padding: 0 24px;
+  justify-content: center;
+  transform: none;
+  text-align: center;
+}
+.community-app .canary-home-empty p { font: 400 20px/30px var(--community-serif); color: #616967; }
+.community-conversation-intro h2 { margin: 0 0 8px; font: 600 24px/32px var(--community-serif); }
+.community-app .community-conversation-intro p { font-size: 15px; line-height: 24px; }
+.community-app .canary-home-languages .showcase-language-picker-trigger::before { border: 0; box-shadow: var(--community-shadow); }
+.community-app .canary-home-languages .showcase-duo-language-select { max-width: 100%; gap: 8px; }
+.community-app .canary-home-languages .showcase-language-picker { min-width: 0; }
+.community-app .canary-home-languages .showcase-language-picker-trigger { max-width: 100%; }
+.community-app .canary-home-languages .showcase-language-picker-trigger strong { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.community-app .canary-home-dock {
+  height: auto;
+  display: grid;
+  gap: 12px;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+}
+.community-mode-shortcuts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.community-mode-shortcut, .community-app .canary-quick-start {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-width: 0;
+  min-height: 56px;
+  padding: 8px;
+  border: 0;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--community-ink);
+  box-shadow: var(--community-shadow);
+  font: 600 16px/1.4 var(--community-serif);
+  cursor: pointer;
+}
+.community-app .canary-quick-start { min-height: 64px; font-size: 18px; }
+.community-mode-shortcut img, .community-app .canary-quick-start img { width: 32px; height: 32px; object-fit: contain; }
+.community-mode-shortcut:disabled, .community-app .canary-quick-start:disabled { opacity: .48; cursor: default; }
+.community-app .canary-workspace.realtime-showcase-device--welcome > .realtime-showcase-notices {
+  bottom: calc(164px + env(safe-area-inset-bottom));
+}
+.community-app .canary-workspace .canary-session-dock {
+  min-height: 0;
+  padding: 12px clamp(12px, 5vw, 24px) calc(16px + env(safe-area-inset-bottom));
+  background: white;
+  border-top: 1px solid var(--community-group);
+}
+.community-app .canary-workspace .canary-audio-controls,
+.community-app .canary-workspace .canary-session-dock button { background: var(--community-group); }
+.community-app .canary-workspace .canary-session-dock .canary-finish-control { background: #000; }
+.community-app .canary-finish-control img { filter: brightness(0) invert(1); }
+.community-app .showcase-multilingual-device.canary-workspace .showcase-row-languages--docked button.is-active { background: #267456; }
+.community-app .showcase-multilingual-device.canary-workspace .showcase-multilingual-row--featured :is(.realtime-showcase-source, .showcase-translation-line.is-primary) { color: #267456 !important; }
+.community-app .canary-workspace .showcase-session-share > button { background: #000; color: white; }
+.community-app .home-conversation-panel { background: white; }
+.community-app .home-conversation-panel.is-active { background: #267456; }
+.community-app .showcase-scene--conversation .showcase-session-action--complete { background: #000; color: white; }
 
-.community-audio-input{display:flex;align-items:center;flex-wrap:wrap;gap:12px;padding:12px 20px;background:#fff;font:13px/1.5 system-ui}.community-audio-input input{max-width:240px}.community-audio-input [role=alert]{color:#a22}
+.app-settings-drawer[data-placement="bottom"][open] { align-items: flex-end; }
+.app-settings-drawer[data-placement="bottom"] > .app-settings-drawer-panel {
+  width: 100%;
+  height: auto;
+  max-height: 88%;
+  overflow: hidden;
+  border-radius: 24px 24px 0 0;
+  animation: none;
+}
+.app-settings-drawer[data-placement="bottom"] .app-settings-drawer-heading > h2 { font-family: 'Songti SC', 'Noto Serif SC Variable', serif; }
 
-/* Keep the product's scaled layout, with readable community text on phones. */
-@media (max-width:900px) {
- .global-shell .showcase-multilingual-device .realtime-showcase-source {font-size:14px;line-height:1.65}
- .global-shell .showcase-multilingual-device .showcase-multilingual-row .showcase-translation-line.is-primary strong {font-size:16px;line-height:1.65}
- .global-shell .showcase-finished-summary strong {font-size:20px;line-height:1.4}
- .global-shell .showcase-finished-summary span {font-size:12px;line-height:1.6}
- .global-shell .session-audio-label,.global-shell .session-audio-time,.global-shell .session-audio-rate {font-size:12px;line-height:1.5}
- .global-shell .showcase-session-share > button,.global-shell .realtime-showcase-back {font-size:14px;min-height:36px}
- .community-audio-input input {max-width:100%}
+.community-login, .community-settings { width: min(100%, 480px); margin: 0 auto; padding: 44px 24px; line-height: 1.6; }
+.community-login form { display: grid; gap: 12px; }
+.community-login h1 { margin: 0; font: 600 32px/1.35 var(--community-serif); }
+.community-login p { margin: 0; overflow-wrap: anywhere; }
+.community-login input, .community-login button {
+  min-height: 48px;
+  padding: 10px 16px;
+  border: 1px solid #d9dddc;
+  border-radius: 999px;
+  background: #fff;
+  font: inherit;
+}
+.community-login button, .community-sign-out { border: 0; background: #000; color: white; cursor: pointer; }
+.community-login code { font-size: 12px; }
+.community-login a { color: #267456; }
+
+.community-app :is(.community-preferences, .consumer-history-page) { background: transparent; min-height: 0; }
+.community-app :is(.community-preferences, .consumer-history-page) .consumer-page-device { background: var(--community-group); }
+.community-app :is(.community-preferences, .consumer-history-page) .consumer-page-topbar {
+  height: auto;
+  min-height: 52px;
+  padding: 0 16px;
+  background: var(--community-group);
+}
+.community-app :is(.community-preferences, .consumer-history-page) .consumer-page-back { min-height: 44px; font-size: 14px; }
+.community-app :is(.community-preferences, .consumer-history-page) .consumer-page-content { padding: 12px 24px 24px; }
+.community-app :is(.community-preferences h1, .consumer-history-title) { margin: 0 0 16px; font: 600 24px/32px var(--community-serif); }
+.community-app .consumer-history-entry-link { height: auto; border: 0; border-radius: 12px; background: white; padding: 16px; }
+.community-preferences-group { margin-bottom: 12px; padding: 16px; border-radius: 12px; background: white; }
+.community-preferences-group h2 { margin: 0 0 6px; font: 600 16px/24px var(--community-serif); }
+.community-preferences-group p { margin: 0 0 8px; color: #43514e; font: 14px/1.65 system-ui, sans-serif; }
+.community-preferences-group :is(a, button) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  border-top: 1px solid var(--community-fill);
+  background: transparent;
+  color: inherit;
+  font: 14px/22px system-ui, sans-serif;
+  text-decoration: none;
+  cursor: pointer;
+}
+.community-sign-out { width: 100%; min-height: 48px; border-radius: 999px; font: 14px/22px system-ui, sans-serif; }
+
+.community-audio-input {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  padding: 8px 16px;
+  background: #fff;
+  font: 13px/1.5 system-ui, sans-serif;
+}
+.community-audio-input label { max-width: 100%; }
+.community-audio-input input { max-width: 100%; width: 205px; }
+.community-audio-input select { padding: 3px 8px; border: 1px solid #d9dddc; border-radius: 999px; background: white; }
+.community-audio-input [role="status"] { flex-basis: 100%; text-align: center; overflow-wrap: anywhere; }
+.community-audio-input [role="alert"], .community-login [role="alert"] { color: #a22; }
+.community-app :is(a, button, input, select):focus-visible { outline: 2px solid #267456; outline-offset: 2px; }
+
+@media (max-width: 900px), (pointer: coarse) and (hover: none) {
+  .community-app:has(.canary-workspace) { height: 100dvh; }
+  .community-app .realtime-showcase-page:has(.canary-workspace) {
+    display: flex;
+    flex-direction: column;
+    padding-block: 0;
+    overflow: visible;
+  }
+  .community-app .realtime-showcase-device.showcase-multilingual-device.canary-workspace {
+    flex: 1;
+    min-height: 350px;
+  }
+  .community-app .showcase-multilingual-device .realtime-showcase-source { font-size: 14px; line-height: 1.65; }
+  .community-app .showcase-multilingual-device .showcase-multilingual-row .showcase-translation-line.is-primary strong { font-size: 16px; line-height: 1.65; }
+  .community-app .showcase-finished-summary strong { font-size: 20px; line-height: 1.4; }
+  .community-app .showcase-finished-summary span, .community-app :is(.session-audio-label, .session-audio-time, .session-audio-rate) { font-size: 12px; line-height: 1.5; }
+  .community-app :is(.showcase-session-share > button, .realtime-showcase-back) { font-size: 14px; min-height: 36px; }
 }
