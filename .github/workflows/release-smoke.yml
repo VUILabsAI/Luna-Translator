@@ -95,7 +95,7 @@ jobs:
               }
 
               const page = await openWorkspace('/')
-              const start = page.getByRole('button', {name: '开始同传', exact: true})
+              const start = page.getByRole('button', {name: /^(快速开始|开始同传)$/})
               await expect(start).toBeVisible()
               await expect(page.getByText(/社区版 · 模拟体验/)).toBeVisible()
 
