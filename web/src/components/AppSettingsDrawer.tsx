@@ -5,6 +5,7 @@ import '../styles/app-settings-drawer.css'
 type AppSettingsDrawerProps = {
   id: string
   title: string
+  placement?: 'right' | 'bottom'
   open: boolean
   onClose: () => void
   containerSelector?: string
@@ -17,7 +18,7 @@ type AppSettingsDrawerProps = {
 
 /** A native modal whose shade and right panel both stay inside the portrait App. */
 export function AppSettingsDrawer({
-  id, title, open, onClose, containerSelector = '.realtime-showcase-device',
+  id, title, open, onClose, placement = 'right', containerSelector = '.realtime-showcase-device',
   dialogRef, contentRef, bodyClassName, mountWhenClosed = false, children,
 }: AppSettingsDrawerProps) {
   const ownDialog = useRef<HTMLDialogElement>(null)
@@ -68,6 +69,7 @@ export function AppSettingsDrawer({
     id={id}
     ref={dialog}
     className="app-settings-drawer"
+    data-placement={placement}
     aria-label={title}
     aria-labelledby={`${id}-title`}
     onClose={event => {
