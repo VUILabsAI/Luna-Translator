@@ -849,7 +849,7 @@ export function SoloTranscriptRow({
 export function LanguageDirectionSelect({ side, sourceLanguage, sourceOptions, selected, maxTargets = maxShowcaseTargetLanguages, allowedTargets, disabled, open, onOpenChange, onSourceChange, onToggle }: {
   side?: '甲' | '乙'; sourceLanguage: string; sourceOptions: string[]; selected: string[]; maxTargets?: number; allowedTargets: Set<string>; disabled: boolean; open: 'source' | 'target' | null; onOpenChange: (open: 'source' | 'target' | null) => void; onSourceChange: (language: string) => void; onToggle: (language: string) => void
 }) {
-  const canary = canaryDesignEnabled() && !side
+  const canary = !side
   return <div className={`showcase-duo-language-select${side ? '' : ' showcase-duo-language-select--solo'}${open !== null ? ' is-open' : ''}`}>
     {side && <span className="showcase-duo-language-side">{side}</span>}
     <ShowcaseLanguagePicker ariaLabel={side ? `${side}的输入语言` : '输入语言'} value={[sourceLanguage]} variant="source" canary={canary}
@@ -1409,14 +1409,14 @@ export function ShowcaseFrame({
   children: ReactNode
 }) {
   const canaryUi = canaryDesignEnabled()
-  const canaryDrawer = canaryUi && mode === 'solo' && (!scene || scene === 'conversation')
+  const communityLayout = mode === 'solo' && !guest
+  const canaryDrawer = communityLayout && (!scene || scene === 'conversation')
   const settingsId = scene === 'conversation' ? 'conversation-mode-settings' : 'quick-mode-settings'
-  const canaryDesign = canaryUi && mode === 'solo' && !guest
   // Keep language rows in the dock's flow so wrapped chips grow its background.
   // Processing/terminal states retain their separate session-control layout.
   const isDockedLanguages = (child: ReactNode) => isValidElement<{ className?: string }>(child)
     && child.props.className?.split(' ').includes('showcase-row-languages--docked')
-  const dockLanguages = canaryDesign && !finished && status === 'recording' && scene !== 'conversation'
+  const dockLanguages = communityLayout && !finished && status === 'recording' && scene !== 'conversation'
     ? Children.toArray(children).filter(isDockedLanguages) : []
   const [dismissedNotice, setDismissedNotice] = useState('')
   const [dismissedInfoNotice, setDismissedInfoNotice] = useState('')
@@ -1430,20 +1430,20 @@ export function ShowcaseFrame({
   const [sessionElapsed, setSessionElapsed] = useState(0)
   const sessionStartedAt = useRef(0)
   useEffect(() => {
-    if (!canaryDesign || status !== 'recording') return
+    if (!communityLayout || status !== 'recording') return
     if (!sessionStartedAt.current) sessionStartedAt.current = Date.now()
     const tick = () => setSessionElapsed(Math.floor((Date.now() - sessionStartedAt.current) / 1000))
     tick()
     const timer = window.setInterval(tick, 1000)
     return () => window.clearInterval(timer)
-  }, [canaryDesign, status])
+  }, [communityLayout, status])
   useEffect(() => { if (status === 'idle') { sessionStartedAt.current = 0; setSessionElapsed(0) } }, [status])
   const workspaceRef = useRef<HTMLDivElement>(null)
   // Reserve the real controls once. A single-screen notice sits above the
   // language chips/dock, never beneath the dock background or over captions.
   useLayoutEffect(() => {
     const root = workspaceRef.current
-    if (!canaryDesign || !root) return
+    if (!communityLayout || !root) return
     const singleScreen = Boolean(root.querySelector(':scope > .canary-caption-viewport'))
     if (!singleScreen && status !== 'recording') return
     const chips = root.querySelector<HTMLElement>('.showcase-row-languages--docked')
@@ -1476,16 +1476,16 @@ export function ShowcaseFrame({
       chips?.style.removeProperty('--caption-chips-bottom')
       for (const element of notices) element.style.removeProperty('--caption-notice-bottom')
     }
-  }, [canaryDesign, status, finished, notice, dismissedNotice, visibleInfoNotice, endingNotice, scene])
+  }, [communityLayout, status, finished, notice, dismissedNotice, visibleInfoNotice, endingNotice, scene])
   const [captionRotation, setCaptionRotation] = useState(0)
   const captionRef = useRef<HTMLDivElement>(null)
   const [captionSize, setCaptionSize] = useState({ width: 0, height: 0 })
   useLayoutEffect(() => {
-    if (!canaryDesign || !captionRef.current) return
+    if (!communityLayout || !captionRef.current) return
     const observer = new ResizeObserver(([entry]) => setCaptionSize({ width: entry.contentRect.width, height: entry.contentRect.height }))
     observer.observe(captionRef.current)
     return () => observer.disconnect()
-  }, [canaryDesign, status])
+  }, [communityLayout, status])
   const duoEntryAllowed = canStartDuoShowcase()
   const [leaveDialogOpen, setLeaveDialogOpen] = useState(false)
   const [leaving, setLeaving] = useState(false)
@@ -1625,7 +1625,7 @@ export function ShowcaseFrame({
       aria-labelledby="multilingual-showcase-title"
     >
       <h1 id="multilingual-showcase-title" className="realtime-showcase-sr-only">{homeModes ? `同声传译 · ${HOME_MODE_OPTIONS.map(option => option.label).join('、')}` : '多语与双人竖屏同传'}</h1>
-      <div ref={workspaceRef} className={`realtime-showcase-device realtime-showcase-device--${welcome ? 'welcome' : status} showcase-multilingual-device showcase-multilingual-device--${mode} showcase-font-size--${fontSize}${homeModes ? ' showcase-has-home-modes' : ''}${scene ? ` showcase-scene--${scene}` : ''}${canaryDesign ? ' canary-workspace' : ''}${invitationVisible ? ' canary-speak-invitation' : ''}`}
+      <div ref={workspaceRef} className={`realtime-showcase-device realtime-showcase-device--${welcome ? 'welcome' : status} showcase-multilingual-device showcase-multilingual-device--${mode} showcase-font-size--${fontSize}${homeModes ? ' showcase-has-home-modes' : ''}${scene ? ` showcase-scene--${scene}` : ''}${communityLayout ? ' canary-workspace' : ''}${invitationVisible ? ' canary-speak-invitation' : ''}`}
         style={invitationVisible ? { '--invitation-height': `${invitationHeight || 52}px` } as CSSProperties : undefined}>
         <div className="realtime-showcase-landscape" aria-hidden="true" />
         <div className="realtime-showcase-motion-stage" aria-hidden="true">
@@ -1635,7 +1635,7 @@ export function ShowcaseFrame({
         </div>
 
         <header className={`realtime-showcase-header${settingsOpen ? ' is-settings-open' : ''}${finished ? ' is-finished' : ''}${finished && backHidden ? ' is-readonly' : ''}`}>
-          {canaryDesign && welcome && !backHidden && window.location.pathname === '/' ? <HomeProfileButton /> : inProgress && onLeave && !backHidden ? (
+          {communityLayout && welcome && !backHidden && window.location.pathname === '/' ? <HomeProfileButton /> : inProgress && onLeave && !backHidden ? (
             <ShowcaseBackButton ariaLabel="返回主页" onClick={() => setLeaveDialogOpen(true)} />
           ) : guest && !backHidden ? (
             <ShowcaseBackButton href={backHref || showcaseHomePath(window.location.pathname)} ariaLabel="返回主页" onClick={clearShowcaseReturnView} />
@@ -1656,7 +1656,7 @@ export function ShowcaseFrame({
             </a>
           )}
           {finished && footerAction}
-          {canaryDesign && welcome && !backHidden && <HomeMeetingScanner disabled={busy} />}
+          {canaryUi && welcome && !backHidden && <HomeMeetingScanner disabled={busy} />}
           {!finished && <div className="realtime-showcase-controls showcase-multilingual-controls">
             {/* Figma 273:1056 模式切换：#f3f3f3 胶囊，激活段 #365337 反白，图标 20（话筒 / 团队）。 */}
             {(!homeModes && !soloWelcome && !guest && (!busy || restoreHeader)) && (
@@ -1683,7 +1683,7 @@ export function ShowcaseFrame({
               >
                 <img src="/showcase/menu.svg" alt="" aria-hidden="true" />
               </button>
-              {canaryDrawer ? <AppSettingsDrawer id={settingsId} title={scene === 'conversation' ? '对话模式设置' : '快速开始模式设置'} open={settingsOpen} onClose={closeModeSettings} contentRef={settingsContentRef}>
+              {canaryDrawer ? <AppSettingsDrawer id={settingsId} placement="bottom" title={scene === 'conversation' ? '对话模式设置' : '快速开始模式设置'} open={settingsOpen} onClose={closeModeSettings} contentRef={settingsContentRef}>
                 {settings}
                 {liveSnapshot && <><button type="button" className="live-share-menu" disabled={sharing.busy} onClick={() => { closeModeSettings(); void openInvitation() }}>{sharing.busy ? '正在生成…' : sharing.stopped ? '查看分享记录' : '分享实时同传'}</button>{sharing.error && <p className="live-share-menu-error" role="status">{sharing.error}</p>}</>}
               </AppSettingsDrawer> : settingsOpen && <aside className="realtime-showcase-settings showcase-multilingual-settings">{settings}{liveSnapshot && <><button type="button" className="live-share-menu" disabled={sharing.busy} onClick={() => { void openInvitation() }}>{sharing.busy ? '正在生成…' : sharing.stopped ? '查看分享记录' : '分享实时同传'}</button>{sharing.error && <p className="live-share-menu-error" role="status">{sharing.error}</p>}</>}</aside>}
@@ -1691,18 +1691,22 @@ export function ShowcaseFrame({
           </div>}
         </header>
 
-        {welcome && !canaryDesign && homeModes && <div className="showcase-home-modes">{homeModes}</div>}
+        {welcome && !communityLayout && homeModes && <div className="showcase-home-modes">{homeModes}</div>}
 
         {canaryUi && shareConfirmationOpen && <LiveShareConfirmation onResult={accepted => { setShareConfirmationOpen(false); if (accepted) void openInvitation(shareView, true) }} />}
         <SessionShareDialog canary={canaryUi} initialView={canaryUi && scene === 'speak' ? shareView : undefined} link={shareDialogOpen ? sharing.link : undefined} live={!sharing.stopped && liveStatus !== 'ended'} onClose={() => setShareDialogOpen(false)} onFinish={() => { void sharing.finish() }} />
         {invitationVisible && <div className="speak-invitation-heading">声音分享</div>}
         {invitationVisible && <div ref={invitationRef} className="speak-invitation-slot"><SpeakInvitationBar shared={Boolean(sharing.link)} stopped={sharing.stopped || liveStatus === 'ended'} busy={sharing.busy} error={sharing.error} onSelect={method => { void openInvitation(method) }} /></div>}
         {!invitationVisible && scene === 'speak' && liveSnapshot && status === 'recording' && <div className="showcase-scene-share"><button type="button" disabled={sharing.busy} onClick={() => { void openInvitation() }}>邀请听众</button>{sharing.error && <span role="status">{sharing.error}</span>}</div>}
-        {!soloWelcome && (!canaryDesign || finished) && toolbar}
+        {!soloWelcome && (!communityLayout || finished) && toolbar}
 
-        {canaryDesign && welcome ? <>
+        {communityLayout && welcome ? <>
           <div className="canary-home-languages">{toolbar}</div>
-          <div className="canary-home-empty"><div className="canary-translation-symbol"><img src="/showcase/canary-figma/translate.svg" alt="" /></div><p>点击按钮开始同传</p></div>
+          <div className="canary-home-empty">
+            {scene === 'conversation' ? <div className="community-conversation-intro">
+              <h2>{welcomeTitle}</h2><p>{welcomeSubtitle}</p>
+            </div> : <p>点击按钮开始同传</p>}
+          </div>
         </> : welcome ? (
           <div className="realtime-showcase-welcome-copy showcase-multilingual-welcome">
             <p>欢迎体验<em>同声传译</em></p>
@@ -1711,7 +1715,7 @@ export function ShowcaseFrame({
             {soloWelcome && <div className="showcase-home-language">{toolbar}</div>}
             {scene && <small className="showcase-scene-hint">{scene === 'speak' ? '开始后可邀请听众，分别收听各自语言的译文。' : scene === 'conversation' ? '共用一支麦克风，上下两侧分别查看自己的语言。' : '持续收声，显示你选择的语言。'}<br />默认只显示字幕，开始后可开启一路译音。</small>}
           </div>
-        ) : canaryDesign && !finished && scene !== 'conversation' ? Children.map(children, child => dockLanguages.length && isDockedLanguages(child) ? null : isValidElement<{ className?: string }>(child) && child.props.className?.includes('realtime-showcase-transcript') ? <div ref={captionRef} className="canary-caption-viewport"><div className="canary-caption-rotated" style={{ width: captionRotation % 180 ? captionSize.height : '100%', height: captionRotation % 180 ? captionSize.width : '100%', left: captionRotation % 180 ? (captionSize.width - captionSize.height) / 2 : 0, top: captionRotation % 180 ? (captionSize.height - captionSize.width) / 2 : 0, transform: `rotate(${captionRotation}deg)` }}>{child}</div></div> : child) : children}
+        ) : communityLayout && !finished && scene !== 'conversation' ? Children.map(children, child => dockLanguages.length && isDockedLanguages(child) ? null : isValidElement<{ className?: string }>(child) && child.props.className?.includes('realtime-showcase-transcript') ? <div ref={captionRef} className="canary-caption-viewport"><div className="canary-caption-rotated" style={{ width: captionRotation % 180 ? captionSize.height : '100%', height: captionRotation % 180 ? captionSize.width : '100%', left: captionRotation % 180 ? (captionSize.width - captionSize.height) / 2 : 0, top: captionRotation % 180 ? (captionSize.height - captionSize.width) / 2 : 0, transform: `rotate(${captionRotation}deg)` }}>{child}</div></div> : child) : children}
 
         {endingNotice && (
           <div
@@ -1757,7 +1761,12 @@ export function ShowcaseFrame({
 
         {!finished && footerAction}
 
-        {canaryDesign && welcome ? <div className="canary-home-dock">{homeModes}<button className="canary-quick-start" type="button" disabled={controlDisabled} aria-label={scene ? startLabel : '快速开始'} onClick={onControl}><img src="/showcase/canary-figma/mic.svg" alt="" /><span>{scene ? ({ listen: '听译', speak: '分享', conversation: '对话' })[scene] : '快速开始'}</span></button><span className="canary-dock-spacer" /></div> : canaryDesign && status === 'recording' ? (
+        {communityLayout && welcome ? <div className="canary-home-dock">
+          {homeModes}
+          <button className="canary-quick-start" type="button" disabled={controlDisabled} onClick={onControl}>
+            <img src="/showcase/canary-figma/quick-start.png" alt="" /><span>{scene ? startLabel : '快速开始'}</span>
+          </button>
+        </div> : communityLayout && status === 'recording' && scene !== 'conversation' ? (
           <div className={`canary-session-dock${dockLanguages.length ? ' canary-session-dock--with-languages' : ''}`} role="group" aria-label="同传控制">
             {dockLanguages}
             <div className="canary-audio-controls">
@@ -1765,7 +1774,7 @@ export function ShowcaseFrame({
                 {muted ? <img src="/showcase/canary-figma/speaker-off.svg" alt="" /> : <svg width="26" height="20" viewBox="0 0 26 20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M3 7h4l5-4v14l-5-4H3Z" />{muted ? <path d="m17 7 6 6m0-6-6 6" /> : <><path d="M16 6q5 4 0 8" /><path d="M20 3q7 7 0 14" /></>}</svg>}
               </button>
               <span aria-hidden="true" />
-              {scene !== 'conversation' && <button type="button" aria-label="字幕旋转90度" onClick={() => setCaptionRotation(value => (value + 90) % 360)}><img src="/showcase/canary-figma/session-rotate.svg" alt="" /></button>}
+              <button type="button" aria-label="字幕旋转90度" onClick={() => setCaptionRotation(value => (value + 90) % 360)}><img src="/showcase/canary-figma/session-rotate.svg" alt="" /></button>
             </div>
             <button type="button" className="canary-pause-control" disabled={pauseDisabled} aria-label={paused ? '继续' : '暂停'} aria-pressed={paused} onClick={onPause}>
               <img className="canary-pause-icon" src={paused ? '/showcase/play.svg' : '/showcase/canary-figma/pause.svg'} alt="" />
@@ -1889,7 +1898,7 @@ export default function MultilingualShowcasePage({ sessionMode: requestedMode = 
     restoreModePickerFocus.current = false
     // A mode switch intentionally remounts SoloShowcase; focus its new opener
     // after the commit instead of leaving focus on the removed menu/button.
-    document.querySelector<HTMLButtonElement>('.canary-home-mode-picker > button, .home-mode-switch [role="tab"][aria-selected="true"]')?.focus({ preventScroll: true })
+    document.querySelector<HTMLButtonElement>('.canary-home-dock .canary-quick-start')?.focus({ preventScroll: true })
   }, [revision])
   const [fontSize] = useState<ShowcaseFontSize>(readShowcaseFontSize)
   const audioDevices = useAudioDevices()
@@ -1918,7 +1927,7 @@ export default function MultilingualShowcasePage({ sessionMode: requestedMode = 
     if (next === 'meeting') { if (meetingAvailable) window.location.assign(sessionMode === 'guest' ? '/meeting?guest=1' : '/meeting'); return }
     const nextScene = next === 'solo' ? undefined : next
     if (nextScene === scene && mode === 'solo') return
-    restoreModePickerFocus.current = Boolean(document.activeElement?.closest('.canary-home-mode-picker, .home-mode-switch'))
+    restoreModePickerFocus.current = Boolean(document.activeElement?.closest('.canary-home-dock'))
     clearShowcaseReturnView()
     const url = new URL(window.location.href)
     if (nextScene) url.searchParams.set('mode', nextScene)
