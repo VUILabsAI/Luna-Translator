@@ -15,11 +15,15 @@
   <a href="https://github.com/VUILabsAI/Luna-Translator/actions/workflows/ci.yml"><img src="https://github.com/VUILabsAI/Luna-Translator/actions/workflows/ci.yml/badge.svg?branch=main" alt="Community checks" /></a>
   <a href="https://github.com/VUILabsAI/Luna-Translator/releases/latest"><img src="https://img.shields.io/github/v/release/VUILabsAI/Luna-Translator" alt="Latest community release" /></a>
   <a href="#installation-and-quick-start"><img src="https://img.shields.io/badge/Docker%20Compose-self--hosted-2496ED?logo=docker" alt="Self-host with Docker Compose" /></a>
+  <br />
+  <a href="https://github.com/VUILabsAI/Luna-Translator"><img src="https://img.shields.io/github/stars/VUILabsAI/Luna-Translator?style=flat" alt="GitHub Stars count" /></a>
+  <img src="https://img.shields.io/github/languages/top/VUILabsAI/Luna-Translator" alt="Top repository language" />
 </p>
 
 | Use Luna | Build with Luna |
 |---|---|
-| [Try the official Web app](#official-web-app-and-product-pages) · [Self-host the Web community edition](#installation-and-quick-start) | [Go API Quickstart](examples/quickstart/README.en.md) · [Interpretation v3 API reference](https://doc.vuilabs.cn/api-reference/realtime-interpretation/) (Chinese) |
+| [![Try Online](https://img.shields.io/badge/Try%20Online-0969DA?style=for-the-badge)](https://simultrans.vuilabs.ai/) | [![Go API Quickstart](https://img.shields.io/badge/Go%20API%20Quickstart-007D9C?style=for-the-badge&logo=go&logoColor=white)](examples/quickstart/README.en.md) |
+| [Self-host the Web community edition](#installation-and-quick-start) · [Official Web app and product pages](#official-web-app-and-product-pages) | [Interpretation v3 API reference](https://doc.vuilabs.cn/api-reference/realtime-interpretation/) (Chinese) |
 | Run the community edition locally in simulation mode without a model API key. | The Go example calls mainland China v3 with `X-API-Key`, separately from the [community Bearer provider adapter](docs/providers.md#luna-公共-api). |
 
 ## Speak, translate, listen
