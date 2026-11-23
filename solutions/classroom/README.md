@@ -23,6 +23,10 @@ go -C examples/quickstart run . -input ../../solutions/classroom/sample-zh.wav -
 
 成功后，终端会显示译文，标准错误会给出 `request_id`，第二条命令还会生成 `output/classroom-zh-en.wav`。样例讲的是声音如何在空气中传播，译文措辞随模型输出变化。[用量与中断查询](https://doc.vuilabs.cn/api-reference/realtime-interpretation/#用量额度与中断)
 
+## 真实 v3 验收结果
+
+同一段讲座音频通过了仅译文和预置音色两种模式。两次输出的英文一致，带译音模式生成了 7.76 秒的 WAV。[英文译文](translation-en.txt) · [英文译音](translation-en.wav) · [验收记录](validation.md)
+
 ## 无 Key 验证
 
 ```sh

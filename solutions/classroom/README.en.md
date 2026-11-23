@@ -23,6 +23,10 @@ go -C examples/quickstart run . -input ../../solutions/classroom/sample-zh.wav -
 
 On success you get translated text, a `request_id` on standard error, and `output/classroom-zh-en.wav` from the second invocation. The clip explains how sound travels through air. The model's exact wording may vary. [Usage and interrupted sessions](https://doc.vuilabs.cn/api-reference/realtime-interpretation/#用量额度与中断)
 
+## Live v3 results
+
+The same lecture clip completed in text-only and preset-voice modes. Both returned identical English text, and the speech run produced a 7.76-second WAV. [English translation](translation-en.txt) · [English speech](translation-en.wav) · [Validation record](validation.md#live-v3-validation)
+
 ## Verify without a key
 
 ```sh
