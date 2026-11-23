@@ -4,7 +4,7 @@
 
 <h1 align="center">Luna Translator</h1>
 
-<p align="center">Real-time speech-to-speech translation by VUI Labs, with live captions, translated audio, and a self-hosted Web community edition.</p>
+<p align="center">Open-source real-time speech translation and API solutions from VUI Labs, with live captions, translated audio, and a self-hosted Web community edition.</p>
 
 <p align="center">
   <a href="README.md">中文</a> · English
@@ -23,8 +23,8 @@
 | Use Luna | Build with Luna |
 |---|---|
 | [![Try Online](https://img.shields.io/badge/Try%20Online-0969DA?style=for-the-badge)](https://simultrans.vuilabs.ai/) | [![Go API Quickstart](https://img.shields.io/badge/Go%20API%20Quickstart-007D9C?style=for-the-badge&logo=go&logoColor=white)](examples/quickstart/README.en.md) |
-| [Self-host the Web community edition](#installation-and-quick-start) · [Official Web app and product pages](#official-web-app-and-product-pages) | [Interpretation v3 API reference](https://doc.vuilabs.cn/api-reference/realtime-interpretation/) (Chinese) |
-| Run the community edition locally in simulation mode without a model API key. | The Go example calls mainland China v3 with `X-API-Key`, separately from the [community Bearer provider adapter](docs/providers.md#luna-公共-api). |
+| [Self-host the Web community edition](#installation-and-quick-start) · [Official Web app and product pages](#official-web-app-and-product-pages) | [Browse solutions](solutions/README.en.md) · [Interpretation v3 API reference](https://doc.vuilabs.cn/api-reference/realtime-interpretation/) (Chinese) |
+| Run the community edition locally in simulation mode without a model API key. | The Go example calls mainland China v3 with `X-API-Key`. The community edition connects to a configured model service through its [Bearer provider adapter](docs/providers.md#luna-公共-api). |
 
 ## Speak, translate, listen
 
@@ -173,6 +173,8 @@ python3 scripts/check-public-content.py
 | `packages/core/`, `packages/ui-shared/` | Shared text state, protocols and browser audio logic. |
 | `backend/community/` | Standalone workspace API, session coordination and persistence. |
 | `backend/providers/` | External model-service client adapters. |
+| [`solutions/`](solutions/README.en.md) | Integration guides and scope for meetings, classrooms, livestreams, and calls. |
+| [`examples/quickstart/`](examples/quickstart/README.en.md) | Runnable Go example for the mainland China interpretation v3 API. |
 | `docs/` | Architecture, deployment, provider setup, validation and roadmap. |
 
 ## Release scope and roadmap

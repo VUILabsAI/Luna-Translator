@@ -5,7 +5,7 @@
 <h1 align="center">Luna Translator</h1>
 
 <p align="center">
-  VUI Labs 的实时语音到语音翻译应用，提供字幕、译音和可自托管的 Web 社区版。
+  VUI Labs 的实时语音同传开源应用与 API 解决方案，提供字幕、译音和可自托管的 Web 社区版。
 </p>
 
 <p align="center">
@@ -25,8 +25,8 @@
 | 使用 Luna | 接入 Luna |
 |---|---|
 | [![在线体验](https://img.shields.io/badge/%E5%9C%A8%E7%BA%BF%E4%BD%93%E9%AA%8C-0969DA?style=for-the-badge)](https://simultrans.lunalabs.cn/) | [![Go API 快速开始](https://img.shields.io/badge/Go%20API%20%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B-007D9C?style=for-the-badge&logo=go&logoColor=white)](examples/quickstart/README.md) |
-| [自托管 Web 社区版](#安装与快速开始) · [官方网页版与产品介绍](#官方网页版与产品介绍) | [同传 v3 API 文档](https://doc.vuilabs.cn/api-reference/realtime-interpretation/) |
-| 社区版可在本机运行模拟体验，不需要模型 API Key。 | Go 示例直接调用国内同传 v3，使用 `X-API-Key`，不同于[社区版 Bearer 模型适配器](docs/providers.md#luna-公共-api)。 |
+| [自托管 Web 社区版](#安装与快速开始) · [官方网页版与产品介绍](#官方网页版与产品介绍) | [按场景接入](solutions/README.md) · [同传 v3 API 文档](https://doc.vuilabs.cn/api-reference/realtime-interpretation/) |
+| 社区版可在本机运行模拟体验，无需模型 API Key。 | Go 示例直连国内同传 v3，使用 `X-API-Key`。社区版通过 [Bearer 模型适配器](docs/providers.md#luna-公共-api)接入自己的模型服务。 |
 
 ## 边说，边译，边听
 
@@ -175,6 +175,8 @@ python3 scripts/check-public-content.py
 | `packages/core/`、`packages/ui-shared/` | 共享文本状态、协议与浏览器音频逻辑。 |
 | `backend/community/` | 独立工作区 API、会话编排与持久化。 |
 | `backend/providers/` | 外部模型服务客户端适配器。 |
+| [`solutions/`](solutions/README.md) | 会议、听课、直播和通话的场景指南与接入范围。 |
+| [`examples/quickstart/`](examples/quickstart/README.md) | 可运行的国内同传 v3 Go 示例。 |
 | `docs/` | 架构、部署、服务接入、验收与路线图。 |
 
 ## 版本范围与路线图
