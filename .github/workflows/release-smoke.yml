@@ -1,0 +1,152 @@
+name: Release package smoke test
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Published release tag
+        required: true
+        default: v0.1.1
+        type: string
+permissions:
+  contents: read
+jobs:
+  verify-release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      RELEASE_TAG: ${{ inputs.tag }}
+      COMPOSE_PROJECT_NAME: luna-release-${{ github.run_id }}-${{ github.run_attempt }}
+      BIND_ADDRESS: 127.0.0.1
+      PORT: '18088'
+      DEMO_MODE: 'true'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Download and verify the published package
+        shell: bash
+        run: |
+          [[ "$RELEASE_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]
+          package="Luna-Translator-$RELEASE_TAG"
+          mkdir "$RUNNER_TEMP/luna-release"
+          cd "$RUNNER_TEMP/luna-release"
+          download="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/releases/download/$RELEASE_TAG"
+          curl --fail --silent --show-error --location --retry 3 --remote-name "$download/$package.tar.gz"
+          curl --fail --silent --show-error --location --retry 3 --remote-name "$download/SHA256SUMS.txt"
+          curl --fail --silent --show-error --location --retry 3 --remote-name "$download/SOURCE_COMMIT.txt"
+          sha256sum --strict --ignore-missing --check SHA256SUMS.txt
+          ref="refs/tags/$RELEASE_TAG"
+          refs=$(git ls-remote "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git" "$ref" "$ref^{}")
+          commit=$(printf '%s\n' "$refs" | awk 'NF { if ($2 ~ /\^\{\}$/) peeled=$1; else tag=$1 } END { print peeled ? peeled : tag }')
+          [[ "$commit" =~ ^[a-f0-9]{40}$ ]]
+          test "$(cat SOURCE_COMMIT.txt)" = "$commit"
+          tar -xzf "$package.tar.gz"
+          test -x "$package/start.sh"
+          printf 'PACKAGE_DIR=%s\n' "$PWD/$package" >> "$GITHUB_ENV"
+          printf 'Verified `%s` from commit `%s`.\n' "$package.tar.gz" "$commit" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Start the downloaded package
+        run: |
+          cd "$PACKAGE_DIR"
+          ./start.sh > "$RUNNER_TEMP/luna-start.log" 2>&1 || {
+            sed '/Deployment password/,$d' "$RUNNER_TEMP/luna-start.log" >&2
+            exit 1
+          }
+          password=$(docker compose exec -T backend cat /data/admin-password)
+          test -n "$password"
+          printf '::add-mask::%s\n' "$password"
+          printf 'LUNA_SMOKE_PASSWORD=%s\n' "$password" >> "$GITHUB_ENV"
+          curl --fail --silent --show-error "http://$BIND_ADDRESS:$PORT/health"
+          curl --fail --silent --show-error "http://$BIND_ADDRESS:$PORT/ready"
+
+      - run: npm ci
+      - run: npm exec --workspace web -- playwright install --with-deps chromium
+
+      - name: Verify WAV input, captions and history playback in Chromium
+        run: |
+          node <<'JS'
+          const {join} = require('node:path')
+          const {chromium, expect} = require('@playwright/test')
+
+          async function verify() {
+            const url = 'http://127.0.0.1:' + process.env.PORT
+            const browser = await chromium.launch()
+            try {
+              const errors = []
+              async function openWorkspace(path) {
+                const page = await browser.newPage({
+                  baseURL: url,
+                  locale: 'zh-CN',
+                  viewport: {width: 1440, height: 1000},
+                })
+                page.setDefaultTimeout(10000)
+                page.on('pageerror', error => errors.push(error.message))
+                const response = await page.goto(path)
+                expect(response.status()).toBe(200)
+                await expect(page).toHaveTitle(/Luna Translator/)
+                await page.getByLabel('部署密码', {exact: true}).fill(process.env.LUNA_SMOKE_PASSWORD)
+                await page.getByRole('button', {name: '进入工作区', exact: true}).click()
+                return page
+              }
+
+              const page = await openWorkspace('/')
+              const start = page.getByRole('button', {name: '开始同传', exact: true})
+              await expect(start).toBeVisible()
+              await expect(page.getByText(/社区版 · 模拟体验/)).toBeVisible()
+
+              const input = page.getByLabel('选择 WAV 测试音频', {exact: true})
+              await input.setInputFiles(join(process.env.PACKAGE_DIR, 'solutions/classroom/sample-zh.wav'))
+              await expect(page.getByText(/已选择 sample-zh\.wav/)).toBeVisible()
+              await start.click()
+              const saved = page.waitForResponse(response =>
+                response.url() === url + '/api/consumer/history' &&
+                response.request().method() === 'POST' && response.status() === 201,
+              {timeout: 40000})
+              await Promise.all([
+                saved,
+                page.getByRole('button', {name: '同意并继续', exact: true}).click(),
+                expect(page.getByText('这是模拟会话，不识别实际语音。', {exact: true})).toBeVisible({timeout: 15000}),
+                expect(page.getByText('This is a simulated session, not a translation of your speech.', {exact: true})).toBeVisible({timeout: 15000}),
+              ])
+
+              // Use a new browser context so playback must load the saved server audio.
+              const history = await openWorkspace('/history')
+              await expect(history.getByRole('heading', {name: '历史记录', exact: true})).toBeVisible()
+              const record = history.locator('a.consumer-history-entry-link')
+              await expect(record).toHaveCount(1)
+              await record.click()
+              await expect(history.getByRole('heading', {name: '同传记录', exact: true})).toBeVisible()
+              const tracks = history.getByRole('region', {name: '完整音频', exact: true})
+              await expect(tracks.locator('audio[aria-label*="原音频"]')).toHaveCount(1)
+              const audio = tracks.locator('audio[aria-label*="译文音频"]')
+              await expect(audio).toHaveCount(1)
+              await tracks.getByRole('button', {name: /^播放.*译文音频$/}).click()
+              await expect.poll(() => audio.evaluate(element => element.currentTime > 0 && !element.error)).toBe(true)
+              expect(errors).toEqual([])
+              await history.screenshot({path: join(process.env.RUNNER_TEMP, 'luna-release-smoke.png'), fullPage: true})
+            } finally {
+              await browser.close()
+            }
+          }
+
+          verify().catch(error => {
+            console.error(error)
+            process.exitCode = 1
+          })
+          JS
+          printf '%s\n' 'Passed clean Compose startup, workspace login, WAV input, demo captions, history and translated audio playback.' >> "$GITHUB_STEP_SUMMARY"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: release-smoke-chromium
+          path: ${{ runner.temp }}/luna-release-smoke.png
+          if-no-files-found: error
+
+      - name: Remove the smoke test containers and volume
+        if: ${{ always() && env.PACKAGE_DIR != '' }}
+        run: docker compose --project-directory "$PACKAGE_DIR" down --volumes
