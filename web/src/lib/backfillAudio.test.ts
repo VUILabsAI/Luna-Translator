@@ -1,5 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 import { BACKFILL_FRAME_MS, createPCMReplayRecorderFactory, wavToPCM16Mono16k } from './backfillAudio'
+import { slicePlaybackWav } from './playbackWav'
 
 function wav(samples: Int16Array, sampleRate = 16_000, channels = 1): Uint8Array {
   const dataBytes = samples.length * 2
@@ -31,6 +32,31 @@ describe('wavToPCM16Mono16k', () => {
 
   it('非 WAV 报错', () => {
     expect(() => wavToPCM16Mono16k(new Uint8Array([1, 2, 3]))).toThrow('不是 WAV 文件')
+  })
+})
+
+describe('slicePlaybackWav', () => {
+  it('skips padded chunks and clips PCM without reading the whole WAV', async () => {
+    const canonical = wav(new Int16Array([10, 20, 30, 40]), 1000)
+    const metadata = new Uint8Array([74, 85, 78, 75, 3, 0, 0, 0, 1, 2, 3, 0]) // JUNK
+    const riff = canonical.slice(0, 12)
+    new DataView(riff.buffer).setUint32(4, canonical.byteLength + metadata.byteLength - 8, true)
+    const recording = new Blob([riff, metadata, canonical.slice(12)])
+    const readWholeFile = vi.spyOn(recording, 'arrayBuffer').mockRejectedValue(new Error('whole-track read'))
+
+    const clip = await slicePlaybackWav(recording, 1, 3)
+    const pcm = new DataView(await clip.arrayBuffer())
+
+    expect(readWholeFile).not.toHaveBeenCalled()
+    expect(clip.type).toBe('audio/wav')
+    expect(pcm.byteLength).toBe(48)
+    expect(pcm.getUint32(40, true)).toBe(4)
+    expect([pcm.getInt16(44, true), pcm.getInt16(46, true)]).toEqual([20, 30])
+  })
+
+  it('rejects a truncated PCM chunk', async () => {
+    const truncated = wav(new Int16Array([10, 20])).slice(0, -1)
+    await expect(slicePlaybackWav(new Blob([truncated]), 0)).rejects.toThrow('回放音频不完整')
   })
 })
 
