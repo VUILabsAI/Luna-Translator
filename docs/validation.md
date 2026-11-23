@@ -1,8 +1,18 @@
-# v0.1.0 验收记录
+# 社区版验收记录
+
+## v0.1.1
+
+2026-11-23 验证了公开发行包和听课 Go Quickstart。ZIP、tar.gz 均从 GitHub 下载并通过 SHA-256 校验。两个包的 Quickstart 测试通过，ZIP 还实跑了国内同传 v3。[发行包](https://github.com/VUILabsAI/Luna-Translator/releases/tag/v0.1.1) · [v3 验收记录](../solutions/classroom/validation.md)
+
+在独立 Ubuntu runner 上，从公开 tar.gz 解压并运行 `./start.sh`。Compose 启动、`/health` 和 `/ready` 均通过。Chromium 用启动时生成的密码登录，上传讲座 WAV，显示模拟字幕并归档。第二个浏览器会话重新登录后从服务端加载记录，并确认译音播放进度推进。运行结束时清理了验收容器和数据卷。[发行包验收](https://github.com/VUILabsAI/Luna-Translator/actions/runs/45176274584)
+
+后续版本可在 **Actions → Release package smoke test → Run workflow** 输入发行标签复测。[验收工作流](../.github/workflows/release-smoke.yml)
+
+## v0.1.0
 
 日期：2026-10-30。验证对象是独立社区仓库的 Web / Go 后端；不代表官方产品部署、移动端或模型本体的发布。
 
-## 可复现的离线检查
+### 可复现的离线检查
 
 | 检查 | 结果 |
 |---|---|
@@ -17,7 +27,7 @@
 
 构建仍有大块 JavaScript 和字体重复导入的性能提示，不影响构建；后续可按需拆分。
 
-## 真实外部服务
+### 真实外部服务
 
 使用维护者私有配置与合成测试语音，不发布密钥、账号工作空间、测试音频或原始日志。默认 CI 跳过真实模型测试，不消耗社区模型额度。
 
@@ -29,7 +39,7 @@
 
 可选复测：设置自己的私有环境及 `COMMUNITY_LIVE_TEST=1`、`LUNA_TEST_PCM` 后运行 `go -C backend test ./community -run TestLiveEndToEnd -v -count=1`。输入是单声道 16 kHz PCM16 原始字节；可用 `TEST_SOURCE_LANG=en TEST_TARGET_LANG=zh` 验证反向。仅使用有权提交给服务商的音频。
 
-## 容器与浏览器
+### 容器与浏览器
 
 本机为 macOS / Apple Silicon，Docker 中运行 Linux arm64；Chrome 实际交互。
 
@@ -46,6 +56,6 @@
 - 公开 Linux amd64 CI 已通过：[候选代码检查](https://github.com/VUILabsHub/Luna-Translator/actions/runs/41009654155)，包括正常 BuildKit 容器构建与 HTTP 健康检查。后续提交状态见 [Actions](https://github.com/VUILabsHub/Luna-Translator/actions)。
 - 本机 arm64 构建曾遇 Docker Hub 连接超时，使用本机网络代理和 Docker 传统构建器完成复测；代理不属于社区默认依赖。公开 CI 使用标准 Compose / BuildKit，无私有镜像、密钥或公司网络。
 
-## 发行边界
+### 发行边界
 
 Apache-2.0 适用于本仓库应用代码；模型、训练数据与内部推理服务不分发。单工作区共享数据，非多租户服务。Windows 脚本尚未在 Windows 实机执行，移动端源码和多人会议不在本版。远程麦克风需要部署者配置有效 HTTPS。真实模型需要自行申请账号与密钥。
