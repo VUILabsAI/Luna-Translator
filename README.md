@@ -44,6 +44,7 @@
 
 ## 最新动态
 
+- **2026-11-23 · [v0.1.1](https://github.com/VUILabsAI/Luna-Translator/releases/tag/v0.1.1)** · 新增四个双语场景指南和 Go Quickstart。听课示例附带真实中译英的译文和译音。公开发行包已通过干净环境的 Docker Compose 启动、WAV 输入和浏览器回放验收。[验收记录](docs/validation.md#v011)
 - **2026-10-30 · [v0.1.0](https://github.com/VUILabsAI/Luna-Translator/releases/tag/v0.1.0)**：发布首个 Web + Go 后端社区版，提供 Docker Compose 启动、Luna / 百炼适配、历史与音频归档、可撤销分享，以及独立的公开 CI。
 
 ## 从实时交流，到回听分享
@@ -181,7 +182,7 @@ python3 scripts/check-public-content.py
 
 ## 版本范围与路线图
 
-v0.1.0 面向**单工作区部署**：使用同一部署密码的人共享历史与模型额度。不同用户需要独立部署；远程浏览器麦克风需要有效 HTTPS。
+社区版面向**单工作区部署**。使用同一部署密码的人共享历史与模型额度。不同用户需要独立部署，远程浏览器麦克风需要有效 HTTPS。
 
 已完成真实合成语音的中译英 / 英译中、浏览器历史与分享、容器启动和公开 CI 验证。真人麦克风、耳机 / 回声、Safari / Edge、Windows 实机及长会话负载尚未完成验收，具体记录见 [验证说明](docs/validation.md)。
 

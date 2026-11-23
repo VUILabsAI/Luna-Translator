@@ -42,6 +42,7 @@ This repository contains a self-hosted **Web frontend and Go backend**. Run it o
 
 ## News
 
+- **2026-11-23 · [v0.1.1](https://github.com/VUILabsAI/Luna-Translator/releases/tag/v0.1.1)** · Four bilingual solution guides and a Go Quickstart. The classroom example includes real Chinese-to-English text and speech. The published package passed a clean Docker Compose startup, WAV input, and browser playback. [Validation record](docs/validation.md#v011)
 - **2026-10-30 · [v0.1.0](https://github.com/VUILabsAI/Luna-Translator/releases/tag/v0.1.0)**: First Web + Go community release with Docker Compose startup, Luna / Model Studio adapters, persistent history and audio, revocable sharing, and public CI.
 
 ## From live conversation to replay
@@ -179,7 +180,7 @@ python3 scripts/check-public-content.py
 
 ## Release scope and roadmap
 
-v0.1.0 is a **single-workspace deployment**. Everyone with its password shares history and model quota. Use separate deployments for separate users. Remote microphone access requires valid HTTPS.
+The community edition is a **single-workspace deployment**. Everyone with its password shares history and model quota. Use separate deployments for separate users. Remote microphone access requires valid HTTPS.
 
 Validation covers synthetic-speech Chinese–English translation in both directions, browser history and sharing, container startup and public CI. Physical microphone capture, headphones / echo behavior, Safari / Edge, Windows hardware and long-session load have not completed acceptance testing. See the [validation record](docs/validation.md).
 
