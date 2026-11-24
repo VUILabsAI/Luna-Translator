@@ -4,12 +4,12 @@ import { pollPendingHistoryTitles } from '@simultrans/core/historyListTitlePolli
 import { historyScene, historySceneLabel } from '@simultrans/core/historyTitle'
 import { formatMeetingCode, meetingElapsedText, normalizeMeetingCode } from '@simultrans/core/meeting'
 import { isOngoingMeetingCheckpoint } from '@simultrans/core/meetingRecord'
-import { useEffect, useMemo, useState, type CSSProperties, type ReactNode } from 'react'
+import { useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react'
 import '@fontsource/poppins/600.css'
 import '../styles/consumer-history.css'
 import ConsumerPageFrame from '../components/ConsumerPageFrame'
 import { ConsumerHistoryRejoinableMeetings } from '../components/ConsumerHistoryRejoinableMeetings'
-import { loadHistoryAudio, type HistoryAudioArchive } from '@simultrans/ui-shared/src/historyAudio'
+import { hasHistoryAudioSamples, loadHistoryAudio, type HistoryAudioArchive } from '@simultrans/ui-shared/src/historyAudio'
 import { sessionExitLabel } from '../lib/sessionRecovery'
 import { FinishedSessionView } from '../components/FinishedSessionView'
 import { finishedSessionDataFromRecord } from '../lib/finishedSessionData'
@@ -111,46 +111,78 @@ function ConsumerHistoryFrame({ children, detail = false }: { children: ReactNod
 }
 
 function useConsumerHistoryTracks(record: ConsumerHistoryRecord) {
-  // 结束页视图按 sessionId 取归档做逐句回放；与 <audio> 列表共用同一次加载。
+  // 结束页的逐句回放和完整音频共用同一份归档。
   const [archives, setArchives] = useState<Record<string, HistoryAudioArchive> | null>(null)
+  const readyTracks = useRef<Record<string, HistoryAudioArchive>>({})
+  const [attempt, setAttempt] = useState(0)
+  const [loading, setLoading] = useState(true)
+  const { sessionIds, targetLanguages } = useMemo(() => ({
+    sessionIds: record.sessionId.split(':').map(id => id.trim()).filter(Boolean),
+    targetLanguages: [...new Set([
+      record.targetLanguage,
+      ...record.units.flatMap(unit => Object.keys(unit.translations || {})),
+    ].filter(Boolean))],
+  }), [record])
+  const hasAudioTracks = historyScene(record) !== 'meeting' && sessionIds.length > 0
 
   useEffect(() => {
-    // 会议记录没有音频（会中只存文字）：不去拉注定 404 的几条音轨。
-    if (historyScene(record) === 'meeting') {
+    // 社区版会议记录仅保存文字。
+    if (!hasAudioTracks) {
+      readyTracks.current = {}
       setArchives({})
+      setLoading(false)
       return
     }
     let active = true
-    const sessionIds = record.sessionId.split(':').map((id) => id.trim()).filter(Boolean)
-    const targetLanguages = [...new Set([
-      record.targetLanguage,
-      ...record.units.flatMap((unit) => Object.keys(unit.translations || {})),
-    ].filter(Boolean))]
+    setLoading(true)
     void Promise.all(sessionIds.map(async (id) => {
       const local = await loadHistoryAudio(id).catch((): HistoryAudioArchive => ({}))
-      const input = local.input || await loadConsumerHistoryAudio(record.id, id, 'input').catch(() => undefined)
-      const modelInput = await loadConsumerHistoryAudio(record.id, id, 'input-model').catch(() => undefined)
-      const output = local.output || await loadConsumerHistoryAudio(record.id, id, 'output').catch(() => undefined)
-      const outputs = { ...local.outputs }
-      await Promise.all(targetLanguages.map(async (language) => {
-        if (outputs[language]) return
-        const audio = await loadConsumerHistoryAudio(record.id, id, `output-${language}`).catch(() => undefined)
-        if (audio) outputs[language] = audio
-      }))
-      return { input, modelInput, output, outputs }
-    })).then((archives) => {
+      const ready = readyTracks.current[id]
+      // Retain blob identity for playing tracks and fetch only missing audio.
+      const load = async (kind: string, ...candidates: Array<Blob | undefined>) => {
+        const cached = candidates.find(hasHistoryAudioSamples)
+        if (cached) return cached
+        const audio = await loadConsumerHistoryAudio(record.id, id, kind).catch(() => undefined)
+        return hasHistoryAudioSamples(audio) ? audio : undefined
+      }
+      const [input, modelInput, languageTracks] = await Promise.all([
+        load('input', ready?.input, local.input),
+        load('input-model', ready?.modelInput, local.modelInput),
+        Promise.all(targetLanguages.map(async (language) => [
+          language, await load(`output-${language}`, ready?.outputs?.[language], local.outputs?.[language]),
+        ] as const)),
+      ])
+      const outputs = { ...local.outputs, ...ready?.outputs }
+      for (const [language, audio] of languageTracks) {
+        if (hasHistoryAudioSamples(audio)) outputs[language] = audio
+      }
+      const output = hasHistoryAudioSamples(outputs[record.targetLanguage]) ? ready?.output ?? local.output
+        : await load('output', ready?.output, local.output)
+      return [id, { input, modelInput, output, outputs }] as const
+    })).then((tracks) => {
       if (!active) return
-      setArchives(Object.fromEntries(archives.map((archive, index) => [sessionIds[index], archive])))
-
+      readyTracks.current = Object.fromEntries(tracks)
+      setArchives(readyTracks.current)
+      setLoading(false)
     })
-    return () => {
-      active = false
-    }
-  }, [record])
+    return () => { active = false }
+  }, [record, sessionIds, targetLanguages, hasAudioTracks, attempt])
 
-  return { archives }
+  const canRetry = hasAudioTracks && archives !== null && sessionIds.some(id => {
+    const archive = archives[id]
+    return !hasHistoryAudioSamples(archive?.input) || targetLanguages.some(language => (
+      !hasHistoryAudioSamples(archive?.outputs?.[language])
+      && !(language === record.targetLanguage && hasHistoryAudioSamples(archive?.output))
+    ))
+  })
+
+  function retry() {
+    setLoading(true)
+    setAttempt(value => value + 1)
+  }
+
+  return { archives, loading, canRetry, retry }
 }
-
 
 // 会话设置折叠区（docs/session-settings-history-plan.md §二）。旧记录不带
 // settings 时整块隐藏；每一行只在对应值上报过时出现，避免把「未记录」显示成
@@ -226,7 +258,7 @@ export function ConsumerHistorySettings({ record }: { record: ConsumerHistoryRec
 
 // 历史详情 = 结束页视图 + 底部「会话音频」「会话设置」折叠栏（docs/history-detail-finished-view-plan.md）。
 function ConsumerHistoryContent({ record, onRefresh, refreshing, refreshError }: { record: ConsumerHistoryRecord; onRefresh: () => void; refreshing: boolean; refreshError: string }) {
-  const { archives } = useConsumerHistoryTracks(record)
+  const { archives, loading: audioLoading, canRetry: canRetryAudio, retry: retryAudio } = useConsumerHistoryTracks(record)
   const data = useMemo(() => finishedSessionDataFromRecord(record), [record])
   // 删除入口从列表卡片（设计稿无删除按钮）挪到详情页底部：确认 → 删除 → 回列表。
   const [deleting, setDeleting] = useState(false)
@@ -252,6 +284,11 @@ function ConsumerHistoryContent({ record, onRefresh, refreshing, refreshError }:
         <>
           {record.abnormalExit && <button type="button" className="shared-session-retry" disabled={refreshing} onClick={onRefresh}>{refreshing ? '正在读取后台记录…' : '重新读取后台记录'}</button>}
           {refreshError && <p role="status">{refreshError} 已保留当前显示的内容。</p>}
+          {canRetryAudio && (
+            <button type="button" className="shared-session-retry" disabled={audioLoading} onClick={retryAudio}>
+              {audioLoading ? '正在重新检查音频…' : '重新检查音频'}
+            </button>
+          )}
           <ConsumerHistorySettings record={record} />
           <button type="button" className="consumer-history-delete" disabled={deleting} onClick={() => { void remove() }}>
             {deleting ? '删除中…' : '删除此记录'}
