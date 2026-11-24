@@ -42,7 +42,7 @@ This repository contains a self-hosted **Web frontend and Go backend**. Run it o
 
 ## News
 
-- **Main branch** · The community Web home, live controls, settings, and history follow the Luna iOS 1.0.11 (128) design, with self-hosting and WAV input.
+- **Main branch** · Reviewed iOS 1.0.11 (129) and Android build 85. Late browser checkpoints now preserve finalized history records. The community Web interface follows the iOS 1.0.11 (128) design. Clone `main` for the updated interface and history fix. The `v0.1.1` downloads reflect the earlier release commit.
 - **2026-11-23 · [v0.1.1](https://github.com/VUILabsAI/Luna-Translator/releases/tag/v0.1.1)** · Four bilingual solution guides and a Go Quickstart. The classroom example includes real Chinese-to-English text and speech. The published package passed a clean Docker Compose startup, WAV input, and browser playback. [Validation record](docs/validation.md#v011)
 - **2026-10-30 · [v0.1.0](https://github.com/VUILabsAI/Luna-Translator/releases/tag/v0.1.0)**: First Web + Go community release with Docker Compose startup, Luna / Model Studio adapters, persistent history and audio, revocable sharing, and public CI.
 
