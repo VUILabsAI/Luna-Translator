@@ -339,6 +339,14 @@ func (a *App) createHistory(w http.ResponseWriter, r *http.Request) {
 		id = randomID()
 	}
 	old := a.state.Records[id]
+	// Return the existing ID so a replaying browser can clear its local checkpoint.
+	if reason, _ := rec["completionReason"].(string); strings.TrimSpace(reason) == "client_checkpoint" {
+		switch old["completionReason"] {
+		case "client_stopped", "session_time_limit", "client_error":
+			respond(w, http.StatusCreated, old)
+			return
+		}
+	}
 	rec["id"] = id
 	if old != nil {
 		rec["createdAt"] = old["createdAt"]

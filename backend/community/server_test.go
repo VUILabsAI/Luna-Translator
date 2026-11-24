@@ -10,6 +10,7 @@ import (
 	"net/http/httptest"
 	"os"
 	"path/filepath"
+	"reflect"
 	"simultrans/core"
 	"strings"
 	"testing"
@@ -97,6 +98,49 @@ func TestOwnershipPersistenceAndSnapshotRevocation(t *testing.T) {
 		t.Fatal("deleted history retained its audio")
 	}
 }
+func TestHistoryCheckpointPreservesFinalRecord(t *testing.T) {
+	for _, reason := range []string{"client_stopped", "session_time_limit", "client_error"} {
+		t.Run(reason, func(t *testing.T) {
+			dir := t.TempDir()
+			app := testApp(t, dir)
+			token := app.issueToken()
+			const path = "/api/consumer/history"
+			const sessionID = "checkpoint-test-session"
+			checkpoint := map[string]any{
+				"sessionId": sessionID, "completionReason": "client_checkpoint",
+				"sourceLanguage": "en", "targetLanguage": "zh",
+				"translationText": "Partial translation", "abnormalExit": true,
+			}
+			status, draft := request(t, app, "POST", path, token, checkpoint)
+			if status != http.StatusCreated {
+				t.Fatalf("initial checkpoint failed: status=%d, result=%v", status, draft)
+			}
+
+			status, final := request(t, app, "POST", path, token, map[string]any{
+				"sessionId": sessionID, "completionReason": reason,
+				"sourceLanguage": "zh", "targetLanguage": "en",
+				"translationText": "Final translation", "abnormalExit": reason == "client_error",
+			})
+			if status != http.StatusCreated || final["id"] != draft["id"] ||
+				final["createdAt"] != draft["createdAt"] || final["completionReason"] != reason {
+				t.Fatalf("final save did not replace checkpoint: status=%d, result=%v", status, final)
+			}
+
+			status, replay := request(t, app, "POST", path, token, checkpoint)
+			if status != http.StatusCreated || !reflect.DeepEqual(final, replay) {
+				t.Fatalf("late checkpoint changed final record: status=%d, result=%v", status, replay)
+			}
+
+			reopened := testApp(t, dir)
+			status, stored := request(t, reopened, "GET", path+"/"+final["id"].(string), token, nil)
+			delete(stored, "share")
+			if status != http.StatusOK || !reflect.DeepEqual(final, stored) {
+				t.Fatalf("final record did not survive restart: status=%d, result=%v", status, stored)
+			}
+		})
+	}
+}
+
 func TestWebSocketTicketAndDemoAudio(t *testing.T) {
 	a := testApp(t, t.TempDir())
 	server := httptest.NewServer(a)
