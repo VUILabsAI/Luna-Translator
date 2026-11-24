@@ -44,7 +44,7 @@
 
 ## 最新动态
 
-- **main 分支** · 已核对 iOS 1.0.11（129）与 Android 85。本次修复晚到的浏览器快照覆盖已结束会话记录的问题。社区版 Web 沿用 iOS 1.0.11（128）的界面样式。界面更新和历史修复可从 `main` 获取，`v0.1.1` 下载包对应此前的发行提交。
+- **main 分支** · 已核对 iOS 1.0.11（130）与 Android 86。历史详情可重新检查暂缺的音轨，保留已可播放的音频。此前的终态记录保护也包含在 `main` 中。社区版 Web 沿用 iOS 1.0.11（128）的界面样式，`v0.1.1` 下载包对应此前的发行提交。
 - **2026-11-23 · [v0.1.1](https://github.com/VUILabsAI/Luna-Translator/releases/tag/v0.1.1)** · 新增四个双语场景指南和 Go Quickstart。听课示例附带真实中译英的译文和译音。公开发行包已通过干净环境的 Docker Compose 启动、WAV 输入和浏览器回放验收。[验收记录](docs/validation.md#v011)
 - **2026-10-30 · [v0.1.0](https://github.com/VUILabsAI/Luna-Translator/releases/tag/v0.1.0)**：发布首个 Web + Go 后端社区版，提供 Docker Compose 启动、Luna / 百炼适配、历史与音频归档、可撤销分享，以及独立的公开 CI。
 
