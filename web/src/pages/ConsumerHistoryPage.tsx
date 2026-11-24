@@ -416,7 +416,7 @@ export function ConsumerHistoryOngoingCard({ ongoing, chineseNames }: { ongoing:
 
 function ConsumerHistoryListPage() {
   const chineseNames = canaryDesignEnabled()
-  // replay：这次加载先补存本机待补存（打开页面、点「重新加载」时）。其他标签页的会议开始 / 结束 / 记录存好时只重拉
+  // replay：打开页面或点「重新加载」时，同时补存本机记录。其他标签页的会议开始 / 结束 / 记录存好时只重拉
   // 列表：那边的终稿这时多半还在发，同时补存本机那份只会重复发同一条。
   const [load, setLoad] = useState({ attempt: 0, replay: true })
   const [state, setState] = useState<HistoryListState>({ status: 'loading' })
@@ -427,13 +427,20 @@ function ConsumerHistoryListPage() {
     let cancelled = false
     // 已有列表时（会议结束后的重拉）不闪回加载态。
     setState(previous => previous.status === 'ready' ? previous : { status: 'loading' })
-    void (load.replay ? retryConsumerHistoryCheckpoints() : Promise.resolve()).then(() => listConsumerHistory()).then((records) => {
-      if (!cancelled) setState({ status: 'ready', records })
-    }).catch((caught) => {
-      if (!cancelled) setState(previous => previous.status === 'ready' ? previous : {
-        status: 'error',
-        message: caught instanceof Error ? caught.message : '无法读取同传历史记录。',
-      })
+    const recovery = load.replay ? retryConsumerHistoryCheckpoints() : Promise.resolve(false)
+    async function readList() {
+      try {
+        const records = await listConsumerHistory()
+        if (!cancelled) setState({ status: 'ready', records })
+      } catch (caught) {
+        if (!cancelled) setState(previous => previous.status === 'ready' ? previous : {
+          status: 'error',
+          message: caught instanceof Error ? caught.message : '无法读取同传历史记录。',
+        })
+      }
+    }
+    void readList().then(async () => {
+      if (await recovery && !cancelled) await readList()
     })
     return () => { cancelled = true }
   }, [load])
