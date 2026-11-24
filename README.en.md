@@ -42,7 +42,7 @@ This repository contains a self-hosted **Web frontend and Go backend**. Run it o
 
 ## News
 
-- **Main branch** · Reviewed iOS 1.0.11 (130) and Android build 86. History details can retry loading missing audio tracks while keeping playable tracks available. The branch also protects finalized records from late browser checkpoints. The community Web interface follows the iOS 1.0.11 (128) design, and the `v0.1.1` downloads reflect the earlier release commit.
+- **2026-11-24 · [v0.1.2](https://github.com/VUILabsAI/Luna-Translator/releases/tag/v0.1.2)** · Based on the history-loading improvements in iOS 1.0.11 (131) and Android build 87, the community Web app shows saved history while retrying pending browser checkpoints in the background. History details can retry missing audio tracks and keep playable tracks available. Late checkpoints no longer replace finalized records. The community Web app follows the iOS 1.0.11 (128) design.
 - **2026-11-23 · [v0.1.1](https://github.com/VUILabsAI/Luna-Translator/releases/tag/v0.1.1)** · Four bilingual solution guides and a Go Quickstart. The classroom example includes real Chinese-to-English text and speech. The published package passed a clean Docker Compose startup, WAV input, and browser playback. [Validation record](docs/validation.md#v011)
 - **2026-10-30 · [v0.1.0](https://github.com/VUILabsAI/Luna-Translator/releases/tag/v0.1.0)**: First Web + Go community release with Docker Compose startup, Luna / Model Studio adapters, persistent history and audio, revocable sharing, and public CI.
 
