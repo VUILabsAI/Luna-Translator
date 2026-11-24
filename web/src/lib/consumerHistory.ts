@@ -103,7 +103,7 @@ export type ConsumerHistorySummary = ConsumerHistoryTitle & {
 export type ConsumerHistoryInput = Omit<ConsumerHistoryRecord, 'id' | 'createdAt' | 'title' | 'titleStatus' | 'share'>
 
 const CONSUMER_HISTORY_CHECKPOINT_KEY = 'simultrans.consumerHistoryCheckpoints.v2'
-let checkpointRetry: Promise<void> | null = null
+let checkpointRetry: Promise<boolean> | null = null
 
 /**
  * 本机待补存的条目。keepCompletion：会议记录的终稿直连没存上、留在本机的那份——重放时原样发
@@ -293,13 +293,15 @@ function clearConsumerHistoryEntry(entry: StoredConsumerHistoryInput, owner?: st
   if (kept.length !== current.length) writeConsumerHistoryCheckpoints(kept, owner)
 }
 
-export function retryConsumerHistoryCheckpoints(fetcher: ConsumerFetcher = consumerFetch): Promise<void> {
+/** Return whether at least one checkpoint was saved for the current workspace. */
+export function retryConsumerHistoryCheckpoints(fetcher: ConsumerFetcher = consumerFetch): Promise<boolean> {
   if (checkpointRetry) return checkpointRetry
   checkpointRetry = (async () => {
     const owner = consumerHistoryCheckpointOwner()
-    if (!owner) return
+    if (!owner) return false
+    let saved = false
     for (const entry of readConsumerHistoryCheckpoints(owner)) {
-      if (consumerHistoryCheckpointOwner() !== owner) return
+      if (consumerHistoryCheckpointOwner() !== owner) return false
       const { keepCompletion, ...input } = entry
       try {
         const replay = keepCompletion ? input : {
@@ -312,11 +314,14 @@ export function retryConsumerHistoryCheckpoints(fetcher: ConsumerFetcher = consu
           if (result.status !== 'saved') continue
         } else await saveConsumerHistory(replay, fetcher)
         // 补存途中会议页可能已把同一 sessionId 的终稿落进本机：只撤刚补存的这一份。
-        if (consumerHistoryCheckpointOwner() === owner) clearConsumerHistoryEntry(entry, owner)
+        if (consumerHistoryCheckpointOwner() !== owner) return false
+        clearConsumerHistoryEntry(entry, owner)
+        saved = true
       } catch {
         // Keep the checkpoint for the next authenticated page load.
       }
     }
+    return saved
   })().finally(() => { checkpointRetry = null })
   return checkpointRetry
 }

@@ -207,10 +207,10 @@ describe('consumer history snapshots', () => {
     })
     checkpointConsumerHistory(input)
     const failed = vi.fn<ConsumerFetcher>().mockRejectedValue(new Error('offline'))
-    await retryConsumerHistoryCheckpoints(failed)
+    await expect(retryConsumerHistoryCheckpoints(failed)).resolves.toBe(false)
     const recovered = vi.fn<ConsumerFetcher>().mockResolvedValue(response(201, { id: 'history-1' }))
-    await retryConsumerHistoryCheckpoints(recovered)
-    await retryConsumerHistoryCheckpoints(recovered)
+    await expect(retryConsumerHistoryCheckpoints(recovered)).resolves.toBe(true)
+    await expect(retryConsumerHistoryCheckpoints(recovered)).resolves.toBe(false)
 
     expect(failed).toHaveBeenCalledTimes(1)
     expect(JSON.parse(String(failed.mock.calls[0][1]?.body))).toMatchObject({
