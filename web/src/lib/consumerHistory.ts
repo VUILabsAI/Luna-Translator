@@ -102,6 +102,34 @@ export type ConsumerHistorySummary = ConsumerHistoryTitle & {
 
 export type ConsumerHistoryInput = Omit<ConsumerHistoryRecord, 'id' | 'createdAt' | 'title' | 'titleStatus' | 'share'>
 
+export function consumerHistoryTranscript(record: Pick<ConsumerHistoryRecord, 'sourceText' | 'translationText' | 'targetLanguage' | 'units'>) {
+  const units = record.units || []
+  const hasText = (text: string | undefined): text is string => Boolean(text?.trim())
+  const source = hasText(record.sourceText) ? record.sourceText : units
+    .filter(unit => !unit.layoutLanguage || unit.layoutLanguage === record.targetLanguage)
+    .map(unit => unit.source)
+    .filter(hasText)
+    .join('\n')
+  const languages = new Set([record.targetLanguage, ...units.flatMap(unit => Object.keys(unit.translations || {}))])
+  const translations = new Map<string, string>()
+  for (const language of languages) {
+    if (!language) continue
+    const useSavedText = language === record.targetLanguage && hasText(record.translationText)
+    const text = useSavedText ? record.translationText : units
+      .filter(unit => !unit.layoutLanguage || unit.layoutLanguage === language)
+      .map(unit => {
+        const text = unit.translations?.[language]
+        if (hasText(text)) return text
+        if (language === record.targetLanguage && !Object.values(unit.translations || {}).some(hasText)) return unit.text
+        return undefined
+      })
+      .filter(hasText)
+      .join('\n')
+    if (hasText(text)) translations.set(language, text)
+  }
+  return { source, translations }
+}
+
 const CONSUMER_HISTORY_CHECKPOINT_KEY = 'simultrans.consumerHistoryCheckpoints.v2'
 let checkpointRetry: Promise<boolean> | null = null
 

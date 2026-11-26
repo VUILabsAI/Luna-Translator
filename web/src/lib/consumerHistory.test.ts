@@ -6,6 +6,7 @@ import {
   clearConsumerHistoryCheckpoint,
   consumerHistoryAudioRange,
   consumerHistoryCheckpointOwner,
+  consumerHistoryTranscript,
   createConsumerShareLink,
   activeConsumerHistoryShare,
   revokeConsumerShareLink,
@@ -149,6 +150,27 @@ describe('consumer history snapshots', () => {
     expect(input.sourceText).toBe('第一句。第二句。')
     expect(input.translationText).toBe('第一文と第二文。')
     expect(input.units.map((unit) => unit.layoutLanguage)).toEqual(['en', 'en', 'ja'])
+    expect(consumerHistoryTranscript(input)).toEqual({
+      source: '第一句。第二句。',
+      translations: new Map([['ja', '第一文と第二文。'], ['en', 'First.\nSecond.']]),
+    })
+  })
+
+  it('exports saved text without changing punctuation or line breaks', () => {
+    const result = consumerHistoryTranscript({
+      sourceText: '',
+      translationText: 'First, “hello.”\n\nSecond!',
+      targetLanguage: 'en',
+      units: [],
+    })
+    expect(result.source).toBe('')
+    expect(result.translations.get('en')).toBe('First, “hello.”\n\nSecond!')
+    expect(consumerHistoryTranscript({
+      sourceText: '',
+      translationText: '',
+      targetLanguage: 'en',
+      units: [{ id: 'older-row', source: '以前の文。', text: 'Older text.' }],
+    })).toEqual({ source: '以前の文。', translations: new Map([['en', 'Older text.']]) })
   })
 
   it('builds input and per-language output ranges without crossing speakers', () => {
