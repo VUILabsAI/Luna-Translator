@@ -203,6 +203,24 @@
   margin-top: 0.1rem;
 }
 
+.consumer-history-export {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.12rem;
+  font-size: 0.14rem;
+}
+
+.consumer-history-export label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.08rem;
+}
+
+.consumer-history-export .consumer-history-retry {
+  margin: 0;
+}
+
 @media (hover: hover) {
   .consumer-history-retry:hover,
   .consumer-history-delete:hover {
