@@ -37,7 +37,11 @@ Follow a talk in another language, present an idea to listeners who speak differ
 
 This repository includes a self-hosted **Web frontend, Go backend, and iOS community client**. Both clients can connect to the same workspace. They use external APIs for recognition and translation, so the deployment needs no local GPU.
 
-## Client open-source roadmap
+## Repository roadmap
+
+This repository provides open-source clients and a self-hosted backend. We plan to open-source more simultaneous interpreting solutions with integration examples, configuration guides, and validation steps.
+
+### Open-source clients
 
 | Client | Status | Community edition scope |
 |---|---|---|
@@ -46,7 +50,19 @@ This repository includes a self-hosted **Web frontend, Go backend, and iOS commu
 | Android | **Next** | Start with Quick Interpreting on a self-hosted workspace. Verify capture, captions, and audio playback on the emulator and a physical device. |
 | macOS | **Planned** | Prepare a desktop community client with a standalone build. Verify microphone permissions and audio output before releasing source. |
 
-Web and iOS run in simulation mode without a model API key. Live recognition and translation require a provider configured on the community backend. See the [full open-source plan](docs/open-source-plan.md#c-端开源计划) in Chinese.
+Web and iOS run in simulation mode without a model API key. Live recognition and translation require a provider configured on the community backend.
+
+### Simultaneous interpreting solutions
+
+| Scenario | Available today | Planned open-source work |
+|---|---|---|
+| [Face-to-face conversation](#from-live-conversation-to-replay) | Web supports Chinese–English turn-taking on one device. | Publish a standalone two-way conversation example with speaker switching, bilingual captions, and translated audio. |
+| [Livestream interpreting (OBS)](solutions/livestream/README.en.md) | The guide covers a single-stream interpreting workflow and a reference OBS integration. | Publish examples and configuration for OBS caption overlays and a separate translated audio track. |
+| [Meeting interpreting](solutions/meeting/README.en.md) | Web handles one presenter audio stream. A multiparty reference architecture is available. | Publish a multiparty integration example showing audio inputs and delivery of captions and translated audio in each listener’s selected language. |
+| [Classes and lectures](solutions/classroom/README.en.md) | A runnable Go v3 example includes sample audio and live translation validation. | Add an integration example for distributing captions and audio to multiple classroom or lecture listeners. |
+| [Call interpreting](solutions/calls/README.en.md) | A reference architecture covers two-way call integration. | Publish a two-stream integration example that routes captions and translated audio to each caller. |
+
+[Detailed client plan (Chinese)](docs/open-source-plan.md#c-端开源计划) · [Current solution guides](solutions/README.en.md)
 
 ## Community edition demo
 
@@ -202,7 +218,7 @@ The community edition is a **single-workspace deployment**. Everyone with its pa
 
 Validation covers synthetic-speech Chinese–English translation in both directions, browser history and sharing, container startup and public CI. Physical microphone capture, headphones / echo behavior, Safari / Edge, Windows hardware and long-session load have not completed acceptance testing. See the [validation record](docs/validation.md).
 
-Next priorities include physical-device iOS audio and live provider validation, along with Web compatibility, accessibility, and provider adapters. See the [client open-source roadmap](#client-open-source-roadmap) for platform milestones.
+Next priorities include physical-device iOS audio and live provider validation, along with Web compatibility, accessibility, and provider adapters. See the [repository roadmap](#repository-roadmap) for client and solution plans.
 
 ## Official Web app and product pages
 
