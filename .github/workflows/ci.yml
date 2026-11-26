@@ -23,6 +23,7 @@ jobs:
       - run: go -C backend test -race ./...
       - run: go -C examples/quickstart test -race ./...
       - run: python3 scripts/check-public-content.py
+      - run: node scripts/readme-badges.mjs --check
       - run: docker compose config --quiet
       - run: docker compose up --build -d --wait
       - run: curl --fail http://localhost:8088/health

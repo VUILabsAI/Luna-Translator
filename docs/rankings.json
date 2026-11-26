@@ -1,0 +1,94 @@
+{
+  "repo": "VUILabsAI/Luna-Translator",
+  "trendshift": {
+    "repositoryId": null
+  },
+  "trendingLanguages": [
+    "TypeScript"
+  ],
+  "trending": [
+    {
+      "date": "2026-11-26",
+      "source": "trendshift",
+      "period": "daily",
+      "scope": "TypeScript",
+      "rank": 3,
+      "url": "https://trendshift.io/?language=TypeScript",
+      "snapshot": "2026-11-26 06:24 UTC"
+    },
+    {
+      "date": "2026-11-26",
+      "source": "trendshift",
+      "period": "daily",
+      "scope": "all",
+      "rank": 8,
+      "url": "https://trendshift.io/",
+      "snapshot": "2026-11-26 06:24 UTC"
+    }
+  ],
+  "topics": [
+    {
+      "topic": "speech-to-speech-translation",
+      "name": {
+        "zh": "语音到语音翻译",
+        "en": "Speech-to-Speech Translation"
+      },
+      "rank": 1,
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "topic": "simultaneous-interpretation",
+      "name": {
+        "zh": "同声传译",
+        "en": "Simultaneous Interpretation"
+      },
+      "rank": 3,
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "topic": "simultaneous-translation",
+      "name": {
+        "zh": "同步翻译",
+        "en": "Simultaneous Translation"
+      },
+      "rank": 3,
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "topic": "live-captions",
+      "name": {
+        "zh": "实时字幕",
+        "en": "Live Captions"
+      },
+      "rank": 5,
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "topic": "real-time-translation",
+      "name": {
+        "zh": "实时翻译",
+        "en": "Real-Time Translation"
+      },
+      "rank": 6,
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "topic": "live-translation",
+      "name": {
+        "zh": "现场翻译",
+        "en": "Live Translation"
+      },
+      "rank": 7,
+      "checkedAt": "2026-11-26"
+    },
+    {
+      "topic": "speech-translation",
+      "name": {
+        "zh": "语音翻译",
+        "en": "Speech Translation"
+      },
+      "rank": 13,
+      "checkedAt": "2026-11-26"
+    }
+  ]
+}

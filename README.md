@@ -8,28 +8,29 @@
   VUI Labs 的实时语音同传开源应用与 API 解决方案，提供字幕、译音和可自托管的 Web 社区版。
 </p>
 
+<!-- rankings:hero:start -->
+<!-- 由 scripts/readme-badges.mjs 生成，请修改 docs/rankings.json 后重新运行 -->
+<p align="center">
+  <a href="https://trendshift.io/?language=TypeScript"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/assets/badges/trending-dark.svg" /><img src="docs/assets/badges/trending.svg" alt="TRENDSHIFT · NOV 26, 2026 #3 TypeScript Repo of the Day" width="320" height="55" /></picture></a>
+  <a href="https://github.com/topics/speech-to-speech-translation?o=desc&amp;s=stars"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/assets/badges/topics-dark.svg" /><img src="docs/assets/badges/topics.svg" alt="GitHub topic speech-to-speech-translation: #1 by stars" width="320" height="55" /></picture></a>
+</p>
+<!-- rankings:hero:end -->
+
+<p align="center">
+  <a href="https://github.com/VUILabsAI/Luna-Translator/stargazers"><img src="https://img.shields.io/github/stars/VUILabsAI/Luna-Translator?style=flat-square&logo=github&label=Stars&color=6E40C9" alt="GitHub Stars" /></a>
+  <a href="https://github.com/VUILabsAI/Luna-Translator/releases/latest"><img src="https://img.shields.io/github/v/release/VUILabsAI/Luna-Translator?style=flat-square&label=Release&color=6E40C9" alt="最新社区版发行版本" /></a>
+  <a href="#安装与快速开始"><img src="https://img.shields.io/badge/Docker%20Compose-self--hosted-6E40C9?style=flat-square&logo=docker&logoColor=white" alt="通过 Docker Compose 自托管" /></a>
+</p>
+
 <p align="center">
   中文 · <a href="README.en.md">English</a>
 </p>
 
 <p align="center">
-  <a href="https://trendshift.io/?language=TypeScript"><img src="docs/assets/trendshift-daily-typescript-2026-11-26.svg" alt="Trendshift TypeScript 日榜第 3 名" /></a>
+  <a href="https://simultrans.lunalabs.cn/"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/assets/badges/cta-try-dark.svg" /><img src="docs/assets/badges/cta-try.svg" alt="在线体验" height="40" /></picture></a>
+  <a href="examples/quickstart/README.md"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/assets/badges/cta-api-dark.svg" /><img src="docs/assets/badges/cta-api.svg" alt="Go API 快速开始" height="40" /></picture></a>
   <br />
-  <a href="https://trendshift.io/">全语言日榜 #8</a> · <a href="https://github.com/topics/speech-to-speech-translation?o=desc&amp;s=stars">语音到语音翻译主题榜 #1</a>
-  <br />
-  <sub>Trendshift 快照 · 2026-11-26 06:24 UTC</sub>
-</p>
-
-| 使用 Luna | 接入 Luna |
-|---|---|
-| [![在线体验](https://img.shields.io/badge/%E5%9C%A8%E7%BA%BF%E4%BD%93%E9%AA%8C-0969DA?style=for-the-badge)](https://simultrans.lunalabs.cn/) | [![Go API 快速开始](https://img.shields.io/badge/Go%20API%20%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B-007D9C?style=for-the-badge&logo=go&logoColor=white)](examples/quickstart/README.md) |
-| [自托管 Web 社区版](#安装与快速开始) · [官方网页版与产品介绍](#官方网页版与产品介绍) | [按场景接入](solutions/README.md) · [同传 v3 API 文档](https://doc.vuilabs.cn/api-reference/realtime-interpretation/) |
-| 社区版可在本机运行模拟体验，无需模型 API Key。 | Go 示例直连国内同传 v3，使用 `X-API-Key`。社区版通过 [Bearer 模型适配器](docs/providers.md#luna-公共-api)接入自己的模型服务。 |
-
-<p align="center">
-  <a href="https://github.com/VUILabsAI/Luna-Translator"><img src="https://img.shields.io/github/stars/VUILabsAI/Luna-Translator?style=flat" alt="GitHub Stars 计数" /></a>
-  <a href="https://github.com/VUILabsAI/Luna-Translator/releases/latest"><img src="https://img.shields.io/github/v/release/VUILabsAI/Luna-Translator" alt="最新社区版发行版本" /></a>
-  <a href="#安装与快速开始"><img src="https://img.shields.io/badge/Docker%20Compose-self--hosted-2496ED?logo=docker" alt="通过 Docker Compose 自托管" /></a>
+  <a href="#安装与快速开始">自托管社区版</a> · <a href="solutions/README.md">按场景接入</a> · <a href="https://doc.vuilabs.cn/api-reference/realtime-interpretation/">同传 v3 API 文档</a> · <a href="#官方网页版与产品介绍">官方网页版</a>
 </p>
 
 ## 边说，边译，边听
@@ -78,6 +79,8 @@
 模型凭据保留在后端。浏览器负责采集和播放，后端负责服务编排与数据保存。完整接口和数据生命周期见 [架构说明](docs/architecture.md) 与 [服务协议](docs/providers.md)。
 
 ## 安装与快速开始
+
+> 社区版可在本机运行模拟体验，无需模型 API Key。只需要调用 API 时，可以直接看 [Go API 快速开始](examples/quickstart/README.md)：示例直连国内同传 v3，使用 `X-API-Key`。社区版通过 [Bearer 模型适配器](docs/providers.md#luna-公共-api)接入自己的模型服务。
 
 ### 1. 下载项目
 
@@ -226,13 +229,21 @@ python3 scripts/check-public-content.py
   <img src="https://img.shields.io/github/languages/top/VUILabsAI/Luna-Translator" alt="仓库主要语言" />
 </p>
 
-<details>
-<summary>榜单核验记录</summary>
+### 榜单记录
 
-- Trendshift · 2026-11-26 06:24 UTC · [Trendshift TypeScript 日榜第 3 名](https://trendshift.io/?language=TypeScript) · [全语言日榜 #8](https://trendshift.io/)
-- GitHub Topics · 2026-11-26 · 按累计 Star 排序 · [`speech-to-speech-translation` #1](https://github.com/topics/speech-to-speech-translation?o=desc&s=stars)
+<!-- rankings:records:start -->
+<!-- 由 scripts/readme-badges.mjs 生成，请修改 docs/rankings.json 后重新运行 -->
 
-</details>
+| 日期 | 榜单 | 名次 | 说明 |
+|---|---|---:|---|
+| 2026-11-26 | [Trendshift 日榜 · TypeScript](https://trendshift.io/?language=TypeScript) | #3 | 快照 2026-11-26 06:24 UTC |
+| 2026-11-26 | [Trendshift 日榜 · 全语言](https://trendshift.io/) | #8 | 快照 2026-11-26 06:24 UTC |
+| 2026-11-26 | GitHub 主题 [`speech-to-speech-translation`](https://github.com/topics/speech-to-speech-translation?o=desc&s=stars) | #1 | 按累计 Star 排序，核验于 2026-11-26 |
+| 2026-11-26 | GitHub 主题 [`simultaneous-interpretation`](https://github.com/topics/simultaneous-interpretation?o=desc&s=stars) | #3 | 按累计 Star 排序，核验于 2026-11-26 |
+| 2026-11-26 | GitHub 主题 [`simultaneous-translation`](https://github.com/topics/simultaneous-translation?o=desc&s=stars) | #3 | 按累计 Star 排序，核验于 2026-11-26 |
+
+数据来自 [docs/rankings.json](docs/rankings.json)，由 `scripts/readme-badges.mjs` 生成；更新方法见 [榜单维护](docs/rankings.md)。
+<!-- rankings:records:end -->
 
 ## 交流与贡献
 
