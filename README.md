@@ -13,21 +13,11 @@
 </p>
 
 <p align="center">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache_2.0-blue.svg" alt="License: Apache-2.0" /></a>
-  <a href="https://github.com/VUILabsAI/Luna-Translator/actions/workflows/ci.yml"><img src="https://github.com/VUILabsAI/Luna-Translator/actions/workflows/ci.yml/badge.svg?branch=main" alt="Community checks" /></a>
-  <a href="https://github.com/VUILabsAI/Luna-Translator/releases/latest"><img src="https://img.shields.io/github/v/release/VUILabsAI/Luna-Translator" alt="最新社区版发行版本" /></a>
-  <a href="#安装与快速开始"><img src="https://img.shields.io/badge/Docker%20Compose-self--hosted-2496ED?logo=docker" alt="通过 Docker Compose 自托管" /></a>
-  <br />
-  <a href="https://github.com/VUILabsAI/Luna-Translator"><img src="https://img.shields.io/github/stars/VUILabsAI/Luna-Translator?style=flat" alt="GitHub Stars 计数" /></a>
-  <img src="https://img.shields.io/github/languages/top/VUILabsAI/Luna-Translator" alt="仓库主要语言" />
-  <br />
-  <a href="https://github.com/topics/speech-to-speech-translation?o=desc&amp;s=stars"><img src="docs/assets/speech-to-speech-translation-rank.svg" alt="GitHub 主题排名第 1 · Speech-to-Speech Translation" /></a>
-  <sub>按 Star 数排序，核验于 2026-11-26</sub>
-  <br />
-  <a href="https://trendshift.io/"><img src="docs/assets/trendshift-daily-overall-2026-11-26.svg" alt="Trendshift 全语言日榜第 8 名" /></a>
   <a href="https://trendshift.io/?language=TypeScript"><img src="docs/assets/trendshift-daily-typescript-2026-11-26.svg" alt="Trendshift TypeScript 日榜第 3 名" /></a>
   <br />
-  <sub>实时榜单快照，2026-11-26 06:24 UTC</sub>
+  <a href="https://trendshift.io/">全语言日榜 #8</a> · <a href="https://github.com/topics/speech-to-speech-translation?o=desc&amp;s=stars">语音到语音翻译主题榜 #1</a>
+  <br />
+  <sub>Trendshift 快照 · 2026-11-26 06:24 UTC</sub>
 </p>
 
 | 使用 Luna | 接入 Luna |
@@ -35,6 +25,12 @@
 | [![在线体验](https://img.shields.io/badge/%E5%9C%A8%E7%BA%BF%E4%BD%93%E9%AA%8C-0969DA?style=for-the-badge)](https://simultrans.lunalabs.cn/) | [![Go API 快速开始](https://img.shields.io/badge/Go%20API%20%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B-007D9C?style=for-the-badge&logo=go&logoColor=white)](examples/quickstart/README.md) |
 | [自托管 Web 社区版](#安装与快速开始) · [官方网页版与产品介绍](#官方网页版与产品介绍) | [按场景接入](solutions/README.md) · [同传 v3 API 文档](https://doc.vuilabs.cn/api-reference/realtime-interpretation/) |
 | 社区版可在本机运行模拟体验，无需模型 API Key。 | Go 示例直连国内同传 v3，使用 `X-API-Key`。社区版通过 [Bearer 模型适配器](docs/providers.md#luna-公共-api)接入自己的模型服务。 |
+
+<p align="center">
+  <a href="https://github.com/VUILabsAI/Luna-Translator"><img src="https://img.shields.io/github/stars/VUILabsAI/Luna-Translator?style=flat" alt="GitHub Stars 计数" /></a>
+  <a href="https://github.com/VUILabsAI/Luna-Translator/releases/latest"><img src="https://img.shields.io/github/v/release/VUILabsAI/Luna-Translator" alt="最新社区版发行版本" /></a>
+  <a href="#安装与快速开始"><img src="https://img.shields.io/badge/Docker%20Compose-self--hosted-2496ED?logo=docker" alt="通过 Docker Compose 自托管" /></a>
+</p>
 
 ## 边说，边译，边听
 
@@ -221,6 +217,22 @@ python3 scripts/check-public-content.py
 - **没有 API Key 能运行吗？** 可以。默认模拟模式无需模型凭据，可体验字幕、历史和分享流程；真实翻译见[模型接入](#接入模型服务)。
 - **启动失败或端口被占用？** 用 `docker compose logs` 查日志，必要时在 `.env` 中修改 `PORT`。更多问题见[部署排障](docs/deployment.md#常见问题)。
 - **无法使用麦克风？** 检查浏览器权限；远程访问需要 HTTPS。也可选择无压缩 PCM16 WAV 文件测试。
+
+## 项目状态
+
+<p>
+  <a href="https://github.com/VUILabsAI/Luna-Translator/actions/workflows/ci.yml"><img src="https://github.com/VUILabsAI/Luna-Translator/actions/workflows/ci.yml/badge.svg?branch=main" alt="Community checks" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache_2.0-blue.svg" alt="License: Apache-2.0" /></a>
+  <img src="https://img.shields.io/github/languages/top/VUILabsAI/Luna-Translator" alt="仓库主要语言" />
+</p>
+
+<details>
+<summary>榜单核验记录</summary>
+
+- Trendshift · 2026-11-26 06:24 UTC · [Trendshift TypeScript 日榜第 3 名](https://trendshift.io/?language=TypeScript) · [全语言日榜 #8](https://trendshift.io/)
+- GitHub Topics · 2026-11-26 · 按累计 Star 排序 · [`speech-to-speech-translation` #1](https://github.com/topics/speech-to-speech-translation?o=desc&s=stars)
+
+</details>
 
 ## 交流与贡献
 

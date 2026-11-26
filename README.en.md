@@ -11,21 +11,11 @@
 </p>
 
 <p align="center">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache_2.0-blue.svg" alt="License: Apache-2.0" /></a>
-  <a href="https://github.com/VUILabsAI/Luna-Translator/actions/workflows/ci.yml"><img src="https://github.com/VUILabsAI/Luna-Translator/actions/workflows/ci.yml/badge.svg?branch=main" alt="Community checks" /></a>
-  <a href="https://github.com/VUILabsAI/Luna-Translator/releases/latest"><img src="https://img.shields.io/github/v/release/VUILabsAI/Luna-Translator" alt="Latest community release" /></a>
-  <a href="#installation-and-quick-start"><img src="https://img.shields.io/badge/Docker%20Compose-self--hosted-2496ED?logo=docker" alt="Self-host with Docker Compose" /></a>
-  <br />
-  <a href="https://github.com/VUILabsAI/Luna-Translator"><img src="https://img.shields.io/github/stars/VUILabsAI/Luna-Translator?style=flat" alt="GitHub Stars count" /></a>
-  <img src="https://img.shields.io/github/languages/top/VUILabsAI/Luna-Translator" alt="Top repository language" />
-  <br />
-  <a href="https://github.com/topics/speech-to-speech-translation?o=desc&amp;s=stars"><img src="docs/assets/speech-to-speech-translation-rank.svg" alt="GitHub Topic #1 · Speech-to-Speech Translation" /></a>
-  <sub>Sorted by stars, verified on 2026-11-26</sub>
-  <br />
-  <a href="https://trendshift.io/"><img src="docs/assets/trendshift-daily-overall-2026-11-26.svg" alt="Trendshift daily rank 8 across all languages" /></a>
   <a href="https://trendshift.io/?language=TypeScript"><img src="docs/assets/trendshift-daily-typescript-2026-11-26.svg" alt="Trendshift TypeScript daily rank 3" /></a>
   <br />
-  <sub>Live ranking snapshot, 2026-11-26 06:24 UTC</sub>
+  <a href="https://trendshift.io/">All languages #8</a> · <a href="https://github.com/topics/speech-to-speech-translation?o=desc&amp;s=stars">GitHub speech-to-speech translation topic #1</a>
+  <br />
+  <sub>Trendshift snapshot · 2026-11-26 06:24 UTC</sub>
 </p>
 
 | Use Luna | Build with Luna |
@@ -33,6 +23,12 @@
 | [![Try Online](https://img.shields.io/badge/Try%20Online-0969DA?style=for-the-badge)](https://simultrans.vuilabs.ai/) | [![Go API Quickstart](https://img.shields.io/badge/Go%20API%20Quickstart-007D9C?style=for-the-badge&logo=go&logoColor=white)](examples/quickstart/README.en.md) |
 | [Self-host the Web community edition](#installation-and-quick-start) · [Official Web app and product pages](#official-web-app-and-product-pages) | [Browse solutions](solutions/README.en.md) · [Interpretation v3 API reference](https://doc.vuilabs.cn/api-reference/realtime-interpretation/) (Chinese) |
 | Run the community edition locally in simulation mode without a model API key. | The Go example calls mainland China v3 with `X-API-Key`. The community edition connects to a configured model service through its [Bearer provider adapter](docs/providers.md#luna-公共-api). |
+
+<p align="center">
+  <a href="https://github.com/VUILabsAI/Luna-Translator"><img src="https://img.shields.io/github/stars/VUILabsAI/Luna-Translator?style=flat" alt="GitHub Stars count" /></a>
+  <a href="https://github.com/VUILabsAI/Luna-Translator/releases/latest"><img src="https://img.shields.io/github/v/release/VUILabsAI/Luna-Translator" alt="Latest community release" /></a>
+  <a href="#installation-and-quick-start"><img src="https://img.shields.io/badge/Docker%20Compose-self--hosted-2496ED?logo=docker" alt="Self-host with Docker Compose" /></a>
+</p>
 
 ## Speak, translate, listen
 
@@ -219,6 +215,22 @@ These are screenshots of the official iOS and Android apps, not part of this com
 - **Can I run it without an API key?** Yes. Simulation mode needs no provider credentials and lets you try captions, history, and sharing. For actual translation, see [model setup](#connect-model-services).
 - **Startup fails or the port is in use?** Check `docker compose logs` and change `PORT` in `.env` if needed. See the [deployment troubleshooting guide](docs/deployment.md#常见问题) for more.
 - **Microphone not available?** Check browser permissions. Remote browser access requires HTTPS for microphone capture. You can also test with an uncompressed PCM16 WAV file.
+
+## Project status
+
+<p>
+  <a href="https://github.com/VUILabsAI/Luna-Translator/actions/workflows/ci.yml"><img src="https://github.com/VUILabsAI/Luna-Translator/actions/workflows/ci.yml/badge.svg?branch=main" alt="Community checks" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache_2.0-blue.svg" alt="License: Apache-2.0" /></a>
+  <img src="https://img.shields.io/github/languages/top/VUILabsAI/Luna-Translator" alt="Top repository language" />
+</p>
+
+<details>
+<summary>Ranking verification</summary>
+
+- Trendshift · 2026-11-26 06:24 UTC · [Trendshift TypeScript daily rank 3](https://trendshift.io/?language=TypeScript) · [All languages #8](https://trendshift.io/)
+- GitHub Topics · 2026-11-26 · Ranked by total stars · [`speech-to-speech-translation` #1](https://github.com/topics/speech-to-speech-translation?o=desc&s=stars)
+
+</details>
 
 ## Community and contributions
 
