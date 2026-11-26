@@ -249,16 +249,21 @@ python3 scripts/check-public-content.py
 | 名次 | 获得时间（UTC） | 徽章 | 说明 |
 |---:|---|---|---|
 | **#1** | 2026-11-26 08:45:54 | [![GitHub topic · speech-to-speech-translation #1](docs/assets/badges/rankings/topic-stars-speech-to-speech-translation-1.svg)](https://github.com/topics/speech-to-speech-translation?o=desc&s=stars) | GitHub 主题 · speech-to-speech-translation · 该榜单最新历史最佳 |
+| **#3** | 2026-11-26 10:04:39 | [![GitHub topic · real-time-translation #3](docs/assets/badges/rankings/topic-stars-real-time-translation-3.svg)](https://github.com/topics/real-time-translation?o=desc&s=stars) | GitHub 主题 · real-time-translation · 该榜单最新历史最佳 |
 | **#3** | 2026-11-26 06:23:50 | [![Trendshift daily · TypeScript #3](docs/assets/badges/rankings/trendshift-daily-typescript-3.svg)](https://trendshift.io/?language=TypeScript) | Trendshift 日榜 · TypeScript · 该榜单最新历史最佳 |
 | **#3** | 2026-11-26 | [![GitHub topic · simultaneous-interpretation #3](docs/assets/badges/rankings/topic-stars-simultaneous-interpretation-3.svg)](https://github.com/topics/simultaneous-interpretation?o=desc&s=stars) | GitHub 主题 · simultaneous-interpretation · 该榜单最新历史最佳 |
 | **#3** | 2026-11-26 | [![GitHub topic · simultaneous-translation #3](docs/assets/badges/rankings/topic-stars-simultaneous-translation-3.svg)](https://github.com/topics/simultaneous-translation?o=desc&s=stars) | GitHub 主题 · simultaneous-translation · 该榜单最新历史最佳 |
-| **#5** | 2026-11-26 09:02:16 | [![GitHub topic · real-time-translation #5](docs/assets/badges/rankings/topic-stars-real-time-translation-5.svg)](https://github.com/topics/real-time-translation?o=desc&s=stars) | GitHub 主题 · real-time-translation · 该榜单最新历史最佳 |
-| **#5** | 2026-11-26 | [![GitHub topic · live-captions #5](docs/assets/badges/rankings/topic-stars-live-captions-5.svg)](https://github.com/topics/live-captions?o=desc&s=stars) | GitHub 主题 · live-captions · 该榜单最新历史最佳 |
-| **#6** | 2026-11-26 09:02:14 | [![GitHub topic · live-translation #6](docs/assets/badges/rankings/topic-stars-live-translation-6.svg)](https://github.com/topics/live-translation?o=desc&s=stars) | GitHub 主题 · live-translation · 该榜单最新历史最佳 |
+| **#4** | 2026-11-26 10:04:37 | [![GitHub topic · live-captions #4](docs/assets/badges/rankings/topic-stars-live-captions-4.svg)](https://github.com/topics/live-captions?o=desc&s=stars) | GitHub 主题 · live-captions · 该榜单最新历史最佳 |
+| #4 | 2026-11-26 09:46:09 | [![GitHub topic · real-time-translation #4](docs/assets/badges/rankings/topic-stars-real-time-translation-4.svg)](https://github.com/topics/real-time-translation?o=desc&s=stars) | GitHub 主题 · real-time-translation · 刷新历史最佳 |
+| **#5** | 2026-11-26 10:04:39 | [![GitHub topic · live-translation #5](docs/assets/badges/rankings/topic-stars-live-translation-5.svg)](https://github.com/topics/live-translation?o=desc&s=stars) | GitHub 主题 · live-translation · 该榜单最新历史最佳 |
+| #5 | 2026-11-26 09:02:16 | [![GitHub topic · real-time-translation #5](docs/assets/badges/rankings/topic-stars-real-time-translation-5.svg)](https://github.com/topics/real-time-translation?o=desc&s=stars) | GitHub 主题 · real-time-translation · 刷新历史最佳 |
+| #5 | 2026-11-26 | [![GitHub topic · live-captions #5](docs/assets/badges/rankings/topic-stars-live-captions-5.svg)](https://github.com/topics/live-captions?o=desc&s=stars) | GitHub 主题 · live-captions · 首次核验成绩 |
+| #6 | 2026-11-26 09:02:14 | [![GitHub topic · live-translation #6](docs/assets/badges/rankings/topic-stars-live-translation-6.svg)](https://github.com/topics/live-translation?o=desc&s=stars) | GitHub 主题 · live-translation · 刷新历史最佳 |
 | #6 | 2026-11-26 | [![GitHub topic · real-time-translation #6](docs/assets/badges/rankings/topic-stars-real-time-translation-6.svg)](https://github.com/topics/real-time-translation?o=desc&s=stars) | GitHub 主题 · real-time-translation · 首次核验成绩 |
 | #7 | 2026-11-26 | [![GitHub topic · live-translation #7](docs/assets/badges/rankings/topic-stars-live-translation-7.svg)](https://github.com/topics/live-translation?o=desc&s=stars) | GitHub 主题 · live-translation · 首次核验成绩 |
 | **#8** | 2026-11-26 06:23:50 | [![Trendshift daily · all languages #8](docs/assets/badges/rankings/trendshift-daily-all-8.svg)](https://trendshift.io/) | Trendshift 日榜 · 全语言 · 该榜单最新历史最佳 |
-| **#13** | 2026-11-26 | [![GitHub topic · speech-translation #13](docs/assets/badges/rankings/topic-stars-speech-translation-13.svg)](https://github.com/topics/speech-translation?o=desc&s=stars) | GitHub 主题 · speech-translation · 该榜单最新历史最佳 |
+| **#11** | 2026-11-26 10:47:49 | [![GitHub topic · speech-translation #11](docs/assets/badges/rankings/topic-stars-speech-translation-11.svg)](https://github.com/topics/speech-translation?o=desc&s=stars) | GitHub 主题 · speech-translation · 该榜单最新历史最佳 |
+| #13 | 2026-11-26 | [![GitHub topic · speech-translation #13](docs/assets/badges/rankings/topic-stars-speech-translation-13.svg)](https://github.com/topics/speech-translation?o=desc&s=stars) | GitHub 主题 · speech-translation · 首次核验成绩 |
 
 数据来自 [docs/rankings.json](docs/rankings.json)。[榜单维护](docs/rankings.md)
 <!-- rankings:records:end -->

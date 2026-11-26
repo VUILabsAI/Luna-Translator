@@ -60,7 +60,7 @@
         "zh": "实时字幕",
         "en": "Live Captions"
       },
-      "rank": 5,
+      "rank": 4,
       "checkedAt": "2026-11-26"
     },
     {
@@ -69,7 +69,7 @@
         "zh": "实时翻译",
         "en": "Real-Time Translation"
       },
-      "rank": 5,
+      "rank": 3,
       "checkedAt": "2026-11-26"
     },
     {
@@ -78,7 +78,7 @@
         "zh": "现场翻译",
         "en": "Live Translation"
       },
-      "rank": 6,
+      "rank": 5,
       "checkedAt": "2026-11-26"
     },
     {
@@ -87,7 +87,7 @@
         "zh": "语音翻译",
         "en": "Speech Translation"
       },
-      "rank": 13,
+      "rank": 11,
       "checkedAt": "2026-11-26"
     }
   ],
@@ -123,6 +123,41 @@
       "date": "2026-11-26",
       "source": "topic",
       "period": "stars",
+      "scope": "real-time-translation",
+      "rank": 6,
+      "url": "https://github.com/topics/real-time-translation?o=desc&s=stars"
+    },
+    {
+      "date": "2026-11-26",
+      "source": "topic",
+      "period": "stars",
+      "scope": "real-time-translation",
+      "rank": 5,
+      "url": "https://github.com/topics/real-time-translation?o=desc&s=stars",
+      "observedAt": "2026-11-26T09:02:16Z"
+    },
+    {
+      "date": "2026-11-26",
+      "source": "topic",
+      "period": "stars",
+      "scope": "real-time-translation",
+      "rank": 4,
+      "url": "https://github.com/topics/real-time-translation?o=desc&s=stars",
+      "observedAt": "2026-11-26T09:46:09Z"
+    },
+    {
+      "date": "2026-11-26",
+      "source": "topic",
+      "period": "stars",
+      "scope": "real-time-translation",
+      "rank": 3,
+      "url": "https://github.com/topics/real-time-translation?o=desc&s=stars",
+      "observedAt": "2026-11-26T10:04:39Z"
+    },
+    {
+      "date": "2026-11-26",
+      "source": "topic",
+      "period": "stars",
       "scope": "simultaneous-interpretation",
       "rank": 3,
       "url": "https://github.com/topics/simultaneous-interpretation?o=desc&s=stars"
@@ -147,18 +182,10 @@
       "date": "2026-11-26",
       "source": "topic",
       "period": "stars",
-      "scope": "real-time-translation",
-      "rank": 6,
-      "url": "https://github.com/topics/real-time-translation?o=desc&s=stars"
-    },
-    {
-      "date": "2026-11-26",
-      "source": "topic",
-      "period": "stars",
-      "scope": "real-time-translation",
-      "rank": 5,
-      "url": "https://github.com/topics/real-time-translation?o=desc&s=stars",
-      "observedAt": "2026-11-26T09:02:16Z"
+      "scope": "live-captions",
+      "rank": 4,
+      "url": "https://github.com/topics/live-captions?o=desc&s=stars",
+      "observedAt": "2026-11-26T10:04:37Z"
     },
     {
       "date": "2026-11-26",
@@ -181,9 +208,27 @@
       "date": "2026-11-26",
       "source": "topic",
       "period": "stars",
+      "scope": "live-translation",
+      "rank": 5,
+      "url": "https://github.com/topics/live-translation?o=desc&s=stars",
+      "observedAt": "2026-11-26T10:04:39Z"
+    },
+    {
+      "date": "2026-11-26",
+      "source": "topic",
+      "period": "stars",
       "scope": "speech-translation",
       "rank": 13,
       "url": "https://github.com/topics/speech-translation?o=desc&s=stars"
+    },
+    {
+      "date": "2026-11-26",
+      "source": "topic",
+      "period": "stars",
+      "scope": "speech-translation",
+      "rank": 11,
+      "url": "https://github.com/topics/speech-translation?o=desc&s=stars",
+      "observedAt": "2026-11-26T10:47:49Z"
     }
   ]
 }
