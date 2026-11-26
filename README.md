@@ -26,6 +26,7 @@
   <br />
   <a href="https://trendshift.io/"><img src="docs/assets/trendshift-daily-overall-2026-11-26.svg" alt="Trendshift 全语言日榜第 8 名" /></a>
   <a href="https://trendshift.io/?language=TypeScript"><img src="docs/assets/trendshift-daily-typescript-2026-11-26.svg" alt="Trendshift TypeScript 日榜第 3 名" /></a>
+  <br />
   <sub>实时榜单快照，2026-11-26 06:24 UTC</sub>
 </p>
 

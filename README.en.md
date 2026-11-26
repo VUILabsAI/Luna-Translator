@@ -24,6 +24,7 @@
   <br />
   <a href="https://trendshift.io/"><img src="docs/assets/trendshift-daily-overall-2026-11-26.svg" alt="Trendshift daily rank 8 across all languages" /></a>
   <a href="https://trendshift.io/?language=TypeScript"><img src="docs/assets/trendshift-daily-typescript-2026-11-26.svg" alt="Trendshift TypeScript daily rank 3" /></a>
+  <br />
   <sub>Live ranking snapshot, 2026-11-26 06:24 UTC</sub>
 </p>
 
