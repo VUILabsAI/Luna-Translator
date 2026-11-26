@@ -21,7 +21,7 @@
   <a href="https://github.com/VUILabsAI/Luna-Translator"><img src="https://img.shields.io/github/stars/VUILabsAI/Luna-Translator?style=flat" alt="GitHub Stars 计数" /></a>
   <img src="https://img.shields.io/github/languages/top/VUILabsAI/Luna-Translator" alt="仓库主要语言" />
   <br />
-  <a href="https://github.com/topics/speech-to-speech-translation?o=desc&amp;s=stars"><img src="https://img.shields.io/badge/GitHub_Topic-%231_%C2%B7_Speech--to--Speech_Translation-0969DA?logo=github" alt="GitHub 主题排名第 1 · Speech-to-Speech Translation" /></a>
+  <a href="https://github.com/topics/speech-to-speech-translation?o=desc&amp;s=stars"><img src="docs/assets/speech-to-speech-translation-rank.svg" alt="GitHub 主题排名第 1 · Speech-to-Speech Translation" /></a>
   <sub>按 Star 数排序，核验于 2026-11-26</sub>
 </p>
 
