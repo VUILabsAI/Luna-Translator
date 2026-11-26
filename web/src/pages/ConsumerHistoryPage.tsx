@@ -4,7 +4,7 @@ import { pollPendingHistoryTitles } from '@simultrans/core/historyListTitlePolli
 import { historyScene, historySceneLabel } from '@simultrans/core/historyTitle'
 import { formatMeetingCode, meetingElapsedText, normalizeMeetingCode } from '@simultrans/core/meeting'
 import { isOngoingMeetingCheckpoint } from '@simultrans/core/meetingRecord'
-import { useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react'
+import { useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type MouseEvent, type ReactNode } from 'react'
 import '@fontsource/poppins/600.css'
 import '../styles/consumer-history.css'
 import ConsumerPageFrame from '../components/ConsumerPageFrame'
@@ -18,6 +18,7 @@ import {
   ACTIVE_MEETING_TAB_GRACE_MS,
   activeConsumerHistoryShare,
   consumerHistoryCheckpointOwner,
+  consumerHistoryTranscript,
   copySnapshotLink,
   deleteConsumerHistory,
   findActiveMeeting,
@@ -61,6 +62,12 @@ type HistoryListState =
 
 
 const consumerHistoryReturnKey = 'simultrans.consumerHistoryReturn'
+const consumerHistoryScrollKey = 'simultrans.consumerHistoryScroll'
+const consumerHistoryScrollSelector = '.consumer-history-page .consumer-page-scroll'
+
+function consumerHistoryReturnHash(id: string) {
+  return `#return-${encodeURIComponent(id)}`
+}
 
 // 历史里的语言名（Canary 手机版中文名、Canary 主机 RTL 名字加隔离符）与分享页同一份，定义在 SharedSessionPage。
 export { historyLanguageName }
@@ -91,22 +98,84 @@ function returnFromConsumerHistory() {
   window.location.assign(validConsumerHistoryReturnPath(returnPath, window.location.origin) || '/')
 }
 
-function returnToConsumerHistoryList() {
-  window.location.assign('/history')
+function rememberConsumerHistoryScroll(event: MouseEvent<HTMLAnchorElement>, id: string) {
+  if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+  try {
+    sessionStorage.setItem(consumerHistoryScrollKey, JSON.stringify({
+      id,
+      page: window.scrollY,
+      frame: event.currentTarget.closest(consumerHistoryScrollSelector)?.scrollTop ?? 0,
+    }))
+  } catch {
+    // Regular navigation still works when browser storage is unavailable.
+  }
+}
+
+function restoreConsumerHistoryScroll() {
+  if (!window.location.hash.startsWith('#return-')) return
+  try {
+    const position = JSON.parse(sessionStorage.getItem(consumerHistoryScrollKey) || 'null')
+    if (typeof position?.id !== 'string' || window.location.hash !== consumerHistoryReturnHash(position.id)) return
+    sessionStorage.removeItem(consumerHistoryScrollKey)
+    window.history.replaceState(window.history.state, '', window.location.pathname + window.location.search)
+    if (Number.isFinite(position.page)) window.scrollTo(0, position.page)
+    if (Number.isFinite(position.frame)) document.querySelector(consumerHistoryScrollSelector)?.scrollTo(0, position.frame)
+  } catch {
+    // An unavailable or invalid position leaves the list at its normal start.
+  }
 }
 
 // 列表页与详情加载态共用 9:16 页框（Figma 971:7559 顶栏：chevron + 「返回」）。
 // 详情就绪后改由 FinishedSessionView 自带页框渲染，不经过这里。
-function ConsumerHistoryFrame({ children, detail = false }: { children: ReactNode; detail?: boolean }) {
+function ConsumerHistoryFrame({ children, detailId }: { children: ReactNode; detailId?: string }) {
+  const detail = Boolean(detailId)
   return (
     <ConsumerPageFrame
       className="consumer-history-page"
       labelledBy="consumer-history-title"
-      onBack={detail ? returnToConsumerHistoryList : returnFromConsumerHistory}
+      backHref={detailId ? `/history${consumerHistoryReturnHash(detailId)}` : undefined}
+      onBack={returnFromConsumerHistory}
     >
       <h1 id="consumer-history-title" className="consumer-history-title">{detail ? '同传记录' : '历史记录'}</h1>
       {children}
     </ConsumerPageFrame>
+  )
+}
+
+function ConsumerHistoryTranscriptDownload({ record }: { record: ConsumerHistoryRecord }) {
+  const transcript = useMemo(() => consumerHistoryTranscript(record), [record])
+  const [selectedLanguage, setSelectedLanguage] = useState(record.targetLanguage)
+  const language = transcript.translations.has(selectedLanguage) ? selectedLanguage : transcript.translations.keys().next().value
+  const translation = language ? transcript.translations.get(language) : undefined
+
+  function download() {
+    const text = [
+      transcript.source && `原文\n${transcript.source}`,
+      translation && language && `译文（${historyLanguageName(language, true)}）\n${translation}`,
+    ].filter(Boolean).join('\n\n')
+    const url = URL.createObjectURL(new Blob([text], { type: 'text/plain;charset=utf-8' }))
+    const link = document.createElement('a')
+    link.href = url
+    link.download = `luna-transcript-${record.id}.txt`
+    document.body.append(link)
+    link.click()
+    link.remove()
+    window.setTimeout(() => URL.revokeObjectURL(url), 1000)
+  }
+
+  if (!transcript.source && !translation) return null
+  return (
+    <div className="consumer-history-export">
+      {transcript.translations.size > 1 && (
+        <label>
+          导出译文语言
+          <select value={language} onChange={event => setSelectedLanguage(event.target.value)}>
+            {[...transcript.translations.keys()].map(code => <option key={code} value={code}>{historyLanguageName(code, true)}</option>)}
+          </select>
+        </label>
+      )}
+      <button type="button" className="consumer-history-retry" onClick={download}>下载会话文本</button>
+    </div>
   )
 }
 
@@ -269,7 +338,7 @@ function ConsumerHistoryContent({ record, onRefresh, refreshing, refreshError }:
     setDeleteError('')
     try {
       await deleteConsumerHistory(record.id)
-      returnToConsumerHistoryList()
+      window.location.assign('/history')
     } catch (caught) {
       setDeleteError(caught instanceof Error ? caught.message : '无法删除同传历史记录。')
       setDeleting(false)
@@ -279,7 +348,7 @@ function ConsumerHistoryContent({ record, onRefresh, refreshing, refreshError }:
     <FinishedSessionView
       data={data}
       archives={archives}
-      backHref="/history"
+      backHref={`/history${consumerHistoryReturnHash(record.id)}`}
       extra={(
         <>
           {record.abnormalExit && <button type="button" className="shared-session-retry" disabled={refreshing} onClick={onRefresh}>{refreshing ? '正在读取后台记录…' : '重新读取后台记录'}</button>}
@@ -289,6 +358,7 @@ function ConsumerHistoryContent({ record, onRefresh, refreshing, refreshError }:
               {audioLoading ? '正在重新检查音频…' : '重新检查音频'}
             </button>
           )}
+          <ConsumerHistoryTranscriptDownload key={record.id} record={record} />
           <ConsumerHistorySettings record={record} />
           <button type="button" className="consumer-history-delete" disabled={deleting} onClick={() => { void remove() }}>
             {deleting ? '删除中…' : '删除此记录'}
@@ -420,6 +490,10 @@ function ConsumerHistoryListPage() {
   // 列表：那边的终稿这时多半还在发，同时补存本机那份只会重复发同一条。
   const [load, setLoad] = useState({ attempt: 0, replay: true })
   const [state, setState] = useState<HistoryListState>({ status: 'loading' })
+  const ready = state.status === 'ready'
+  useLayoutEffect(() => {
+    if (ready) restoreConsumerHistoryScroll()
+  }, [ready])
   // 进行中的会议（Canary）：与列表并行查（没有会议页开着时要等一小会儿才知道，不拖慢列表）。
   const [ongoing, setOngoing] = useState<ActiveMeetingLookup | null>(null)
   const [presenceCheck, setPresenceCheck] = useState(0)
@@ -517,7 +591,7 @@ export function ConsumerHistoryListView({ records, ongoing, chineseNames, clampT
         const targets = summaryTargetLanguages(record)
         return (
           <li className="consumer-history-entry" key={record.id}>
-            <a className="consumer-history-entry-link" href={`/history/${encodeURIComponent(record.id)}`}>
+            <a className="consumer-history-entry-link" href={`/history/${encodeURIComponent(record.id)}`} onClick={event => rememberConsumerHistoryScroll(event, record.id)}>
               <strong className="consumer-history-entry-title">{historyShortTitle(record, clampTitles)}</strong>
               <span className="consumer-history-entry-head">
                 <time className="consumer-history-entry-time" dateTime={record.createdAt}>{formatShareTimestamp(record.createdAt) || '时间未知'}</time>
@@ -593,7 +667,7 @@ function ConsumerHistoryDetailPage({ id }: { id: string }) {
 
   if (state.status !== 'ready') {
     return (
-      <ConsumerHistoryFrame detail>
+      <ConsumerHistoryFrame detailId={id}>
         <div className={`consumer-history-state${state.status === 'error' ? ' is-error' : ''}`} role={state.status === 'error' ? 'alert' : 'status'}>
           <p>{state.status === 'loading' ? '正在加载同传记录…' : state.message}</p>
           {state.status === 'error' && <button type="button" className="consumer-history-retry" onClick={() => setAttempt((value) => value + 1)}>重新加载</button>}
