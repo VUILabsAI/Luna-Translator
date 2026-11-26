@@ -18,6 +18,9 @@
   <br />
   <a href="https://github.com/VUILabsAI/Luna-Translator"><img src="https://img.shields.io/github/stars/VUILabsAI/Luna-Translator?style=flat" alt="GitHub Stars count" /></a>
   <img src="https://img.shields.io/github/languages/top/VUILabsAI/Luna-Translator" alt="Top repository language" />
+  <br />
+  <a href="https://github.com/topics/speech-to-speech-translation?o=desc&amp;s=stars"><img src="https://img.shields.io/badge/GitHub_Topic-%231_%C2%B7_Speech--to--Speech_Translation-0969DA?logo=github" alt="GitHub Topic #1 · Speech-to-Speech Translation" /></a>
+  <sub>Sorted by stars, verified on 2026-11-26</sub>
 </p>
 
 | Use Luna | Build with Luna |
