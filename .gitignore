@@ -12,3 +12,9 @@ playwright-report/
 *.log
 *.pem
 *.key
+
+/ios/build/
+**/xcuserdata/
+*.xcuserstate
+*.mobileprovision
+*.p12

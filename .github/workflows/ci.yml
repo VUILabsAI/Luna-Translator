@@ -29,3 +29,13 @@ jobs:
       - run: curl --fail http://localhost:8088/health
       - if: always()
         run: docker compose down
+
+  ios:
+    name: Build iOS community client
+    runs-on: macos-26
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - run: >
+          xcodebuild -project ios/LunaCommunity.xcodeproj -scheme LunaCommunity
+          -destination 'generic/platform=iOS Simulator' CODE_SIGNING_ALLOWED=NO build

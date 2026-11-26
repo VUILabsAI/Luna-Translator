@@ -33,7 +33,9 @@ for name in sorted(set(paths)):
     count += 1
     parts = pathlib.PurePosixPath(name).parts
     forbidden = (parts[0] in ['mobile', 'deploy', '.gitlab', '.env', 'output', 'data'] or name.startswith('.gitlab-ci')
-                 or path.suffix.lower() in ['.safetensors', '.ckpt', '.pt', '.onnx', '.tflite', '.pem', '.key']
+                 or path.suffix.lower() in ['.safetensors', '.ckpt', '.pt', '.onnx', '.tflite', '.pem', '.key',
+                                            '.p12', '.p8', '.mobileprovision', '.xcuserstate']
+                 or 'xcuserdata' in parts
                  or (path.name.startswith('.env') and path.name != '.env.example'))
     if forbidden:
         failures.append((name, 'excluded release content'))

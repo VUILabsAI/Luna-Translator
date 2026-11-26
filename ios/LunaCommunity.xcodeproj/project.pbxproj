@@ -1,0 +1,471 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		03CB40F234E6DEF7A6BDB95E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED62C605A594671D3F4B111E /* Assets.xcassets */; };
+		2421B5C2D60607DD970CB974 /* WorkspaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963D8A6EBD36A6D8CEF7BE47 /* WorkspaceTests.swift */; };
+		73F380407B48FD7FB7663F1F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 912270C52DD84191EF021391 /* Foundation.framework */; };
+		85FB74B6E3C9605FF0106047 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4AD168577939D2417B9BC74B /* Localizable.strings */; };
+		891246C50E026BF3390B4FAA /* CommunityAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372D146DC3433CC09B3B6F0F /* CommunityAudio.swift */; };
+		A730AF0FF808D61D2772DA6E /* Workspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151ABEE50E5FFA8AA2B6659F /* Workspace.swift */; };
+		A78F465CF3C26A18FB21C4C2 /* LunaCommunityApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB42723020D49FAA0753FF7 /* LunaCommunityApp.swift */; };
+		AAE1AD3557AACE7A91E16765 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 912270C52DD84191EF021391 /* Foundation.framework */; };
+		B8327F3BF6A11E87E262B5CA /* CommunityAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3F298C8B225345859CFF0B /* CommunityAPI.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5389D521A3AE527CC7616C21 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0971785EE3E638813C52C246 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EF3E728A986C13B5C6E4C685;
+			remoteInfo = LunaCommunity;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0F3F298C8B225345859CFF0B /* CommunityAPI.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CommunityAPI.swift; sourceTree = "<group>"; };
+		151ABEE50E5FFA8AA2B6659F /* Workspace.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Workspace.swift; sourceTree = "<group>"; };
+		246CDD818D230A9531AFC130 /* en */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		372D146DC3433CC09B3B6F0F /* CommunityAudio.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CommunityAudio.swift; sourceTree = "<group>"; };
+		47241A965E3141B50B6370C5 /* LunaCommunity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LunaCommunity.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		74B2098BF4075271008D0572 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7AB42723020D49FAA0753FF7 /* LunaCommunityApp.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LunaCommunityApp.swift; sourceTree = "<group>"; };
+		912270C52DD84191EF021391 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		963D8A6EBD36A6D8CEF7BE47 /* WorkspaceTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WorkspaceTests.swift; sourceTree = "<group>"; };
+		9BDD11D94B3893748FD25B32 /* LunaCommunityUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LunaCommunityUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AEE5863E95E92E9B3157F051 /* zh-Hans */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		ED62C605A594671D3F4B111E /* Assets.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1B07B9BC4C6C06C01129221E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AAE1AD3557AACE7A91E16765 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A6F58A300BF523D00CD72351 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73F380407B48FD7FB7663F1F /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		69D4D73BB213A4337E8C381B = {
+			isa = PBXGroup;
+			children = (
+				923DFDBF6938ADE216ABED1A /* Products */,
+				A75564DA72C4CB30E8434CD1 /* Frameworks */,
+				D60196AFA68EE1CBAFCBEC15 /* LunaCommunity */,
+				BC22D10B4925061CB3C53A34 /* LunaCommunityUITests */,
+			);
+			sourceTree = "<group>";
+		};
+		8CB8A8DE0F8F22C973CDC061 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				912270C52DD84191EF021391 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		923DFDBF6938ADE216ABED1A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				47241A965E3141B50B6370C5 /* LunaCommunity.app */,
+				9BDD11D94B3893748FD25B32 /* LunaCommunityUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A75564DA72C4CB30E8434CD1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8CB8A8DE0F8F22C973CDC061 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BC22D10B4925061CB3C53A34 /* LunaCommunityUITests */ = {
+			isa = PBXGroup;
+			children = (
+				963D8A6EBD36A6D8CEF7BE47 /* WorkspaceTests.swift */,
+			);
+			name = LunaCommunityUITests;
+			path = LunaCommunityUITests;
+			sourceTree = "<group>";
+		};
+		D60196AFA68EE1CBAFCBEC15 /* LunaCommunity */ = {
+			isa = PBXGroup;
+			children = (
+				0F3F298C8B225345859CFF0B /* CommunityAPI.swift */,
+				372D146DC3433CC09B3B6F0F /* CommunityAudio.swift */,
+				151ABEE50E5FFA8AA2B6659F /* Workspace.swift */,
+				7AB42723020D49FAA0753FF7 /* LunaCommunityApp.swift */,
+				ED62C605A594671D3F4B111E /* Assets.xcassets */,
+				4AD168577939D2417B9BC74B /* Localizable.strings */,
+				74B2098BF4075271008D0572 /* Info.plist */,
+			);
+			name = LunaCommunity;
+			path = LunaCommunity;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		073663563228724081FE1C7E /* LunaCommunityUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3A04DDD3813103CD7BA36D4D /* Build configuration list for PBXNativeTarget "LunaCommunityUITests" */;
+			buildPhases = (
+				BA98DD18BA1231CA7FBCE93E /* Sources */,
+				1B07B9BC4C6C06C01129221E /* Frameworks */,
+				9A8FEF0C262DAA9DE6517BE8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5872EA2B2BC6F27CA98E208D /* PBXTargetDependency */,
+			);
+			name = LunaCommunityUITests;
+			productName = LunaCommunityUITests;
+			productReference = 9BDD11D94B3893748FD25B32 /* LunaCommunityUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		EF3E728A986C13B5C6E4C685 /* LunaCommunity */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 68A8F874D4D55C187B19E8F7 /* Build configuration list for PBXNativeTarget "LunaCommunity" */;
+			buildPhases = (
+				805F69A54EDB424F5CEB2A4C /* Sources */,
+				A6F58A300BF523D00CD72351 /* Frameworks */,
+				C747CB59286F7B7E8716F8BD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LunaCommunity;
+			productName = LunaCommunity;
+			productReference = 47241A965E3141B50B6370C5 /* LunaCommunity.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0971785EE3E638813C52C246 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
+			};
+			buildConfigurationList = 77694A74400023DA3502035F /* Build configuration list for PBXProject "LunaCommunity" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				"zh-Hans",
+				Base,
+			);
+			mainGroup = 69D4D73BB213A4337E8C381B;
+			minimizedProjectReferenceProxies = 0;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 923DFDBF6938ADE216ABED1A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EF3E728A986C13B5C6E4C685 /* LunaCommunity */,
+				073663563228724081FE1C7E /* LunaCommunityUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9A8FEF0C262DAA9DE6517BE8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C747CB59286F7B7E8716F8BD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				03CB40F234E6DEF7A6BDB95E /* Assets.xcassets in Resources */,
+				85FB74B6E3C9605FF0106047 /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		805F69A54EDB424F5CEB2A4C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B8327F3BF6A11E87E262B5CA /* CommunityAPI.swift in Sources */,
+				891246C50E026BF3390B4FAA /* CommunityAudio.swift in Sources */,
+				A730AF0FF808D61D2772DA6E /* Workspace.swift in Sources */,
+				A78F465CF3C26A18FB21C4C2 /* LunaCommunityApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BA98DD18BA1231CA7FBCE93E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2421B5C2D60607DD970CB974 /* WorkspaceTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5872EA2B2BC6F27CA98E208D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = LunaCommunity;
+			target = EF3E728A986C13B5C6E4C685 /* LunaCommunity */;
+			targetProxy = 5389D521A3AE527CC7616C21 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		4AD168577939D2417B9BC74B /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				246CDD818D230A9531AFC130 /* en */,
+				AEE5863E95E92E9B3157F051 /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		745247550A702760882D9EC1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		A0FE71746263E17B3D036290 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		D7FBA7C37F828CA0FCF72D97 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				PRODUCT_BUNDLE_IDENTIFIER = org.vuilabs.lunacommunity.uitests;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = LunaCommunity;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E80A7171F45B8760AAC89B36 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LunaCommunity/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = org.vuilabs.lunacommunity;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F98350ECEBCCDF29C8DDA5F2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LunaCommunity/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = org.vuilabs.lunacommunity;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FEA115EB1EB653C953E9381F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				PRODUCT_BUNDLE_IDENTIFIER = org.vuilabs.lunacommunity.uitests;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = LunaCommunity;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3A04DDD3813103CD7BA36D4D /* Build configuration list for PBXNativeTarget "LunaCommunityUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D7FBA7C37F828CA0FCF72D97 /* Release */,
+				FEA115EB1EB653C953E9381F /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		68A8F874D4D55C187B19E8F7 /* Build configuration list for PBXNativeTarget "LunaCommunity" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F98350ECEBCCDF29C8DDA5F2 /* Release */,
+				E80A7171F45B8760AAC89B36 /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		77694A74400023DA3502035F /* Build configuration list for PBXProject "LunaCommunity" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A0FE71746263E17B3D036290 /* Debug */,
+				745247550A702760882D9EC1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0971785EE3E638813C52C246 /* Project object */;
+}

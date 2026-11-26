@@ -5,7 +5,7 @@
 <h1 align="center">Luna Translator</h1>
 
 <p align="center">
-  VUI Labs 的实时语音同传开源应用与 API 解决方案，提供字幕、译音和可自托管的 Web 社区版。
+  VUI Labs 的实时语音同传开源应用与 API 解决方案，提供实时字幕和译音，现已开源 Web 与 iOS 社区版。
 </p>
 
 <!-- rankings:hero:start -->
@@ -30,18 +30,27 @@
   <a href="https://simultrans.lunalabs.cn/"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/assets/badges/cta-try-dark.svg" /><img src="docs/assets/badges/cta-try.svg" alt="在线体验" height="40" /></picture></a>
   <a href="examples/quickstart/README.md"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/assets/badges/cta-api-dark.svg" /><img src="docs/assets/badges/cta-api.svg" alt="Go API 快速开始" height="40" /></picture></a>
   <br />
-  <a href="#安装与快速开始">自托管社区版</a> · <a href="solutions/README.md">按场景接入</a> · <a href="https://doc.vuilabs.cn/api-reference/realtime-interpretation/">同传 v3 API 文档</a> · <a href="#官方网页版与产品介绍">官方网页版</a>
+  <a href="#安装与快速开始">自托管社区版</a> · <a href="ios/README.md">iOS 源码与构建</a> · <a href="solutions/README.md">按场景接入</a> · <a href="https://doc.vuilabs.cn/api-reference/realtime-interpretation/">同传 v3 API 文档</a> · <a href="#官方网页版与产品介绍">官方网页版</a>
 </p>
 
 ## 边说，边译，边听
 
 听一场外语分享，向不同语言的听众介绍想法，或与面前的人轮流交谈——Luna Translator 将输入语音转换为原文字幕、目标语言译文与译音，并保留会话，方便之后回听和分享。
 
-这个仓库提供可独立部署的 **Web 前端与 Go 后端**。你可以在自己的电脑或服务器上运行，修改界面、扩展业务流程，或接入自己的模型服务。应用通过外部 API 完成实际识别与翻译，本机部署无需 GPU。
+这个仓库提供自托管 **Web 前端、Go 后端和 iOS 社区客户端**。Web 和 iOS 可以连接同一个工作区。应用通过外部 API 完成实际识别与翻译，本机部署无需 GPU。
 
-> 当前社区版优先支持 Web：单人同传、中英双向对话、历史、回放与分享。默认启动的是有明确标识的模拟体验；实际识别和翻译需要配置自己的模型服务。
+## C 端开源计划
 
-### 社区版演示
+| 客户端 | 状态 | 社区版范围 |
+|---|---|---|
+| Web | **已开源** | 单人同传、中英双向对话、历史、回放与分享。查看 [Web 源码](web/) 或 [自托管指南](#安装与快速开始)。 |
+| iOS | **已开源** | 首批提供单人快速同传、麦克风收音、实时字幕和译音播放。查看 [iOS 源码](ios/) 或 [Xcode 构建指南](ios/README.md)。 |
+| Android | **下一阶段** | 计划先开放快速同传社区版，实现自托管连接，并验证模拟器和真机的录音、字幕与译音。 |
+| macOS | **后续计划** | 计划开放桌面同传社区版，完成独立构建、麦克风权限及音频输出验证后发布源码。 |
+
+Web 和 iOS 都可以在模拟模式下运行。真实识别与翻译需要在社区后端配置模型服务。Android 和 macOS 的发布准备见[开源计划](docs/open-source-plan.md#c-端开源计划)。
+
+## 社区版演示
 
 [![Web 社区版模拟会话记录：中英示例字幕与音频回放控件](docs/assets/community-web-demo.jpg)](docs/assets/community-web-demo.mp4)
 
@@ -181,6 +190,7 @@ python3 scripts/check-public-content.py
 | 目录 | 内容 |
 |---|---|
 | `web/` | Web 页面、音频交互、历史与分享界面。 |
+| [`ios/`](ios/README.md) | SwiftUI 客户端、原生音频和模拟器测试。 |
 | `packages/core/`、`packages/ui-shared/` | 共享文本状态、协议与浏览器音频逻辑。 |
 | `backend/community/` | 独立工作区 API、会话编排与持久化。 |
 | `backend/providers/` | 外部模型服务客户端适配器。 |
@@ -194,7 +204,7 @@ python3 scripts/check-public-content.py
 
 已完成真实合成语音的中译英 / 英译中、浏览器历史与分享、容器启动和公开 CI 验证。真人麦克风、耳机 / 回声、Safari / Edge、Windows 实机及长会话负载尚未完成验收，具体记录见 [验证说明](docs/validation.md)。
 
-后续优先完善 Web 的兼容性、可访问性、模型适配和对齐策略，再扩展多人会议 / RTC，整理 Android 与 iOS 源码。完整安排见 [开源计划](docs/open-source-plan.md)。
+后续继续验证 iOS 实机录音、译音和真实模型，并改进 Web 兼容性、可访问性与模型适配。各平台的源码发布顺序见 [C 端开源计划](#c-端开源计划)。
 
 ## 官方网页版与产品介绍
 
@@ -210,10 +220,10 @@ python3 scripts/check-public-content.py
 
 <p>
   <img src="docs/assets/official-ios-preview.jpg" alt="官方 iOS App：快速同传入口（模拟器截图）" width="205" />
-  <img src="docs/assets/official-android-preview.jpg" alt="官方 Android App：快速同传入口（模拟器截图）" width="205" />
+  <img src="docs/assets/official-android-preview.jpg" alt="Android 1.0.11（90）访客首页与快速同传入口（模拟器截图）" width="205" />
 </p>
 
-上图为官方 App 的 iOS 和 Android 模拟器截图，不代表移动端源码已发布。中国大陆 iOS 用户可前往 [App Store](https://apps.apple.com/cn/app/id6806330215)，社区版进展见[开源路线图](docs/open-source-plan.md#移动端发布准备)。
+上图为官方 iOS 和 Android App 的模拟器预览，Android 截图来自 1.0.11（90）构建。中国大陆用户可在 [App Store](https://apps.apple.com/cn/app/id6806330215) 下载官方 iOS App。自托管版本的运行说明和界面截图见 [iOS 社区版指南](ios/README.md)。
 
 ## FAQ 与排障
 
