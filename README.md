@@ -23,6 +23,10 @@
   <br />
   <a href="https://github.com/topics/speech-to-speech-translation?o=desc&amp;s=stars"><img src="docs/assets/speech-to-speech-translation-rank.svg" alt="GitHub 主题排名第 1 · Speech-to-Speech Translation" /></a>
   <sub>按 Star 数排序，核验于 2026-11-26</sub>
+  <br />
+  <a href="https://trendshift.io/"><img src="docs/assets/trendshift-daily-overall-2026-11-26.svg" alt="Trendshift 全语言日榜第 8 名" /></a>
+  <a href="https://trendshift.io/?language=TypeScript"><img src="docs/assets/trendshift-daily-typescript-2026-11-26.svg" alt="Trendshift TypeScript 日榜第 3 名" /></a>
+  <sub>实时榜单快照，2026-11-26 06:24 UTC</sub>
 </p>
 
 | 使用 Luna | 接入 Luna |
