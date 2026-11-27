@@ -33,6 +33,8 @@
 
 ## Speak, translate, listen
 
+*in Real-time, one voice, every language.*
+
 Follow a talk in another language, present an idea to listeners who speak different languages, or take turns in a face-to-face conversation. Luna Translator provides source captions, translated text and speech, then saves the session for replay and sharing.
 
 This repository includes a self-hosted **Web frontend, Go backend, and iOS community client**. Both clients can connect to the same workspace. They use external APIs for recognition and translation, so the deployment needs no local GPU.
