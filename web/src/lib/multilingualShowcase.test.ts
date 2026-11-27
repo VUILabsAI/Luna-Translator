@@ -80,6 +80,26 @@ const output = (targetLanguage: string, speechEpoch: number, source: string, tra
 }
 
 describe('multilingual showcase helpers', () => {
+  it('extends a finalized source caption when ASR restarts within the same utterance', () => {
+    let state = emptyVadTranscriptPairState()
+    state = reduceVadTranscriptPairEvent(state, {
+      type: 'source_done', utteranceId: 'vad-1', speechEpoch: 1, text: 'First clause.', epochText: 'First clause.',
+    })
+    state = reduceVadTranscriptPairEvent(state, {
+      type: 'source_update', utteranceId: 'vad-1', speechEpoch: 2,
+      text: 'First clause. Still speaking', epochText: 'Still speaking',
+    })
+    expect(state.pairs.map(pair => pair.source)).toEqual(['First clause. Still speaking'])
+    state = reduceVadTranscriptPairEvent(state, {
+      type: 'source_done', utteranceId: 'vad-1', speechEpoch: 2,
+      text: 'First clause. Still speaking here.', epochText: 'Still speaking here.',
+    })
+    state = reduceVadTranscriptPairEvent(state, {
+      type: 'source_update', utteranceId: 'vad-1', speechEpoch: 3, text: 'Unrelated.', epochText: 'Unrelated.',
+    })
+    expect(state.pairs.map(pair => pair.source)).toEqual(['First clause. Still speaking here.'])
+  })
+
   it('joins each target language by the shared VAD epoch', () => {
     const rows = buildMultilingualShowcaseRows('', [], ['en', 'ja'], {
       en: output('en', 1, '欢迎使用多语同传。', 'Welcome to multilingual interpretation.'),

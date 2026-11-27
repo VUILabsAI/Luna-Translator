@@ -687,7 +687,7 @@ html[lang="en"] .lede-line {
   }
 }
 
-/* Under 360px 「Luna翻译」 no longer fits beside the language pill and 立即体验, so the
+/* Under 360px the localized name no longer fits beside the language pill and 立即体验, so the
  * logo stands alone; the name stays available to screen readers. */
 @media (max-width: 359px) {
   html:not([lang="en"]) .wordmark {

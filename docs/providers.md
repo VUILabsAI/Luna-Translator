@@ -8,9 +8,26 @@
 
 后端用 `Authorization: Bearer <your-key>` 连接 `LUNA_WS_URL`。服务端代码位于 `backend/providers/lunapublic/`，凭据不下发浏览器。
 
-协议：发送 `action=start`，配置 `source_lang` / `target_lang`、`enable_tts=true`、`enable_vad=true`。默认固定音色为 `tts_backend=lunasi-tts-sc`、`voice_mode=preset`、`voice=avery`。收到 `started` 后实时发送 16 kHz 单声道 PCM16 二进制块；结束输入发送 `action=finish`，继续接收至 `completed`。
+连接后发送 `action=start`，设置 `source_lang`、`target_lang` 和 `enable_tts=true`。社区版默认使用 `tts_backend=lunasi-tts-sc`、`voice_mode=preset`、`voice=avery`。收到 `started` 后，以实时节奏发送 16 kHz 单声道 PCM16 小端二进制块，每包最多 1 秒。一次连接只发送一次 `start`。两段录音之间可以继续送音，所有输入发完再发送一次 `action=finish`，继续接收到 `completed`。
 
-`translation` 是增量文本；`speech` / `speech_chunk` 的 JSON 描述紧随其后的 float32 二进制音频。适配器校验长度、采样率和非有限样本，转换为浏览器现有 PCM16 事件协议。`usage` 计量由模型服务处理；应用不承诺免费额度。
+### 热词与 VAD
+
+可在本地 `.env` 设置以下选项，再重新运行启动脚本：
+
+```dotenv
+LUNA_ENABLE_VAD=false
+LUNA_HOTWORDS='[{"source":"西湖","target":"West Lake"}]'
+```
+
+- `LUNA_HOTWORDS` 是结构化词对，每项只含 `source` 和 `target`。最多 20 对，每个词去除首尾空白后为 1–50 字符，同一个源词只出现一次。省略或设置 `[]` 使用标准翻译。词对作为部署配置，会附加到每条 Luna 上游调用。多目标语言部署宜使用各语种通用的固定译法。生成的完整提示词还受上游字符数和 token 限制。
+- Bearer 接口拒绝 `system_prompt`，包括空字符串和 `null`。社区版发送结构化词对，旧的自由提示词无法设置翻译行为。
+- `LUNA_ENABLE_VAD` 默认关闭，设为 `true` 开启推理侧 VAD。停顿后的输出时机由上游决定。连续 60 秒没有有效音频时，上游会自动收尾，WebSocket 心跳不算音频。发送的静音 PCM 仍按输入音频计量。详情见[官方 VAD 参数和用量说明](https://simultrans.lunalabs.cn/api-docs#parameters)。
+
+`translation` 是增量文本，每条 `speech` / `speech_chunk` JSON 后是对应的 float32 小端二进制音频。适配器校验音频包长度、采样率和非有限样本，并转换为社区 Web 的 PCM16 事件。语音段编号独立于文本编号。`translation_complete` 后仍可能收到译音。如果 `completed` 标记 `partial`，社区版报告不完整输出。上游发送 `usage` 后结束，可通过[上游用量收据](https://simultrans.lunalabs.cn/api-docs#receipts)按 `session_id` 查询分项 token。
+
+### 双段协议检查
+
+`go -C backend test ./providers/lunapublic -run TestBearerTwoSegments -v -count=1` 使用本地模拟服务。在 VAD 开和关两组中分别通过同一条连接发送两段输入，校验两段译文、合成语音帧、独立语音段编号及模拟用量。真实复测时建议使用两句易区分且有权提交的录音，中间插入约 2 秒静音，两段发完才 `finish`。记录第二段的文本和对应 PCM、`usage`、`completed`，按同一 `session_id` 核对上游收据。
 
 ## 百炼
 

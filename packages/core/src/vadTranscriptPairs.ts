@@ -366,14 +366,22 @@ export function reduceVadTranscriptPairEvent(
   }
 
   if (event.type === 'source_delta' || event.type === 'source_update' || event.type === 'source_done') {
-    const source = (event.epochText || event.segmentText || event.text || '').trim()
-    if (!source) return state
+    const localText = event.epochText || event.segmentText
+    const candidate = (localText || event.text || '').trim()
+    if (!candidate) return state
     const previous = state.pairs[index - 1]
-    const repeatedSnapshot = Boolean((event.epochText || event.segmentText) && event.text && previous?.sourceSnapshot
+    const repeatedSnapshot = Boolean(localText && event.text && previous?.sourceSnapshot
       && previous.sourceSnapshot !== previous.source
       && event.text.trim() === previous.sourceSnapshot
-      && source === previous.source)
+      && candidate === previous.source)
+    const cumulative = localText ? (event.text ?? '').trim() : ''
     return updatePair(state, index, (pair) => {
+      // A restarted ASR stream can send only the new words as its local text.
+      // Recover the utterance from the cumulative text if it extends the final prefix.
+      const stable = pair.sourceStableText
+      const source = stable && !candidate.startsWith(stable) && cumulative.length > stable.length && cumulative.startsWith(stable)
+        ? cumulative
+        : candidate
       const sourceStableText = event.type !== 'source_done'
         ? pair.sourceStableText
         : !pair.sourceStableText || source.startsWith(pair.sourceStableText)

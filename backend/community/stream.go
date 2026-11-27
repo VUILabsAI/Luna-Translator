@@ -27,7 +27,6 @@ type startFrame struct {
 	Type, SessionID, Ticket, Provider, SourceLanguage, Voice string
 	TargetLanguages                                          []string
 	VoiceClone                                               bool
-	Qwen3SimulSystemPrompt                                   string
 }
 type packet struct {
 	kind int
@@ -63,8 +62,8 @@ func (a *App) translate(w http.ResponseWriter, r *http.Request) {
 		_ = ws.WriteJSON(core.Event{Type: "error", Error: "Invalid or expired session ticket"})
 		return
 	}
-	if (frame.SourceLanguage != "zh" && frame.SourceLanguage != "en") || len(frame.TargetLanguages) == 0 || len(frame.TargetLanguages) > 3 || len([]rune(frame.Qwen3SimulSystemPrompt)) > 2000 {
-		_ = ws.WriteJSON(core.Event{Type: "error", Error: "Invalid language selection or prompt"})
+	if (frame.SourceLanguage != "zh" && frame.SourceLanguage != "en") || len(frame.TargetLanguages) == 0 || len(frame.TargetLanguages) > 3 {
+		_ = ws.WriteJSON(core.Event{Type: "error", Error: "Invalid language selection"})
 		return
 	}
 	seen := map[string]bool{}
@@ -107,7 +106,7 @@ func (a *App) translate(w http.ResponseWriter, r *http.Request) {
 			local := make(chan core.Event, 64)
 			ended := make(chan error, 1)
 			go func() {
-				ended <- p.Run(ctx, core.SessionConfig{SessionID: frame.SessionID, SourceLanguage: frame.SourceLanguage, TargetLanguage: language, Voice: frame.Voice, VoiceClone: frame.VoiceClone, Qwen3SimulSystemPrompt: frame.Qwen3SimulSystemPrompt}, ch, local)
+				ended <- p.Run(ctx, core.SessionConfig{SessionID: frame.SessionID, SourceLanguage: frame.SourceLanguage, TargetLanguage: language, Voice: frame.Voice, VoiceClone: frame.VoiceClone}, ch, local)
 			}()
 			forward := func(e core.Event) {
 				if asr && !strings.HasPrefix(e.Type, "source_") && e.Type != "error" {
