@@ -44,8 +44,9 @@ const RECORD_CARD = {
 };
 const HERO_CARD = {
   height: 55, radius: 10, rankX: 31, rankRadius: 17, rankSize: 19, multiRankSize: 15,
-  textX: 58, topY: 22, topSize: 9, mainY: 39, mainSize: 13.5, padding: 16, minWidth: 250,
+  textX: 58, topY: 22, topSize: 9, mainY: 39, mainSize: 13.5, padding: 16, minWidth: 320,
 };
+const TOPIC_MEDAL_CARD = { ...HERO_CARD, mainY: 25, topY: 41 };
 const BUTTON = {
   primary: {
     light: { bg: '#1F2328', fg: '#FFFFFF', stroke: '#1F2328' },
@@ -112,14 +113,14 @@ function cardWidth(cards, layout) {
     Math.ceil(layout.textX + Math.max(textWidth(main, layout.mainSize), textWidth(top, layout.topSize, 0.8)) + layout.padding)));
 }
 
-function cardSvg({ rank, top, main, title }, width, layout, c) {
+function cardSvg({ rank, rankLabel = String(rank), top, main, title }, width, layout, c) {
   const { height, radius, rankX, rankRadius, rankSize, multiRankSize, textX, topY, topSize, mainY, mainSize } = layout;
   const fontSize = rank >= 10 ? multiRankSize : rankSize;
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-label="${esc(title)}">
   <title>${esc(title)}</title>
   <rect x="0.5" y="0.5" width="${width - 1}" height="${height - 1}" rx="${radius}" fill="${c.bg}" stroke="${c.stroke}"/>
   <circle cx="${rankX}" cy="${height / 2}" r="${rankRadius}" fill="${c.disc}"/>
-  <text x="${rankX}" y="${Math.round(height / 2 + fontSize / 3)}" text-anchor="middle" font-family="${FONT}" font-size="${fontSize}" font-weight="700" fill="${c.rank}">${rank}</text>
+  <text x="${rankX}" y="${Math.round(height / 2 + fontSize / 3)}" text-anchor="middle" font-family="${FONT}" font-size="${fontSize}" font-weight="700" fill="${c.rank}">${esc(rankLabel)}</text>
   <text x="${textX}" y="${topY}" font-family="${FONT}" font-size="${topSize}" font-weight="600" letter-spacing="0.8" fill="${c.top}">${esc(top)}</text>
   <text x="${textX}" y="${mainY}" font-family="${FONT}" font-size="${mainSize}" font-weight="700" fill="${c.main}">${esc(main)}</text>
 </svg>
@@ -176,6 +177,13 @@ function topicsCard(topics) {
   }
   const best = [...ranked].sort((a, b) => a.rank - b.rank)[0];
   if (!best || best.rank > 3) return null;
+  if (best.rank === 1) {
+    return {
+      rank: best.rank, rankLabel: '#1', layout: TOPIC_MEDAL_CARD,
+      top: 'GITHUB TOPIC · BY STARS', main: best.name.en,
+      title: `${best.name.en} · GitHub Topic #1 by stars`, link: () => topicUrl(best.topic),
+    };
+  }
   return { rank: best.rank, top: 'GITHUB TOPIC · BY STARS', main: `#${best.rank} ${best.name.en}`, title: `GitHub topic ${best.topic}: #${best.rank} by stars`, link: () => topicUrl(best.topic) };
 }
 
@@ -408,9 +416,10 @@ async function main() {
   const width = cardWidth(cards, HERO_CARD);
   for (const c of cards) {
     c.width = width;
+    const layout = c.layout ?? HERO_CARD;
     const palette = MEDAL_CARDS[c.rank] ?? CARD;
-    outputs.set(`${ASSETS}/${c.file}.svg`, cardSvg(c, width, HERO_CARD, palette.light));
-    outputs.set(`${ASSETS}/${c.file}-dark.svg`, cardSvg(c, width, HERO_CARD, palette.dark));
+    outputs.set(`${ASSETS}/${c.file}.svg`, cardSvg(c, width, layout, palette.light));
+    outputs.set(`${ASSETS}/${c.file}-dark.svg`, cardSvg(c, width, layout, palette.dark));
   }
   for (const b of BUTTONS) {
     outputs.set(`${ASSETS}/${b.file}.svg`, buttonSvg(b, 'light').svg);
