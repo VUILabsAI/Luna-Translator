@@ -6,9 +6,9 @@
   var messages = {
     "zh-CN": {
       name: "简体中文",
-      brandName: "Luna翻译",
+      brandName: "Luna 同传",
       brandShort: "Luna",
-      title: "Luna翻译 — 实时同声传译",
+      title: "Luna 同传 — 实时同声传译",
       description: "VUI Labs 自研实时同传模型与产品，支持低延迟翻译、行业词库适配、实时音色克隆及中英输入、18 种语言输出。",
       languageLabel: "界面语言",
       platformLabel: "选择使用平台",
@@ -41,9 +41,9 @@
     },
     "zh-TW": {
       name: "繁體中文",
-      brandName: "Luna翻译",
+      brandName: "Luna 同傳",
       brandShort: "Luna",
-      title: "Luna翻譯 — 即時同步口譯",
+      title: "Luna 同傳 — 即時同步口譯",
       description: "VUI Labs 自主研發的即時同步口譯模型與產品，支援低延遲翻譯、產業詞庫適配、即時聲音複製，以及中英輸入、18 種語言輸出。",
       languageLabel: "介面語言",
       platformLabel: "選擇使用平台",
