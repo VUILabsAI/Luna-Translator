@@ -8,18 +8,34 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/gorilla/websocket"
 	"math"
 	"net/http"
 	"net/url"
-	"simultrans/core"
 	"strings"
 	"time"
+
+	"github.com/gorilla/websocket"
+
+	"simultrans/core"
 )
 
 type Adapter struct {
 	APIKey, Endpoint string
 	Dialer           *websocket.Dialer
+	EnableVAD        bool
+	Hotwords         []Hotword
+}
+
+type startRequest struct {
+	Action     string    `json:"action"`
+	SourceLang string    `json:"source_lang"`
+	TargetLang string    `json:"target_lang"`
+	EnableTTS  bool      `json:"enable_tts"`
+	EnableVAD  bool      `json:"enable_vad"`
+	TTSBackend string    `json:"tts_backend,omitempty"`
+	VoiceMode  string    `json:"voice_mode,omitempty"`
+	Voice      string    `json:"voice,omitempty"`
+	Hotwords   []Hotword `json:"hotwords,omitempty"`
 }
 
 func (a Adapter) Name() string { return "luna" }
@@ -50,26 +66,26 @@ func (a Adapter) Run(ctx context.Context, cfg core.SessionConfig, audio <-chan [
 	ctx, cancel := context.WithCancel(ctx)
 	defer cancel()
 	go func() { <-ctx.Done(); _ = ws.Close() }()
-	voiceMode, backend := "preset", "lunasi-tts-sc"
-	voice := cfg.Voice
-	if voice == "" || voice == "Tina" {
-		voice = "avery"
+	start := startRequest{
+		Action: "start", SourceLang: cfg.SourceLanguage, TargetLang: cfg.TargetLanguage,
+		EnableTTS: !cfg.TextOnly, EnableVAD: a.EnableVAD, Hotwords: a.Hotwords,
 	}
-	if cfg.VoiceClone {
-		voiceMode = "clone"
-		backend = "lunasi-tts"
-		voice = ""
-	}
-	start := map[string]any{"action": "start", "source_lang": cfg.SourceLanguage, "target_lang": cfg.TargetLanguage, "enable_tts": !cfg.TextOnly, "enable_vad": true, "tts_backend": backend, "voice_mode": voiceMode, "system_prompt": cfg.Qwen3SimulSystemPrompt}
-	if voice != "" {
-		start["voice"] = voice
+	if start.EnableTTS {
+		if cfg.VoiceClone {
+			start.VoiceMode, start.TTSBackend = "clone", "lunasi-tts"
+		} else {
+			start.VoiceMode, start.TTSBackend, start.Voice = "preset", "lunasi-tts-sc", cfg.Voice
+			if start.Voice == "" || start.Voice == "Tina" {
+				start.Voice = "avery"
+			}
+		}
 	}
 	if err = ws.WriteJSON(start); err != nil {
 		return errors.New("could not start Luna session")
 	}
 	done := make(chan error, 1)
 	started := make(chan struct{})
-	go func() { done <- receive(ctx, ws, events, started, voiceMode) }()
+	go func() { done <- receive(ctx, ws, events, started, start.VoiceMode) }()
 	select {
 	case <-ctx.Done():
 		return ctx.Err()
@@ -100,7 +116,7 @@ func (a Adapter) Run(ctx context.Context, cfg core.SessionConfig, audio <-chan [
 					return errors.New("Luna completion timed out")
 				}
 			}
-			if len(pcm)%2 != 0 || len(pcm) > 32000 {
+			if len(pcm) == 0 || len(pcm)%2 != 0 || len(pcm) > 32000 {
 				return errors.New("invalid PCM16 frame")
 			}
 			if ws.WriteMessage(websocket.BinaryMessage, pcm) != nil {
@@ -147,11 +163,11 @@ func receive(ctx context.Context, ws *websocket.Conn, events chan<- core.Event, 
 			return errors.New("missing Luna audio frame")
 		}
 		var event struct {
-			Type, Code, Message, Text string
-			Index                     int
-			TextStart                 int `json:"text_start"`
-			TextEnd                   int `json:"text_end"`
-			Audio                     struct {
+			Type, Code, Status, Text string
+			Index                    *int
+			TextStart                int `json:"text_start"`
+			TextEnd                  int `json:"text_end"`
+			Audio                    struct {
 				Encoding   string
 				SampleRate int `json:"sample_rate"`
 				Samples    int
@@ -174,7 +190,11 @@ func receive(ctx context.Context, ws *websocket.Conn, events chan<- core.Event, 
 			emit(core.Event{Type: "translation_done", Text: text.String()})
 			emit(core.Event{Type: "translation_complete"})
 		case "speech", "speech_chunk":
-			segmentID = fmt.Sprintf("luna-speech-%d", event.Index)
+			index := 0
+			if event.Index != nil {
+				index = *event.Index
+			}
+			segmentID = fmt.Sprintf("luna-speech-%d", index)
 			full := []rune(text.String())
 			segmentText = ""
 			if event.TextStart >= 0 && event.TextEnd > event.TextStart && event.TextEnd <= len(full) {
@@ -190,10 +210,20 @@ func receive(ctx context.Context, ws *websocket.Conn, events chan<- core.Event, 
 			}
 			outputRate = rate
 		case "speech_done":
-			emit(core.Event{Type: "audio_done", SegmentID: segmentID, UtteranceID: segmentID})
+			doneID := segmentID
+			if event.Index != nil {
+				doneID = fmt.Sprintf("luna-speech-%d", *event.Index)
+			}
+			emit(core.Event{Type: "audio_done", SegmentID: doneID, UtteranceID: doneID})
 		case "error":
 			return fmt.Errorf("Luna API error: %s", event.Code)
 		case "completed":
+			if event.Code == "tts_failed" {
+				return errors.New("Luna session completed with incomplete output: tts_failed")
+			}
+			if event.Status == "partial" {
+				return errors.New("Luna session completed with incomplete output")
+			}
 			return nil
 		}
 	}
