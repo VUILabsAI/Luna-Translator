@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="255" height="44" viewBox="0 0 255 44" role="img" aria-label="Trendshift daily · TypeScript #1">
+  <title>Trendshift daily · TypeScript #1</title>
+  <rect x="0.5" y="0.5" width="254" height="43" rx="8" fill="#241C0D" stroke="#D5A746"/>
+  <circle cx="22" cy="22" r="13" fill="#523A0C"/>
+  <text x="22" y="27" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei','Noto Sans SC',Helvetica,Arial,sans-serif" font-size="15" font-weight="700" fill="#FFDD8F">1</text>
+  <text x="44" y="16" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei','Noto Sans SC',Helvetica,Arial,sans-serif" font-size="8" font-weight="600" letter-spacing="0.8" fill="#E5C270">TRENDSHIFT · DAILY</text>
+  <text x="44" y="32" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei','Noto Sans SC',Helvetica,Arial,sans-serif" font-size="12" font-weight="700" fill="#FAEBC6">TypeScript</text>
+</svg>
