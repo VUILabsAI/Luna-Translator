@@ -46,7 +46,7 @@ const HERO_CARD = {
   height: 55, radius: 10, rankX: 31, rankRadius: 17, rankSize: 19, multiRankSize: 15,
   textX: 58, topY: 22, topSize: 9, mainY: 39, mainSize: 13.5, padding: 16, minWidth: 320,
 };
-const TOPIC_MEDAL_CARD = { ...HERO_CARD, mainY: 25, topY: 41 };
+const FIRST_PLACE_MEDAL = { rank: 1, rankLabel: '#1', layout: { ...HERO_CARD, mainY: 25, topY: 41 } };
 const BUTTON = {
   primary: {
     light: { bg: '#1F2328', fg: '#FFFFFF', stroke: '#1F2328' },
@@ -164,8 +164,12 @@ function pickTrending(list) {
 function trendingCard(entry) {
   if (!entry) return null;
   const word = PERIOD_WORD[entry.period];
-  const main = entry.scope === 'all' ? `#${entry.rank} Repository of the ${word}` : `#${entry.rank} ${entry.scope} Repo of the ${word}`;
+  const name = entry.scope === 'all' ? `Repository of the ${word}` : `${entry.scope} Repo of the ${word}`;
   const top = `${entry.source === 'trendshift' ? 'TRENDSHIFT' : 'GITHUB TRENDING'} · ${fmtDate(entry.date)}`;
+  if (entry.rank === 1) {
+    return { ...FIRST_PLACE_MEDAL, top, main: name, title: `${name} · ${top} · #1`, link: () => entry.url };
+  }
+  const main = `#${entry.rank} ${name}`;
   return { rank: entry.rank, top, main, title: `${top} ${main}`, link: () => entry.url };
 }
 
@@ -179,7 +183,7 @@ function topicsCard(topics) {
   if (!best || best.rank > 3) return null;
   if (best.rank === 1) {
     return {
-      rank: best.rank, rankLabel: '#1', layout: TOPIC_MEDAL_CARD,
+      ...FIRST_PLACE_MEDAL,
       top: 'GITHUB TOPIC · BY STARS', main: best.name.en,
       title: `${best.name.en} · GitHub Topic #1 by stars`, link: () => topicUrl(best.topic),
     };
