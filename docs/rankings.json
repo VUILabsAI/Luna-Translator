@@ -78,7 +78,7 @@
         "zh": "实时字幕",
         "en": "Live Captions"
       },
-      "rank": 4,
+      "rank": 3,
       "checkedAt": "2026-11-27"
     },
     {
@@ -185,6 +185,32 @@
       "date": "2026-11-26",
       "source": "topic",
       "period": "stars",
+      "scope": "live-captions",
+      "rank": 5,
+      "url": "https://github.com/topics/live-captions?o=desc&s=stars"
+    },
+    {
+      "date": "2026-11-26",
+      "source": "topic",
+      "period": "stars",
+      "scope": "live-captions",
+      "rank": 4,
+      "url": "https://github.com/topics/live-captions?o=desc&s=stars",
+      "observedAt": "2026-11-26T10:04:37Z"
+    },
+    {
+      "date": "2026-11-27",
+      "source": "topic",
+      "period": "stars",
+      "scope": "live-captions",
+      "rank": 3,
+      "url": "https://github.com/topics/live-captions?o=desc&s=stars",
+      "observedAt": "2026-11-27T03:09:28Z"
+    },
+    {
+      "date": "2026-11-26",
+      "source": "topic",
+      "period": "stars",
       "scope": "real-time-translation",
       "rank": 6,
       "url": "https://github.com/topics/real-time-translation?o=desc&s=stars"
@@ -223,23 +249,6 @@
       "scope": "simultaneous-interpretation",
       "rank": 3,
       "url": "https://github.com/topics/simultaneous-interpretation?o=desc&s=stars"
-    },
-    {
-      "date": "2026-11-26",
-      "source": "topic",
-      "period": "stars",
-      "scope": "live-captions",
-      "rank": 5,
-      "url": "https://github.com/topics/live-captions?o=desc&s=stars"
-    },
-    {
-      "date": "2026-11-26",
-      "source": "topic",
-      "period": "stars",
-      "scope": "live-captions",
-      "rank": 4,
-      "url": "https://github.com/topics/live-captions?o=desc&s=stars",
-      "observedAt": "2026-11-26T10:04:37Z"
     },
     {
       "date": "2026-11-26",
