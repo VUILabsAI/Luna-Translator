@@ -24,6 +24,24 @@
       "rank": 8,
       "url": "https://trendshift.io/",
       "snapshot": "2026-11-26 06:24 UTC"
+    },
+    {
+      "date": "2026-11-27",
+      "source": "trendshift",
+      "period": "daily",
+      "scope": "all",
+      "rank": 2,
+      "url": "https://trendshift.io/",
+      "snapshot": "2026-11-27 01:51:46 UTC"
+    },
+    {
+      "date": "2026-11-27",
+      "source": "trendshift",
+      "period": "daily",
+      "scope": "TypeScript",
+      "rank": 1,
+      "url": "https://trendshift.io/?language=TypeScript",
+      "snapshot": "2026-11-27 01:33:34 UTC"
     }
   ],
   "topics": [
@@ -34,7 +52,7 @@
         "en": "Speech-to-Speech Translation"
       },
       "rank": 1,
-      "checkedAt": "2026-11-26"
+      "checkedAt": "2026-11-27"
     },
     {
       "topic": "simultaneous-interpretation",
@@ -43,7 +61,7 @@
         "en": "Simultaneous Interpretation"
       },
       "rank": 3,
-      "checkedAt": "2026-11-26"
+      "checkedAt": "2026-11-27"
     },
     {
       "topic": "simultaneous-translation",
@@ -52,7 +70,7 @@
         "en": "Simultaneous Translation"
       },
       "rank": 3,
-      "checkedAt": "2026-11-26"
+      "checkedAt": "2026-11-27"
     },
     {
       "topic": "live-captions",
@@ -61,7 +79,7 @@
         "en": "Live Captions"
       },
       "rank": 4,
-      "checkedAt": "2026-11-26"
+      "checkedAt": "2026-11-27"
     },
     {
       "topic": "real-time-translation",
@@ -70,7 +88,7 @@
         "en": "Real-Time Translation"
       },
       "rank": 3,
-      "checkedAt": "2026-11-26"
+      "checkedAt": "2026-11-27"
     },
     {
       "topic": "live-translation",
@@ -79,7 +97,7 @@
         "en": "Live Translation"
       },
       "rank": 5,
-      "checkedAt": "2026-11-26"
+      "checkedAt": "2026-11-27"
     },
     {
       "topic": "speech-translation",
@@ -87,8 +105,8 @@
         "zh": "语音翻译",
         "en": "Speech Translation"
       },
-      "rank": 11,
-      "checkedAt": "2026-11-26"
+      "rank": 12,
+      "checkedAt": "2026-11-27"
     }
   ],
   "recordHistory": [
@@ -102,6 +120,15 @@
       "observedAt": "2026-11-26T06:23:50Z"
     },
     {
+      "date": "2026-11-27",
+      "source": "trendshift",
+      "period": "daily",
+      "scope": "TypeScript",
+      "rank": 1,
+      "url": "https://trendshift.io/?language=TypeScript",
+      "observedAt": "2026-11-27T01:33:34Z"
+    },
+    {
       "date": "2026-11-26",
       "source": "trendshift",
       "period": "daily",
@@ -109,6 +136,24 @@
       "rank": 8,
       "url": "https://trendshift.io/",
       "observedAt": "2026-11-26T06:23:50Z"
+    },
+    {
+      "date": "2026-11-27",
+      "source": "trendshift",
+      "period": "daily",
+      "scope": "all",
+      "rank": 5,
+      "url": "https://trendshift.io/",
+      "observedAt": "2026-11-27T01:09:25Z"
+    },
+    {
+      "date": "2026-11-27",
+      "source": "trendshift",
+      "period": "daily",
+      "scope": "all",
+      "rank": 2,
+      "url": "https://trendshift.io/",
+      "observedAt": "2026-11-27T01:51:46Z"
     },
     {
       "date": "2026-11-26",
