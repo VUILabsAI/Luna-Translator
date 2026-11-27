@@ -103,6 +103,11 @@ describe('Welcome language selection', () => {
 
   it('updates the page immediately and remembers a manual selection', () => {
     const view = page({ languages: ['zh-CN'] })
+    expect(view.text('brandName')).toBe('Luna 同传')
+    expect(view.document.title).toBe('Luna 同传 — 实时同声传译')
+    view.choose('zh-TW')
+    expect(view.text('brandName')).toBe('Luna 同傳')
+    expect(view.document.title).toBe('Luna 同傳 — 即時同步口譯')
     view.choose('en')
     expect(view.text('openWeb')).toBe('Open web app')
     expect(view.text('brandName')).toBe('Luna Translator')
