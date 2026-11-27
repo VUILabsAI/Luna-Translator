@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="320" height="55" viewBox="0 0 320 55" role="img" aria-label="TRENDSHIFT · NOV 27, 2026 #1 TypeScript Repo of the Day">
   <title>TRENDSHIFT · NOV 27, 2026 #1 TypeScript Repo of the Day</title>
-  <rect x="0.5" y="0.5" width="319" height="54" rx="10" fill="#FFFFFF" stroke="#4A0E99"/>
-  <circle cx="31" cy="27.5" r="17" fill="#F1EBFB"/>
-  <text x="31" y="34" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei','Noto Sans SC',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#4A0E99">1</text>
-  <text x="58" y="22" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei','Noto Sans SC',Helvetica,Arial,sans-serif" font-size="9" font-weight="600" letter-spacing="0.8" fill="#6B4FA8">TRENDSHIFT · NOV 27, 2026</text>
-  <text x="58" y="39" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei','Noto Sans SC',Helvetica,Arial,sans-serif" font-size="13.5" font-weight="700" fill="#432787">#1 TypeScript Repo of the Day</text>
+  <rect x="0.5" y="0.5" width="319" height="54" rx="10" fill="#FFFAED" stroke="#A96C0C"/>
+  <circle cx="31" cy="27.5" r="17" fill="#F9E1A4"/>
+  <text x="31" y="34" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei','Noto Sans SC',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#805000">1</text>
+  <text x="58" y="22" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei','Noto Sans SC',Helvetica,Arial,sans-serif" font-size="9" font-weight="600" letter-spacing="0.8" fill="#7B5311">TRENDSHIFT · NOV 27, 2026</text>
+  <text x="58" y="39" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei','Noto Sans SC',Helvetica,Arial,sans-serif" font-size="13.5" font-weight="700" fill="#583D07">#1 TypeScript Repo of the Day</text>
 </svg>
