@@ -408,8 +408,9 @@ async function main() {
   const width = cardWidth(cards, HERO_CARD);
   for (const c of cards) {
     c.width = width;
-    outputs.set(`${ASSETS}/${c.file}.svg`, cardSvg(c, width, HERO_CARD, CARD.light));
-    outputs.set(`${ASSETS}/${c.file}-dark.svg`, cardSvg(c, width, HERO_CARD, CARD.dark));
+    const palette = MEDAL_CARDS[c.rank] ?? CARD;
+    outputs.set(`${ASSETS}/${c.file}.svg`, cardSvg(c, width, HERO_CARD, palette.light));
+    outputs.set(`${ASSETS}/${c.file}-dark.svg`, cardSvg(c, width, HERO_CARD, palette.dark));
   }
   for (const b of BUTTONS) {
     outputs.set(`${ASSETS}/${b.file}.svg`, buttonSvg(b, 'light').svg);
