@@ -28,11 +28,20 @@ import (
 
 type Config struct {
 	DataDir, Password, LunaKey, LunaURL, AliyunKey, Workspace, Region, ASRURL, EmbeddingURL, Build string
-	Demo                                                                                           bool
+	LunaHotwords                                                                                   string
+	Demo, LunaEnableVAD                                                                            bool
 }
 
 func FromEnv() Config {
-	return Config{DataDir: env("DATA_DIR", "/data"), Password: os.Getenv("ADMIN_PASSWORD"), LunaKey: os.Getenv("LUNA_API_KEY"), LunaURL: env("LUNA_WS_URL", "wss://simultrans.lunalabs.cn/v1/realtime/translate"), AliyunKey: os.Getenv("DASHSCOPE_API_KEY"), Workspace: os.Getenv("DASHSCOPE_WORKSPACE_ID"), Region: env("DASHSCOPE_REGION", "cn-beijing"), ASRURL: os.Getenv("DASHSCOPE_ASR_URL"), EmbeddingURL: os.Getenv("DASHSCOPE_EMBEDDING_URL"), Build: env("BUILD_SHA", "development"), Demo: os.Getenv("DEMO_MODE") == "true"}
+	return Config{
+		DataDir: env("DATA_DIR", "/data"), Password: os.Getenv("ADMIN_PASSWORD"),
+		LunaKey: os.Getenv("LUNA_API_KEY"), LunaURL: env("LUNA_WS_URL", "wss://simultrans.lunalabs.cn/v1/realtime/translate"),
+		LunaHotwords: os.Getenv("LUNA_HOTWORDS"), LunaEnableVAD: os.Getenv("LUNA_ENABLE_VAD") == "true",
+		AliyunKey: os.Getenv("DASHSCOPE_API_KEY"), Workspace: os.Getenv("DASHSCOPE_WORKSPACE_ID"),
+		Region: env("DASHSCOPE_REGION", "cn-beijing"), ASRURL: os.Getenv("DASHSCOPE_ASR_URL"),
+		EmbeddingURL: os.Getenv("DASHSCOPE_EMBEDDING_URL"), Build: env("BUILD_SHA", "development"),
+		Demo: os.Getenv("DEMO_MODE") == "true",
+	}
 }
 func env(k, d string) string {
 	if v := os.Getenv(k); v != "" {
@@ -107,7 +116,15 @@ func New(cfg Config) (*App, error) {
 	if app.state.Records == nil || app.state.Shares == nil {
 		return nil, errors.New("invalid persistent state maps")
 	}
-	app.providers["luna"] = lunapublic.Adapter{APIKey: cfg.LunaKey, Endpoint: cfg.LunaURL}
+	if !cfg.Demo {
+		hotwords, err := lunapublic.ParseHotwords(cfg.LunaHotwords)
+		if err != nil {
+			return nil, fmt.Errorf("invalid LUNA_HOTWORDS: %w", err)
+		}
+		app.providers["luna"] = lunapublic.Adapter{
+			APIKey: cfg.LunaKey, Endpoint: cfg.LunaURL, Hotwords: hotwords, EnableVAD: cfg.LunaEnableVAD,
+		}
+	}
 	if os.Getenv("ENABLE_BAILIAN_TRANSLATE") == "true" {
 		app.providers["aliyun"] = aliyun.Adapter{APIKey: cfg.AliyunKey, WorkspaceID: cfg.Workspace, Region: cfg.Region, Model: "qwen3.5-livetranslate-flash-realtime"}
 	}

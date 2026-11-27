@@ -12,6 +12,7 @@ import (
 	"path/filepath"
 	"reflect"
 	"simultrans/core"
+	"simultrans/providers/lunapublic"
 	"strings"
 	"testing"
 	"time"
@@ -38,6 +39,39 @@ func testApp(t *testing.T, dir string) *App {
 	}
 	return a
 }
+func TestLunaDeploymentOptions(t *testing.T) {
+	t.Setenv("DEMO_MODE", "false")
+	t.Setenv("DATA_DIR", t.TempDir())
+	t.Setenv("ADMIN_PASSWORD", "ephemeral-test-password")
+	t.Setenv("LUNA_ENABLE_VAD", "")
+	t.Setenv("LUNA_HOTWORDS", "")
+	cfg := FromEnv()
+	app, err := New(cfg)
+	if err != nil {
+		t.Fatal(err)
+	}
+	provider := app.providers["luna"].(lunapublic.Adapter)
+	if provider.EnableVAD || len(provider.Hotwords) != 0 {
+		t.Fatal("Luna must default to VAD off and standard translation")
+	}
+
+	t.Setenv("LUNA_ENABLE_VAD", "true")
+	t.Setenv("LUNA_HOTWORDS", `[{"source":"西湖","target":"West Lake"}]`)
+	app, err = New(FromEnv())
+	if err != nil {
+		t.Fatal(err)
+	}
+	provider = app.providers["luna"].(lunapublic.Adapter)
+	if !provider.EnableVAD || len(provider.Hotwords) != 1 || provider.Hotwords[0].Target != "West Lake" {
+		t.Fatal("Luna deployment options did not reach the adapter")
+	}
+
+	t.Setenv("LUNA_HOTWORDS", "null")
+	if _, err := New(FromEnv()); err == nil || !strings.Contains(err.Error(), "LUNA_HOTWORDS") {
+		t.Fatalf("invalid structured hotwords must be reported: %v", err)
+	}
+}
+
 func TestOwnershipPersistenceAndSnapshotRevocation(t *testing.T) {
 	dir := t.TempDir()
 	a := testApp(t, dir)
