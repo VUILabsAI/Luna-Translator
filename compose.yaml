@@ -15,6 +15,8 @@ services:
       ADMIN_PASSWORD: ${ADMIN_PASSWORD:-}
       LUNA_API_KEY: ${LUNA_API_KEY:-}
       LUNA_WS_URL: ${LUNA_WS_URL:-wss://simultrans.lunalabs.cn/v1/realtime/translate}
+      LUNA_ENABLE_VAD: ${LUNA_ENABLE_VAD:-false}
+      LUNA_HOTWORDS: ${LUNA_HOTWORDS:-[]}
       DASHSCOPE_API_KEY: ${DASHSCOPE_API_KEY:-}
       DASHSCOPE_WORKSPACE_ID: ${DASHSCOPE_WORKSPACE_ID:-}
       DASHSCOPE_REGION: ${DASHSCOPE_REGION:-cn-beijing}

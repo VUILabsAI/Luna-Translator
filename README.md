@@ -74,6 +74,7 @@ Web 和 iOS 都可以在模拟模式下运行。真实识别与翻译需要在�
 
 ## 最新动态
 
+- **2026-11-27 · main** · 社区 Web 修复原文识别重连后字幕停止更新的问题，Welcome 页更新简繁品牌名。Go 后端的 Luna Bearer 适配器改用结构化术语词对，VAD 默认关闭。[模型配置与协议](docs/providers.md)
 - **2026-11-24 · [v0.1.2](https://github.com/VUILabsAI/Luna-Translator/releases/tag/v0.1.2)** · 参考 iOS 1.0.11（131）与 Android 87 的历史加载优化，社区 Web 先显示服务端已有记录，在后台补存并刷新列表。历史详情可重新检查暂缺的音轨，保留已可播放的音频。晚到的浏览器检查点不会覆盖已完成的记录。社区 Web 沿用 iOS 1.0.11（128）的界面样式。
 - **2026-11-23 · [v0.1.1](https://github.com/VUILabsAI/Luna-Translator/releases/tag/v0.1.1)** · 新增四个双语场景指南和 Go Quickstart。听课示例附带真实中译英的译文和译音。公开发行包已通过干净环境的 Docker Compose 启动、WAV 输入和浏览器回放验收。[验收记录](docs/validation.md#v011)
 - **2026-10-30 · [v0.1.0](https://github.com/VUILabsAI/Luna-Translator/releases/tag/v0.1.0)**：发布首个 Web + Go 后端社区版，提供 Docker Compose 启动、Luna / 百炼适配、历史与音频归档、可撤销分享，以及独立的公开 CI。
@@ -168,7 +169,7 @@ DASHSCOPE_REGION=cn-beijing
 DASHSCOPE_EMBEDDING_URL=https://your-workspace-id.cn-beijing.maas.aliyuncs.com/compatible-mode/v1/embeddings
 ```
 
-重新运行启动脚本以应用配置。未配置百炼 ASR 时，Luna 译文和译音仍可使用，原文字幕不可用。服务开通、费用、地域和并发限制由各提供方决定；多个目标语言会分别建立上游调用并占用额度。
+重新运行启动脚本以应用配置。Luna Bearer 链路默认关闭 VAD，使用 `LUNA_ENABLE_VAD` 和 `LUNA_HOTWORDS` 可选配置 VAD 与术语词对。详见[热词与 VAD](docs/providers.md#热词与-vad)。未配置百炼 ASR 时，Luna 译文和译音仍可使用，原文字幕不可用。服务开通、费用、地域和并发限制由各提供方决定；多个目标语言会分别建立上游调用并占用额度。
 
 社区版按整段或每轮发言展示原译文。Embedding 提供向量评分，不能代替已验证的逐句对齐模型。更多参数和适配方式见 [模型配置与协议](docs/providers.md)。自己的 `.env` 和密钥应留在本机，不提交到仓库或公开 Issue。
 

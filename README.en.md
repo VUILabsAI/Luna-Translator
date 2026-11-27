@@ -72,6 +72,7 @@ Web and iOS run in simulation mode without a model API key. Live recognition and
 
 ## News
 
+- **2026-11-27 · main** · The community Web app keeps source captions updating after ASR reconnects and updates the Chinese brand names on the Welcome page. The Go backend's Luna Bearer adapter uses structured terminology pairs with VAD off by default. [Provider configuration and protocols](docs/providers.md)
 - **2026-11-24 · [v0.1.2](https://github.com/VUILabsAI/Luna-Translator/releases/tag/v0.1.2)** · Based on the history-loading improvements in iOS 1.0.11 (131) and Android build 87, the community Web app shows saved history while retrying pending browser checkpoints in the background. History details can retry missing audio tracks and keep playable tracks available. Late checkpoints no longer replace finalized records. The community Web app follows the iOS 1.0.11 (128) design.
 - **2026-11-23 · [v0.1.1](https://github.com/VUILabsAI/Luna-Translator/releases/tag/v0.1.1)** · Four bilingual solution guides and a Go Quickstart. The classroom example includes real Chinese-to-English text and speech. The published package passed a clean Docker Compose startup, WAV input, and browser playback. [Validation record](docs/validation.md#v011)
 - **2026-10-30 · [v0.1.0](https://github.com/VUILabsAI/Luna-Translator/releases/tag/v0.1.0)**: First Web + Go community release with Docker Compose startup, Luna / Model Studio adapters, persistent history and audio, revocable sharing, and public CI.
@@ -166,7 +167,7 @@ DASHSCOPE_REGION=cn-beijing
 DASHSCOPE_EMBEDDING_URL=https://your-workspace-id.cn-beijing.maas.aliyuncs.com/compatible-mode/v1/embeddings
 ```
 
-Run the startup script again to apply the configuration. Without Model Studio ASR, Luna translated text and speech remain available, but source captions are unavailable. Accounts, costs, regions and concurrency limits are controlled by each provider. Each target language opens a separate upstream call and consumes quota.
+Run the startup script again to apply the configuration. For the Luna Bearer connection, VAD defaults to off. Set `LUNA_ENABLE_VAD` and `LUNA_HOTWORDS` to configure VAD and structured terminology pairs. See [hotwords and VAD](docs/providers.md#热词与-vad). Without Model Studio ASR, Luna translated text and speech remain available, but source captions are unavailable. Accounts, costs, regions and concurrency limits are controlled by each provider. Each target language opens a separate upstream call and consumes quota.
 
 The community UI pairs text by whole utterance or speaking turn. Embeddings score similarity; they do not provide validated sentence-level alignment. See [configuration and protocols](docs/providers.md) for more options. Keep your `.env` and credentials out of commits and public Issues.
 
