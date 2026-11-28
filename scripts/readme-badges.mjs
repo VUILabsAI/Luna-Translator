@@ -177,7 +177,11 @@ function topicsCard(topics) {
   const ranked = topics.filter((t) => Number.isInteger(t.rank));
   const firsts = ranked.filter((t) => t.rank === 1);
   if (firsts.length >= 2) {
-    return { rank: 1, top: 'GITHUB TOPICS · BY STARS', main: `#1 in ${firsts.length} GitHub Topics`, title: `#1 in ${firsts.length} GitHub topics by stars`, link: (lang) => README[lang].recordsAnchor };
+    return {
+      ...FIRST_PLACE_MEDAL,
+      top: 'RANKED BY STARS', main: `${firsts.length} GitHub Topics`,
+      title: `#1 in ${firsts.length} GitHub topics by stars`, link: (lang) => README[lang].recordsAnchor,
+    };
   }
   const best = [...ranked].sort((a, b) => a.rank - b.rank)[0];
   if (!best || best.rank > 3) return null;

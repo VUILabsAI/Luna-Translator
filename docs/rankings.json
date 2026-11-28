@@ -78,8 +78,8 @@
         "zh": "实时字幕",
         "en": "Live Captions"
       },
-      "rank": 3,
-      "checkedAt": "2026-11-27"
+      "rank": 2,
+      "checkedAt": "2026-11-28"
     },
     {
       "topic": "real-time-translation",
@@ -87,8 +87,8 @@
         "zh": "实时翻译",
         "en": "Real-Time Translation"
       },
-      "rank": 2,
-      "checkedAt": "2026-11-27"
+      "rank": 1,
+      "checkedAt": "2026-11-28"
     },
     {
       "topic": "live-translation",
@@ -96,8 +96,8 @@
         "zh": "现场翻译",
         "en": "Live Translation"
       },
-      "rank": 4,
-      "checkedAt": "2026-11-27"
+      "rank": 3,
+      "checkedAt": "2026-11-28"
     },
     {
       "topic": "speech-translation",
@@ -208,6 +208,15 @@
       "observedAt": "2026-11-27T03:09:28Z"
     },
     {
+      "date": "2026-11-28",
+      "source": "topic",
+      "period": "stars",
+      "scope": "live-captions",
+      "rank": 2,
+      "url": "https://github.com/topics/live-captions?o=desc&s=stars",
+      "observedAt": "2026-11-28T00:05:40Z"
+    },
+    {
       "date": "2026-11-26",
       "source": "topic",
       "period": "stars",
@@ -252,6 +261,15 @@
       "observedAt": "2026-11-27T13:57:11Z"
     },
     {
+      "date": "2026-11-28",
+      "source": "topic",
+      "period": "stars",
+      "scope": "real-time-translation",
+      "rank": 1,
+      "url": "https://github.com/topics/real-time-translation?o=desc&s=stars",
+      "observedAt": "2026-11-28T00:05:41Z"
+    },
+    {
       "date": "2026-11-26",
       "source": "topic",
       "period": "stars",
@@ -293,6 +311,15 @@
       "rank": 4,
       "url": "https://github.com/topics/live-translation?o=desc&s=stars",
       "observedAt": "2026-11-27T13:57:09Z"
+    },
+    {
+      "date": "2026-11-28",
+      "source": "topic",
+      "period": "stars",
+      "scope": "live-translation",
+      "rank": 3,
+      "url": "https://github.com/topics/live-translation?o=desc&s=stars",
+      "observedAt": "2026-11-28T00:05:39Z"
     },
     {
       "date": "2026-11-26",
