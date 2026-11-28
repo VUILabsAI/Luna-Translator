@@ -42,6 +42,15 @@
       "rank": 1,
       "url": "https://trendshift.io/?language=TypeScript",
       "snapshot": "2026-11-27 01:33:34 UTC"
+    },
+    {
+      "date": "2026-11-28",
+      "source": "trendshift",
+      "period": "weekly",
+      "scope": "TypeScript",
+      "rank": 22,
+      "url": "https://trendshift.io/weekly?language=TypeScript",
+      "snapshot": "2026-11-28 05:40:20 UTC"
     }
   ],
   "topics": [
@@ -69,8 +78,8 @@
         "zh": "同步翻译",
         "en": "Simultaneous Translation"
       },
-      "rank": 2,
-      "checkedAt": "2026-11-27"
+      "rank": 1,
+      "checkedAt": "2026-11-28"
     },
     {
       "topic": "live-captions",
@@ -96,7 +105,7 @@
         "zh": "现场翻译",
         "en": "Live Translation"
       },
-      "rank": 3,
+      "rank": 2,
       "checkedAt": "2026-11-28"
     },
     {
@@ -105,8 +114,8 @@
         "zh": "语音翻译",
         "en": "Speech Translation"
       },
-      "rank": 9,
-      "checkedAt": "2026-11-27"
+      "rank": 7,
+      "checkedAt": "2026-11-28"
     }
   ],
   "recordHistory": [
@@ -156,65 +165,31 @@
       "observedAt": "2026-11-27T01:51:46Z"
     },
     {
-      "date": "2026-11-26",
-      "source": "topic",
-      "period": "stars",
-      "scope": "speech-to-speech-translation",
-      "rank": 1,
-      "url": "https://github.com/topics/speech-to-speech-translation?o=desc&s=stars",
-      "observedAt": "2026-11-26T08:45:54Z"
-    },
-    {
-      "date": "2026-11-26",
-      "source": "topic",
-      "period": "stars",
-      "scope": "simultaneous-translation",
-      "rank": 3,
-      "url": "https://github.com/topics/simultaneous-translation?o=desc&s=stars"
-    },
-    {
-      "date": "2026-11-27",
-      "source": "topic",
-      "period": "stars",
-      "scope": "simultaneous-translation",
-      "rank": 2,
-      "url": "https://github.com/topics/simultaneous-translation?o=desc&s=stars",
-      "observedAt": "2026-11-27T04:26:26Z"
-    },
-    {
-      "date": "2026-11-26",
-      "source": "topic",
-      "period": "stars",
-      "scope": "live-captions",
-      "rank": 5,
-      "url": "https://github.com/topics/live-captions?o=desc&s=stars"
-    },
-    {
-      "date": "2026-11-26",
-      "source": "topic",
-      "period": "stars",
-      "scope": "live-captions",
-      "rank": 4,
-      "url": "https://github.com/topics/live-captions?o=desc&s=stars",
-      "observedAt": "2026-11-26T10:04:37Z"
-    },
-    {
-      "date": "2026-11-27",
-      "source": "topic",
-      "period": "stars",
-      "scope": "live-captions",
-      "rank": 3,
-      "url": "https://github.com/topics/live-captions?o=desc&s=stars",
-      "observedAt": "2026-11-27T03:09:28Z"
+      "date": "2026-11-28",
+      "source": "trendshift",
+      "period": "weekly",
+      "scope": "TypeScript",
+      "rank": 25,
+      "url": "https://trendshift.io/weekly?language=TypeScript",
+      "observedAt": "2026-11-28T03:05:17Z"
     },
     {
       "date": "2026-11-28",
-      "source": "topic",
-      "period": "stars",
-      "scope": "live-captions",
-      "rank": 2,
-      "url": "https://github.com/topics/live-captions?o=desc&s=stars",
-      "observedAt": "2026-11-28T00:05:40Z"
+      "source": "trendshift",
+      "period": "weekly",
+      "scope": "TypeScript",
+      "rank": 24,
+      "url": "https://trendshift.io/weekly?language=TypeScript",
+      "observedAt": "2026-11-28T03:35:14Z"
+    },
+    {
+      "date": "2026-11-28",
+      "source": "trendshift",
+      "period": "weekly",
+      "scope": "TypeScript",
+      "rank": 22,
+      "url": "https://trendshift.io/weekly?language=TypeScript",
+      "observedAt": "2026-11-28T05:40:20Z"
     },
     {
       "date": "2026-11-26",
@@ -273,9 +248,71 @@
       "date": "2026-11-26",
       "source": "topic",
       "period": "stars",
-      "scope": "simultaneous-interpretation",
+      "scope": "simultaneous-translation",
       "rank": 3,
-      "url": "https://github.com/topics/simultaneous-interpretation?o=desc&s=stars"
+      "url": "https://github.com/topics/simultaneous-translation?o=desc&s=stars"
+    },
+    {
+      "date": "2026-11-27",
+      "source": "topic",
+      "period": "stars",
+      "scope": "simultaneous-translation",
+      "rank": 2,
+      "url": "https://github.com/topics/simultaneous-translation?o=desc&s=stars",
+      "observedAt": "2026-11-27T04:26:26Z"
+    },
+    {
+      "date": "2026-11-28",
+      "source": "topic",
+      "period": "stars",
+      "scope": "simultaneous-translation",
+      "rank": 1,
+      "url": "https://github.com/topics/simultaneous-translation?o=desc&s=stars",
+      "observedAt": "2026-11-28T05:01:00Z"
+    },
+    {
+      "date": "2026-11-26",
+      "source": "topic",
+      "period": "stars",
+      "scope": "speech-to-speech-translation",
+      "rank": 1,
+      "url": "https://github.com/topics/speech-to-speech-translation?o=desc&s=stars",
+      "observedAt": "2026-11-26T08:45:54Z"
+    },
+    {
+      "date": "2026-11-26",
+      "source": "topic",
+      "period": "stars",
+      "scope": "live-captions",
+      "rank": 5,
+      "url": "https://github.com/topics/live-captions?o=desc&s=stars"
+    },
+    {
+      "date": "2026-11-26",
+      "source": "topic",
+      "period": "stars",
+      "scope": "live-captions",
+      "rank": 4,
+      "url": "https://github.com/topics/live-captions?o=desc&s=stars",
+      "observedAt": "2026-11-26T10:04:37Z"
+    },
+    {
+      "date": "2026-11-27",
+      "source": "topic",
+      "period": "stars",
+      "scope": "live-captions",
+      "rank": 3,
+      "url": "https://github.com/topics/live-captions?o=desc&s=stars",
+      "observedAt": "2026-11-27T03:09:28Z"
+    },
+    {
+      "date": "2026-11-28",
+      "source": "topic",
+      "period": "stars",
+      "scope": "live-captions",
+      "rank": 2,
+      "url": "https://github.com/topics/live-captions?o=desc&s=stars",
+      "observedAt": "2026-11-28T00:05:40Z"
     },
     {
       "date": "2026-11-26",
@@ -322,6 +359,23 @@
       "observedAt": "2026-11-28T00:05:39Z"
     },
     {
+      "date": "2026-11-28",
+      "source": "topic",
+      "period": "stars",
+      "scope": "live-translation",
+      "rank": 2,
+      "url": "https://github.com/topics/live-translation?o=desc&s=stars",
+      "observedAt": "2026-11-28T05:00:58Z"
+    },
+    {
+      "date": "2026-11-26",
+      "source": "topic",
+      "period": "stars",
+      "scope": "simultaneous-interpretation",
+      "rank": 3,
+      "url": "https://github.com/topics/simultaneous-interpretation?o=desc&s=stars"
+    },
+    {
       "date": "2026-11-26",
       "source": "topic",
       "period": "stars",
@@ -355,6 +409,15 @@
       "rank": 9,
       "url": "https://github.com/topics/speech-translation?o=desc&s=stars",
       "observedAt": "2026-11-27T05:02:43Z"
+    },
+    {
+      "date": "2026-11-28",
+      "source": "topic",
+      "period": "stars",
+      "scope": "speech-translation",
+      "rank": 7,
+      "url": "https://github.com/topics/speech-translation?o=desc&s=stars",
+      "observedAt": "2026-11-28T05:01:03Z"
     }
   ]
 }
